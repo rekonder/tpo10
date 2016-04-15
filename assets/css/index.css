@@ -1,0 +1,47 @@
+/* FORM VALIDATION */
+form input.form-control.ng-invalid.ng-touched:not(.ng-pristine) {
+    border-color: #d9534f;
+    color: #d9534f;
+}
+
+form input.form-control.ng-valid.ng-touched {
+    border-color: #5cb85c;
+    color: #5cb85c;
+}
+
+/* BUTTONS && INPUTS */
+input,
+.form-control {
+    border-radius: 0px;
+}
+.btn {
+    border-radius: 0px;
+}
+
+/* ALERTS */
+.alert {
+    border-radius: 0px;
+    border-width: 1px;
+    border-right-width: 10px;
+    background-color: white;
+}
+
+.alert.alert-success {
+    color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.alert.alert-danger {
+    color: #d9534f;
+    border-color: #d9534f;;
+}
+
+.alert.alert-warning {
+    color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.alert.alert-info {
+    color: #5bc0de;
+    border-color: #5bc0de;
+}
