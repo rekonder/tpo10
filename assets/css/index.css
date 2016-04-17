@@ -1,14 +1,3 @@
-/* FORM VALIDATION */
-form input.form-control.ng-invalid.ng-touched:not(.ng-pristine) {
-    border-color: #d9534f;
-    color: #d9534f;
-}
-
-form input.form-control.ng-valid.ng-touched {
-    border-color: #5cb85c;
-    color: #5cb85c;
-}
-
 /* BUTTONS && INPUTS */
 input,
 .form-control {
@@ -44,4 +33,18 @@ input,
 .alert.alert-info {
     color: #5bc0de;
     border-color: #5bc0de;
+}
+
+.bootstrap-datetimepicker-widget * {
+    border-radius: 0px;
+}
+
+/* DATETIMEPICKER */
+.datetimepicker,
+.datetimepicker  td,
+.datetimepicker th,
+.datetimepicker table tr td span {
+	-webkit-border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	border-radius: 0px !important;
 }

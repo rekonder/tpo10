@@ -42,3 +42,28 @@ validation.directive("confirmPassword", [function() {
         }
     };
 }]);
+
+validation.directive("healthInsuranceNumber", [function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.healthInsuranceNumber = function(modelValue) {
+                var patt = new RegExp(/^[\d]{9}$/i);
+                return patt.test(modelValue);
+            }
+        }
+    };
+}]);
+
+validation.directive("date", [function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.date = function(modelValue) {
+                return (modelValue instanceof Date) && modelValue && modelValue != 'Invalid Date';
+            }
+        }
+    };
+}]);

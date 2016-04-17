@@ -1,31 +1,37 @@
 angular.module('app.components.register', []).
-controller('registerCtrl', ['$scope', 'accountResource',
-function($scope, accountResource) {
-    $scope.submitting = false;
-    $scope.submit = function() {
-        $scope.submitting = true;
-        accountResource.register({
+controller('registerCtrl', ['$scope', 'accountResource', '$location',
+function($scope, accountResource, $location) {
+    
+    $scope.userId = $location.search().userId
+    if($scope.userId) {
+        $scope.userId = decodeURIComponent($scope.userId);
+    }
+    
+    $scope.register = function() {
+        $scope.registering = true;
+        accountResource().register({
             'Email': $scope.email,
             'Password': $scope.password,
             'ConfirmPassword': $scope.confirmPassword
         }).$promise.then(function(response) {
             console.log(response);
-            $scope.submitting = false;
+            $scope.registering = false;
             $.notify({message: 'Preko e-pošte smo vam poslali povezavo za aktivacijo vašega računa.'}, {type: 'success'});
+            $location.search('userId', response.UserId);
         }, function(response) {
             console.log(response);
-            $scope.submitting = false;
+            $scope.registering = false;
             try {
                 var error = response.data.ModelState[''][1];
                 $.notify({message: 'Ta e-poštni račun je že zaseden.'}, {type: 'danger'});
             } catch(e) {
                 $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
             }
-            // for (var key in response.data.ModelState) {
-            //     for (var i = 0; i < response.data.ModelState[key].length; i++) {
-            //         $.notify({message: response.data.ModelState[key][i]}, {type: 'danger'});
-            //     }
-            // }
         });
+    };
+    
+    $scope.skip = function() {
+        $location.search('userId', null);
+        $location.path('/login');
     };
 }]);

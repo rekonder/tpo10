@@ -2,6 +2,7 @@ var routes = angular.module('app.routes', []);
 
 routes.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
+        // LOGIN
         when('/login', {
            templateUrl: 'app/components/login/loginView.html',
            controller: 'loginCtrl' 
@@ -10,9 +11,18 @@ routes.config(['$routeProvider', function($routeProvider) {
            templateUrl: 'app/components/login/forgotten/forgottenView.html',
            controller: 'forgottenCtrl' 
         }).
+        when('/login/changeForgotten', {
+           templateUrl: 'app/components/login/forgotten/changeForgottenView.html',
+           controller: 'changeForgottenCtrl' 
+        }).
+        // REGISTER
         when('/register', {
            templateUrl: 'app/components/register/registerView.html',
            controller: 'registerCtrl' 
+        }).
+        when('/register/activate', {
+           templateUrl: 'app/components/register/activate/activateView.html',
+           controller: 'activateCtrl' 
         }).
         otherwise({
            redirectTo: '/login' 

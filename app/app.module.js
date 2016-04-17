@@ -8,7 +8,11 @@ var app = angular.module('app', [
     
     'app.routes',
     'app.directives.validation',
+    'app.directives.datetimepicker',
     'app.shared.navbar',
+    
+    // SERVICES
+    'app.services.account',
     
     // RESOURCES
     'app.resources.account',
@@ -16,9 +20,11 @@ var app = angular.module('app', [
     // LOGIN
     'app.components.login',
     'app.components.login.forgotten',
+    'app.components.login.changeForgotten',
     
     // REGISTER
-    'app.components.register'
+    'app.components.register',
+    'app.components.register.activate'
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',
