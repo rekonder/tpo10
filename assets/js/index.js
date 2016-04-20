@@ -15,3 +15,5 @@ $.notifyDefaults({
             '<span data-notify="message">{2}</span>' +
         '</div>'
 });
+
+$.ajaxSetup({cache: true});

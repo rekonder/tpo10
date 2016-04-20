@@ -8,7 +8,7 @@ function($scope, accountResource, $location) {
     if(!userId || !code) {
         $location.search('userId', null);
         $location.search('code', null);
-        $location.path('/');
+        $location.path('/', false);
         return;    
     }
     
@@ -30,5 +30,5 @@ function($scope, accountResource, $location) {
         }
     });
     
-    $location.path('/');
+    $location.path('/', false);
 }]);
