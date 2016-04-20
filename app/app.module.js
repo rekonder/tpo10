@@ -15,7 +15,9 @@ var app = angular.module('app', [
     'app.services.account',
     
     // RESOURCES
+    'app.resources.helper',
     'app.resources.account',
+    'app.resources.patientProfile',
     
     // LOGIN
     'app.components.login',
@@ -31,7 +33,7 @@ app.run(['$rootScope', 'defaultErrorMessageResolver',
 function($rootScope, defaultErrorMessageResolver) {
     $rootScope.appSettings = {
         brandName: 'TPO 10',
-        // baseUrl: 'http://localhost:64110/'
+        // baseUrl: 'http://localhost:64110'
         baseUrl: 'http://tpo10-rest.azurewebsites.net'
     };
     defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {

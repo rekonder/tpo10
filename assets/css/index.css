@@ -39,12 +39,8 @@ input,
     border-radius: 0px;
 }
 
-/* DATETIMEPICKER */
-.datetimepicker,
-.datetimepicker  td,
-.datetimepicker th,
-.datetimepicker table tr td span {
-	-webkit-border-radius: 0px !important;
-	-moz-border-radius: 0px !important;
-	border-radius: 0px !important;
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th,
+.bootstrap-datetimepicker-widget table td span  {
+  border-radius: 0px;
 }

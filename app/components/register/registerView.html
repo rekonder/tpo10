@@ -33,8 +33,9 @@
         </div>
     </div>
 </form>
+
 <!-- CREATE PROFILE -->
-<form class="form-horizontal" ng-show="userId" novalidate>
+<form class="form-horizontal" ng-show="userId" ng-submit="createProfile()" novalidate>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <h3>Uporabniški profil</h3>
@@ -62,6 +63,24 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="address" class="col-sm-2 control-label">Naslov</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="address" ng-model="address" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="post" class="col-sm-2 control-label">Poštna številka</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="post" ng-model="post" required post-number>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="telephone" class="col-sm-2 control-label">Telefon</label>
+        <div class="col-sm-10">
+            <input type="tel" class="form-control" id="telephone" ng-model="telephone" required telephone-number>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="birthDate" class="col-sm-2 control-label">Datum rojstva</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="birthDate" ng-model="birthDate" datetimepicker required date view-mode="years">
@@ -72,21 +91,80 @@
         <div class="col-sm-10">
             <div class="radio">
                 <label>
-                    <input type="radio" name="gender" id="gender0" value="female" checked>
+                    <input type="radio" name="gender" id="gender0" value="Ženski" ng-model="gender" ng-checked="true">
                     Ženski
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="gender" id="gender1" value="male">
+                    <input type="radio" name="gender" id="gender1" value="Moški" ng-model="gender">
                     Moški
                 </label>
             </div>
         </div>
     </div>
+        
+    <!-- CONTACT -->
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default btn-primary" ladda="creating" data-style="expand-right" ng-submit="submit()">Ustvari</button>
+            <h3>Kontaktne informacije</h3>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="checkbox" ng-model="sameContactInfo"> Uporabi zgornje podatke
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactFirstName" class="col-sm-2 control-label">Ime</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="contactFirstName" ng-model="contactFirstName" ng-disabled="sameContactInfo" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactLastName" class="col-sm-2 control-label">Priimek</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="contactLastName" ng-model="contactLastName" ng-disabled="sameContactInfo" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactAddress" class="col-sm-2 control-label">Naslov</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="contactAddress" ng-model="contactAddress" ng-disabled="sameContactInfo" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactPost" class="col-sm-2 control-label">Pošta</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="contactPost" ng-model="contactPost" ng-disabled="sameContactInfo"
+            required post-number>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactTelephone" class="col-sm-2 control-label">Telefon</label>
+        <div class="col-sm-10">
+            <input type="tel" class="form-control" id="contactTelephone" ng-model="contactTelephone" ng-disabled="sameContactInfo" required telephone-number>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contactFamilyRelationship" class="col-sm-2 control-label">Družinska relacija</label>
+        <div class="col-sm-10">
+            <select class="form-control" id="contactFamilyRelationship" ng-model="contactFamilyRelationship" ng-disabled="sameContactInfo" required>
+                <option value="" disabled selected>Jaz sem _____ zgornjega profila.</option>
+                <option value="Jaz">Jaz</option>
+                <option value="Starš">Starš</option>
+                <option value="Otrok">Otrok</option>
+                <option value="Brat ali sestra">Brat ali sestra</option>
+                <option value="Stari starš">Stari starš</option>
+                <option value="Vnuk">Vnuk</option>
+                <option value="Nečak ali nečakinja">Nečak ali nečakinja</option>
+                <option value="Bratranec ali sestrična">Bratranec ali sestrična</option>
+                <option value="Stric ali teta">Stric ali teta</option>
+                <option value="Ostalo">Ostalo</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default btn-primary" ladda="creating" data-style="expand-right">Ustvari</button>
             <button type="skip" class="btn btn-default" ng-click="skip()">Preskoči</button>
         </div>
     </div>

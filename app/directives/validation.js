@@ -56,6 +56,7 @@ validation.directive("healthInsuranceNumber", [function() {
     };
 }]);
 
+// TODO - Ni čisto ok
 validation.directive("date", [function() {
     return {
         restrict: "A",
@@ -63,6 +64,34 @@ validation.directive("date", [function() {
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.date = function(modelValue) {
                 return (modelValue instanceof Date) && modelValue && modelValue != 'Invalid Date';
+            }
+        }
+    };
+}]);
+
+// TODO - Ni čisto ok
+validation.directive("telephoneNumber", [function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.telephoneNumber = function(modelValue) {
+                var patt = new RegExp(/^[\d+ -]{9,}$/i);
+                return patt.test(modelValue);
+            }
+        }
+    };
+}]);
+
+// TODO - Ni čisto ok
+validation.directive("postNumber", ['helperResources', function(helperResources) {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.postNumber = function(modelValue) {
+                var patt = new RegExp(/^[\d]{4}$/i);
+                return patt.test(modelValue);
             }
         }
     };

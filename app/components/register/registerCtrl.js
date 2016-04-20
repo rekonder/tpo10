@@ -1,12 +1,14 @@
 angular.module('app.components.register', []).
-controller('registerCtrl', ['$scope', 'accountResource', '$location',
-function($scope, accountResource, $location) {
+controller('registerCtrl', ['$scope', 'accountResource', 'patientProfileResources', '$location',
+function($scope, accountResource, patientProfileResources, $location) {
+    
+    $scope.gender = "Ženski"
     
     $scope.userId = $location.search().userId
     if($scope.userId) {
         $scope.userId = decodeURIComponent($scope.userId);
     }
-    
+        
     $scope.register = function() {
         $scope.registering = true;
         accountResource().register({
@@ -30,8 +32,79 @@ function($scope, accountResource, $location) {
         });
     };
     
+    $scope.createProfile = function() {
+        var profile = {
+            'HealthInsuranceNumber': $scope.healthInsuranceNumber,
+            'FirstName': $scope.firstName,
+            'LastName': $scope.lastName,
+            'Address': $scope.address,
+            'PostNumber': $scope.post,
+            'Telephone': $scope.telephone,
+            'Gender': $scope.gender,
+            'BirthDate': $scope.birthDate,
+            'ContactFirstName': $scope.contactFirstName,
+            'ContactLastName': $scope.contactLastName,
+            'ContactAddress': $scope.contactAddress,
+            'ContactPostNumber': $scope.contactPost,
+            'ContactTelephone': $scope.contactTelephone,
+            'ContactFamilyRelationship': $scope.contactFamilyRelationship
+        };
+        patientProfileResources().create({'UserId': $scope.userId}, profile).$promise.then(function(response) {
+            console.log(response);
+            $.notify({message: 'Uspešno ste kreirali uporabniški profil, ne pozabite aktivirati uporabniškega računa.'}, {type: 'success'});
+            $location.search('userId', null);
+            $location.path('/');
+        }, function(response) {
+            console.log(response);
+            $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
+        });
+    };
+    
     $scope.skip = function() {
         $location.search('userId', null);
-        $location.path('/login');
+        $location.path('/');
     };
+    
+    $scope.$watch('sameContactInfo', function(newValue) {
+        if(newValue) {
+            $scope.contactFirstName = $scope.firstName;
+            $scope.contactLastName = $scope.lastName;
+            $scope.contactAddress = $scope.address;
+            $scope.contactPost = $scope.post;
+            $scope.contactTelephone = $scope.telephone;
+            $scope.contactFamilyRelationship = "Jaz";
+        } else {
+            $scope.contactFirstName = null;
+            $scope.contactLastName = null;
+            $scope.contactAddress = null;
+            $scope.contactPost = null;
+            $scope.contactTelephone = null;
+            $scope.contactFamilyRelationship = null;
+        }
+    });
+    $scope.$watch('firstName', function(newValue) {
+        if($scope.sameContactInfo) {
+            $scope.contactFirstName = $scope.firstName;
+        }
+    });
+    $scope.$watch('lastName', function(newValue) {
+        if($scope.sameContactInfo) {
+            $scope.contactLastName = $scope.lastName;
+        }
+    });
+    $scope.$watch('address', function(newValue) {
+        if($scope.sameContactInfo) {
+            $scope.contactAddress = $scope.address;
+        }
+    });
+    $scope.$watch('post', function(newValue) {
+        if($scope.sameContactInfo) {
+            $scope.contactPost = $scope.post;
+        }
+    });
+    $scope.$watch('telephone', function(newValue) {
+        if($scope.sameContactInfo) {
+            $scope.contactTelephone = $scope.telephone;
+        }
+    });
 }]);
