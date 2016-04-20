@@ -8,7 +8,7 @@ function($scope, accountResource, $location) {
     if(!userId || !code) {
         $location.search('userId', null);
         $location.search('code', null);
-        $location.path('/login/forgotten');
+        $location.path('/login/forgotten', false);
         return;    
     }
     
@@ -26,7 +26,7 @@ function($scope, accountResource, $location) {
             console.log(response);
             $scope.submitting = false;
             $.notify({message: 'Vaše geslo je bilo spremenjeno, sedaj se lahko prijavite v sistem.'}, {type: 'success'});
-            $location.path('/login');
+            $location.path('/login', false);
         }, function(response) {
             $scope.submitting = false;
             console.log(response);

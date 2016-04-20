@@ -53,7 +53,7 @@ function($scope, accountResource, patientProfileResources, $location) {
             console.log(response);
             $.notify({message: 'Uspešno ste kreirali uporabniški profil, ne pozabite aktivirati uporabniškega računa.'}, {type: 'success'});
             $location.search('userId', null);
-            $location.path('/');
+            $location.path('/', false);
         }, function(response) {
             console.log(response);
             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
@@ -62,7 +62,7 @@ function($scope, accountResource, patientProfileResources, $location) {
     
     $scope.skip = function() {
         $location.search('userId', null);
-        $location.path('/');
+        $location.path('/', false);
     };
     
     $scope.$watch('sameContactInfo', function(newValue) {
