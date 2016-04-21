@@ -16,4 +16,5 @@ $.notifyDefaults({
         '</div>'
 });
 
-$.ajaxSetup({cache: true});
+// NUJNO ODKOMENTIRAJ ZA PRODUKCIJO
+// $.ajaxSetup({cache: true});

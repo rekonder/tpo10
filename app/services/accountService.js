@@ -1,13 +1,14 @@
 angular.module('app.services.account', []).
-service('accountService', [function() {
-    this.setAccount = function(id, email, role, token, lastLogin, lastLoginIp) {
+service('accountService', ['$location', function($location) {
+    this.setAccount = function(id, email, role, token, lastLogin, lastLoginIp, profileCount) {
         var account = {
             'id': id,
             'email': email,
             'role': role,
             'token': 'Bearer ' + token,
             'lastLogin': lastLogin,
-            'lastLoginIp': lastLoginIp    
+            'lastLoginIp': lastLoginIp,
+            'profileCount': profileCount    
         };
         localStorage.setItem('tpo10_account', JSON.stringify(account));
     };
@@ -21,5 +22,16 @@ service('accountService', [function() {
     };
     this.removeAccount = function() {
         localStorage.removeItem('tpo10_account');
+    };
+    this.authorize = function(role, success) {
+        var account = this.getAccount();
+        if(!account) {
+            return false;
+        }
+        if(role === account.role) {
+            if(success) $location.path(success, false);
+            return true;
+        }
+        return false;
     };
 }]);

@@ -26,7 +26,11 @@ var app = angular.module('app', [
     
     // REGISTER
     'app.components.register',
-    'app.components.register.activate'
+    'app.components.register.activate',
+    
+    // ACCOUNT
+    'app.components.account',
+    'app.components.account.patient'
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',
@@ -43,3 +47,9 @@ function($rootScope, defaultErrorMessageResolver) {
     });
     
 }]);
+
+app.filter('toDate', function() {
+    return function (date) {
+        return moment(date).toDate();
+    };
+});

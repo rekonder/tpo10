@@ -3,12 +3,7 @@ controller('registerCtrl', ['$scope', 'accountResource', 'patientProfileResource
 function($scope, accountResource, patientProfileResources, $location) {
     
     $scope.gender = "Ženski"
-    
-    $scope.userId = $location.search().userId
-    if($scope.userId) {
-        $scope.userId = decodeURIComponent($scope.userId);
-    }
-        
+            
     $scope.register = function() {
         $scope.registering = true;
         accountResource().register({
@@ -19,7 +14,7 @@ function($scope, accountResource, patientProfileResources, $location) {
             console.log(response);
             $scope.registering = false;
             $.notify({message: 'Preko e-pošte smo vam poslali povezavo za aktivacijo vašega računa.'}, {type: 'success'});
-            $location.search('userId', response.UserId);
+            $scope.userId = response.UserId;
         }, function(response) {
             console.log(response);
             $scope.registering = false;
@@ -33,6 +28,7 @@ function($scope, accountResource, patientProfileResources, $location) {
     };
     
     $scope.createProfile = function() {
+        $scope.creatingProfile = true;
         var profile = {
             'HealthInsuranceNumber': $scope.healthInsuranceNumber,
             'FirstName': $scope.firstName,
@@ -49,19 +45,19 @@ function($scope, accountResource, patientProfileResources, $location) {
             'ContactTelephone': $scope.contactTelephone,
             'ContactFamilyRelationship': $scope.contactFamilyRelationship
         };
-        patientProfileResources().create({'UserId': $scope.userId}, profile).$promise.then(function(response) {
+        patientProfileResources().postPatientProfile({id: $scope.userId}, profile).$promise.then(function(response) {
             console.log(response);
+            $scope.creatingProfile = false;
             $.notify({message: 'Uspešno ste kreirali uporabniški profil, ne pozabite aktivirati uporabniškega računa.'}, {type: 'success'});
-            $location.search('userId', null);
             $location.path('/', false);
         }, function(response) {
             console.log(response);
+            $scope.creatingProfile = false;
             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
         });
     };
     
     $scope.skip = function() {
-        $location.search('userId', null);
         $location.path('/', false);
     };
     
@@ -73,13 +69,6 @@ function($scope, accountResource, patientProfileResources, $location) {
             $scope.contactPost = $scope.post;
             $scope.contactTelephone = $scope.telephone;
             $scope.contactFamilyRelationship = "Jaz";
-        } else {
-            $scope.contactFirstName = null;
-            $scope.contactLastName = null;
-            $scope.contactAddress = null;
-            $scope.contactPost = null;
-            $scope.contactTelephone = null;
-            $scope.contactFamilyRelationship = null;
         }
     });
     $scope.$watch('firstName', function(newValue) {

@@ -16,9 +16,10 @@ function($scope, accountResource, $httpParamSerializer, accountService, $locatio
                 response.role,
                 response.access_token,
                 response.lastLogin,
-                response.lastLoginIp
+                response.lastLoginIp,
+                response.profileCount
             );
-            $location.path('/profile', false);
+            $location.path('/account', false);
         }, function(response) {
             console.log(response);
             $scope.submitting = false;

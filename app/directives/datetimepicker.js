@@ -21,7 +21,7 @@ validation.directive("datetimepicker", [function() {
             })
 
             element.on('blur', function () {
-                var datetime = new Date(moment(element[0].value, 'D. M. YYYY'));
+                var datetime = new Date(moment(element[0].value, 'D. M. YYYY').add(12, 'hours'));
                 ngModel.$setViewValue(datetime);
             });
         }
