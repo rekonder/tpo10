@@ -3,3 +3,4 @@ for (var key in response.data.ModelState) {
         $.notify({message: response.data.ModelState[key][i]}, {type: 'danger'});
     }
 }
+
