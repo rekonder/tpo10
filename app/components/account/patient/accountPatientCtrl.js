@@ -67,6 +67,8 @@ function($scope, accountResource, accountService, $location, patientProfileResou
             $scope.deletingProfile[index] = false;
             $scope.refreshProfiles();
             $.notify({message: 'Profil je bil odstranjen.'}, {type: 'success'});
+            accountService.subProfileCount();
+            $scope.close();
         }, function(response) {
             console.log(response);
             $scope.deletingProfile[index] = false;
@@ -83,6 +85,7 @@ function($scope, accountResource, accountService, $location, patientProfileResou
                 $scope.submittingProfile = false;
                 $scope.refreshProfiles();
                 $.notify({message: 'Profil je bil dodan.'}, {type: 'success'});
+                accountService.addProfileCount();
                 $scope.close();
             }, function(response) {
                 console.log(response);
