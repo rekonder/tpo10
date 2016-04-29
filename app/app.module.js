@@ -10,6 +10,7 @@ var app = angular.module('app', [
     'app.directives.validation',
     'app.directives.datetimepicker',
     'app.shared.navbar',
+    'app.shared.footer',
     
     // SERVICES
     'app.services.account',
@@ -40,12 +41,6 @@ function($rootScope, defaultErrorMessageResolver) {
         // baseUrl: 'http://localhost:64110'
         baseUrl: 'http://tpo10-rest.azurewebsites.net'
     };
-    defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
-        errorMessages['email'] = 'Napačen e-poštni naslov.';
-        errorMessages['password'] = 'Geslo mora vsebovati vsaj 8 zankov od tega vsaj eno številko.';
-        errorMessages['confirmPassword'] = 'Gesli se ne ujemata.';
-    });
-    
 }]);
 
 app.filter('toDate', function() {

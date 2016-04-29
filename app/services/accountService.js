@@ -34,4 +34,14 @@ service('accountService', ['$location', function($location) {
         }
         return false;
     };
+    this.addProfileCount = function() {
+        var account = this.getAccount();
+        account.profileCount++;
+        localStorage.setItem('tpo10_account', JSON.stringify(account));
+    };
+    this.subProfileCount = function() {
+        var account = this.getAccount();
+        account.profileCount--;
+        localStorage.setItem('tpo10_account', JSON.stringify(account));
+    };
 }]);
