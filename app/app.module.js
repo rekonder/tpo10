@@ -13,6 +13,7 @@ var app = angular.module('app', [
     
     // SERVICES
     'app.services.account',
+    'app.services.patient',
     
     // RESOURCES
     'app.resources.helper',
@@ -30,15 +31,18 @@ var app = angular.module('app', [
     
     // ACCOUNT
     'app.components.account',
-    'app.components.account.patient'
+    'app.components.account.patient',
+    
+    // DASHBOARD
+    'app.components.dashboard.patient'
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',
 function($rootScope, defaultErrorMessageResolver) {
     $rootScope.appSettings = {
         brandName: 'TPO 10',
-        // baseUrl: 'http://localhost:64110'
-        baseUrl: 'http://tpo10-rest.azurewebsites.net'
+        baseUrl: 'http://localhost:64110'
+        // baseUrl: 'http://tpo10-rest.azurewebsites.net'
     };
     defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
         errorMessages['email'] = 'Napačen e-poštni naslov.';

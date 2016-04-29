@@ -29,6 +29,7 @@
                     <td>{{profile.Gender}}</td>
                     <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
                     <td class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard($index)"></button> 
                         <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="open($index)" ng-hide="profile.opened"></button>
                         <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="close($index)" ng-show="profile.opened"></button>
                         <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" ng-click="delete($index)" ladda="deletingProfile[$index]" data-style="expand-right"></button>
