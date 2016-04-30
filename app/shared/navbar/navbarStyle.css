@@ -8,7 +8,8 @@ body {
 }
 
 .navbar-default > .container-fluid {
-    background-color: #333333;
+    /*background-color: #333333;*/
+    background-color: #2A3F54;
 }
 
 .navbar-default .navbar-brand,
@@ -21,13 +22,21 @@ body {
 }
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
-    color: #333333;
+    /*color: #333333;*/
+    color: #2A3F54;
     background-color: white;
 }
 .navbar-default .navbar-nav>li.active>a,
 .navbar-default .navbar-nav>li.active>a:hover,
 .navbar-default .navbar-nav>li.active>a:focus {
-    color: #333333;
+    /*color: #333333;*/
+    color: #2A3F54;
     background-color: white;
     background-image: none;
+}
+.navbar-toggle:hover {
+    background-color: #2A4E60 !important;
+}
+.navbar-toggle .icon-bar {
+    background-color: white !important;   
 }
