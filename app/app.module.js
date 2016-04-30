@@ -31,15 +31,16 @@ var app = angular.module('app', [
     
     // ACCOUNT
     'app.components.account',
-    'app.components.account.patient'
+    'app.components.account.patient',
+    'app.components.account.administrator'
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',
 function($rootScope, defaultErrorMessageResolver) {
     $rootScope.appSettings = {
         brandName: 'TPO 10',
-        // baseUrl: 'http://localhost:64110'
-        baseUrl: 'http://tpo10-rest.azurewebsites.net'
+        baseUrl: 'http://localhost:64110'
+        //baseUrl: 'http://tpo10-rest.azurewebsites.net'
     };
 }]);
 
