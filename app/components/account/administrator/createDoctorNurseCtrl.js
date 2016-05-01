@@ -1,7 +1,7 @@
 angular.module('app.components.account.administrator', []).
 controller('createDoctorNurseCtrl',
-    ['$scope', 'accountResource', 'accountService', '$location',
-        function($scope, accountResource, accountService, $location) {
+    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources',
+        function($scope, accountResource, accountService, $location, doctorProfileResources) {
             var account = accountService.getAccount();
 
             if(accountService.authorize('Administrator', null));
@@ -30,6 +30,9 @@ controller('createDoctorNurseCtrl',
                         $scope.sloRole = 'zdravnika';
                     else 
                         $scope.sloRole = 'medicinske sestre';
+                    $scope.staffId = response.UserId;
+
+                    //reset
                     $scope.email = null;
                     $scope.password = null;
                     $scope.confirmPassword = null;
@@ -37,7 +40,6 @@ controller('createDoctorNurseCtrl',
                     $scope.role = 'Doctor';
                     $scope.created = true;
                     $scope.createProfile = false;
-                    //response.UserId;
                 }, function(response) {
                     console.log(response);
                     $scope.registering = false;
@@ -47,6 +49,38 @@ controller('createDoctorNurseCtrl',
                     } catch(e) {
                         $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
                     }
+                });
+            };
+
+            $scope.createStaffProfile = function() {
+                $scope.submittingProfile = true;
+                var profile = {
+                    'DoctorKey': $scope.doctorKey,
+                    'FirstName': $scope.firstName,
+                    'LastName': $scope.lastName,
+                    'Telephone': $scope.telephone,
+                    'PatientNumber': $scope.patientNumber,
+                    'HealthCareProviderNumber': $scope.healthCareProviderNumber
+                };
+                console.log(profile);
+                doctorProfileResources().postDoctorProfile({id: $scope.staffId}, profile).$promise.then(function(response) {
+                    console.log(response);
+                    $scope.submittingProfile = false;
+                    $scope.doctorKey = null;
+                    $scope.firstName = null;
+                    $scope.lastName = null;
+                    $scope.telephone = null;
+                    $scope.patientNumber = null;
+                    $scope.healthCareProviderNumber = null;
+                    $scope.profileDoctorNurseForm.$setPristine();
+                    $scope.createProfile = false;
+                    $scope.created = false;
+
+                    $.notify({message: 'Uspešno ste kreirali profil zdravnika ' + $scope.oldEmail}, {type: 'success'});
+                }, function(response) {
+                    console.log(response);
+                    $scope.submittingProfile = false;
+                    $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
                 });
             };
 
