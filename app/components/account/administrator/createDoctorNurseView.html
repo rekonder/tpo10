@@ -47,17 +47,17 @@
     </form>
 
     <div class="alert alert-info" ng-show="created">
-        <strong>Opcija:</strong> Če želite ustvariti profil za doktorja/medicinsko sestro {{oldEmail}} kliknite <strong ng-click="createProfile = true">tukaj</strong> .
+        <strong>Opcija:</strong> Če želite ustvariti profil {{sloRole + ' ' + oldEmail}} kliknite <strong ng-click="createProfile = true">tukaj</strong> .
     </div>
-<!-- Profile -->
+<!-- Profile  zdravnik-->
     <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="createProfile" ng-submit="createStaffProfile()" novalidate>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <h3>Profil {{sloRole + ' ' + oldEmail}}</h3>
+                <h3>Ustavarite profil {{sloRole + ' ' + oldEmail}}</h3>
             </div>
         </div>
         <div class="form-group">
-            <label for="doctorKey" class="col-sm-2 control-label">Številka {{sloRole}} </label>
+            <label for="doctorKey" class="col-sm-2 control-label">Šifrant {{sloRole}} </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="doctorKey" ng-model="doctorKey" required  doctor-key>
             </div>
@@ -81,15 +81,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="healthCareProviderNumber" class="col-sm-2 control-label">Ustanova</label>
+            <label for="healthCareProviderNumber" class="col-sm-2 control-label">Številka ustanove</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" required>
+                <input type="number" min="1" class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" required>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="createProfile && zdravnik">
             <label for="patientNumber" class="col-sm-2 control-label">Število pacientov</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="patientNumber" ng-model="patientNumber" required>
+                <input type="number" min="0"class="form-control" id="patientNumber" ng-model="$parent.patientNumber" required>
             </div>
         </div>
         <div class="form-group">

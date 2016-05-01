@@ -103,7 +103,7 @@ validation.directive("doctorKey", [function() {
         require: "ngModel",
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.doctorKey = function(modelValue) {
-                var patt = new RegExp(/^[\d]{4}$/i);
+                var patt = new RegExp(/^[a-zA-Z\d]{4}$/i);
                 return patt.test(modelValue);
             }
         }
