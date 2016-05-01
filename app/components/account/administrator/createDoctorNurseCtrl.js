@@ -6,8 +6,8 @@ controller('createDoctorNurseCtrl',
 
             if(accountService.authorize('Administrator', null));
             else $location.path('/account');
-
             $scope.role = 'Doctor';
+            
             $scope.registerDoctorNurse = function() {
                 $scope.registering = true;
                 accountResource().createAccount({
@@ -24,11 +24,20 @@ controller('createDoctorNurseCtrl',
                     else
                         message += 'medicinsko sestro ';
                     $.notify({message: message +  $scope.email + ' .'}, {type: 'success'});
+                    $scope.oldEmail = $scope.email;
+                    $scope.oldRole = $scope.role;
+                    if($scope.oldRole == 'Doctor')
+                        $scope.sloRole = 'zdravnika';
+                    else 
+                        $scope.sloRole = 'medicinske sestre';
                     $scope.email = null;
                     $scope.password = null;
                     $scope.confirmPassword = null;
                     $scope.registerDoctorNurseForm.$setPristine();
                     $scope.role = 'Doctor';
+                    $scope.created = true;
+                    $scope.createProfile = false;
+                    //response.UserId;
                 }, function(response) {
                     console.log(response);
                     $scope.registering = false;

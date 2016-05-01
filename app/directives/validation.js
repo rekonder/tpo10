@@ -86,13 +86,26 @@ validation.directive("telephoneNumber", [function() {
 // TODO - Ni čisto ok
 validation.directive("postNumber", ['helperResources', function(helperResources) {
     return {
-        restrict: "A",
-        require: "ngModel",
-        link: function(scope, element, attributes, ngModel) {
-            ngModel.$validators.postNumber = function(modelValue) {
+    restrict: "A",
+    require: "ngModel",
+    link: function(scope, element, attributes, ngModel) {
+        ngModel.$validators.postNumber = function(modelValue) {
+            var patt = new RegExp(/^[\d]{4}$/i);
+            return patt.test(modelValue);
+        }
+    }
+};
+}]);
+
+validation.directive("doctorKey", [function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attributes, ngModel) {
+            ngModel.$validators.doctorKey = function(modelValue) {
                 var patt = new RegExp(/^[\d]{4}$/i);
                 return patt.test(modelValue);
-            }
-        }
-    };
+            }
+        }
+    };
 }]);
