@@ -1,6 +1,6 @@
 <div class="container">
     <!-- REGISTER -->
-    <form class="form-horizontal" name="registerDoctorNurseForm" ng-submit="registerDoctorNurse()" novalidate>
+    <form class="form-horizontal" name="registerDoctorNurseForm" ng-submit="registerDoctorNurse()" ng-hide="createProfile" novalidate>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <h3>Registracija zdravnika/medicinske sestre</h3>
@@ -46,10 +46,10 @@
         </div>
     </form>
 
-    <div class="alert alert-info" ng-show="created">
+    <div class="alert alert-info" ng-show="created && !createProfile">
         <strong>Opcija:</strong> Če želite ustvariti profil {{sloRole + ' ' + oldEmail}} kliknite <strong ng-click="createProfile = true">tukaj</strong> .
     </div>
-<!-- Profile  zdravnik-->
+<!-- Profil  zdravnik-->
     <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="createProfile" ng-submit="createStaffProfile()" novalidate>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -83,7 +83,9 @@
         <div class="form-group">
             <label for="healthCareProviderNumber" class="col-sm-2 control-label">Številka ustanove</label>
             <div class="col-sm-10">
-                <input type="number" min="1" class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" required>
+              <!--  <input type="number" min="1" class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" required> -->
+                <select class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" ng-options="x.Key + ' - '
+                 + x.Name for x in healthCareProvidersProfile | orderBy:'Key'" required></select>
             </div>
         </div>
         <div class="form-group" ng-if="createProfile && zdravnik">
@@ -97,5 +99,8 @@
                 <button type="submit" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">Ustvari</button>
             </div>
         </div>
+
+
     </form>
+
 </div>

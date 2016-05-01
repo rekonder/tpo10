@@ -1,13 +1,21 @@
 angular.module('app.components.account.administrator', []).
 controller('createDoctorNurseCtrl',
-    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'nurseProfileResources',
-        function($scope, accountResource, accountService, $location, doctorProfileResources, nurseProfileResources) {
+    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'nurseProfileResources', 'helperResources',
+        function($scope, accountResource, accountService, $location, doctorProfileResources, nurseProfileResources, helperResources) {
             var account = accountService.getAccount();
 
             if(accountService.authorize('Administrator', null));
             else $location.path('/account');
+
             $scope.role = 'Doctor';
-            
+
+            helperResources().getHealthCareProviders().$promise.then(function(response) {
+                $scope.healthCareProvidersProfile = response;
+            },function(response) {
+                console.log(response);
+                $scope.healthCareProvidersProfile = [];
+            });
+
             $scope.registerDoctorNurse = function() {
                 $scope.registering = true;
                 accountResource().createAccount({
@@ -42,14 +50,7 @@ controller('createDoctorNurseCtrl',
                     $scope.confirmPassword = null;
                     $scope.registerDoctorNurseForm.$setPristine();
                     $scope.registerDoctorNurseForm.$setUntouched();
-                    $scope.doctorKey = null;
-                    $scope.firstName = null;
-                    $scope.lastName = null;
-                    $scope.telephone = null;
-                    $scope.patientNumber = null;
-                    $scope.healthCareProviderNumber = null;
-                    $scope.profileDoctorNurseForm.$setPristine();
-                    $scope.profileDoctorNurseForm.$setUntouched();
+                    $scope.clearProfile();
                     $scope.role = 'Doctor';
                     $scope.created = true;
                     $scope.createProfile = false;
@@ -73,19 +74,12 @@ controller('createDoctorNurseCtrl',
                         'LastName': $scope.lastName,
                         'Telephone': $scope.telephone,
                         'PatientNumber': $scope.patientNumber,
-                        'HealthCareProviderNumber': $scope.healthCareProviderNumber
+                        'HealthCareProviderNumber': $scope.healthCareProviderNumber.Key
                     };
                     console.log(profile);
                     doctorProfileResources().postDoctorProfile({id: $scope.staffId}, profile).$promise.then(function (response) {
                         $scope.submittingProfile = false;
-                        $scope.doctorKey = null;
-                        $scope.firstName = null;
-                        $scope.lastName = null;
-                        $scope.telephone = null;
-                        $scope.patientNumber = null;
-                        $scope.healthCareProviderNumber = null;
-                        $scope.profileDoctorNurseForm.$setPristine();
-                        $scope.profileDoctorNurseForm.$setUntouched();
+                        $scope.clearProfile();
                         $scope.createProfile = false;
                         $scope.created = false;
 
@@ -106,18 +100,12 @@ controller('createDoctorNurseCtrl',
                         'FirstName': $scope.firstName,
                         'LastName': $scope.lastName,
                         'Telephone': $scope.telephone,
-                        'HealthCareProviderNumber': $scope.healthCareProviderNumber
+                        'HealthCareProviderNumber': $scope.healthCareProviderNumber.Key
                     };
                     console.log(profile);
                     nurseProfileResources().postNurseProfile({id: $scope.staffId}, profile).$promise.then(function (response) {
                         $scope.submittingProfile = false;
-                        $scope.doctorKey = null;
-                        $scope.firstName = null;
-                        $scope.lastName = null;
-                        $scope.telephone = null;
-                        $scope.healthCareProviderNumber = null;
-                        $scope.profileDoctorNurseForm.$setPristine();
-                        $scope.profileDoctorNurseForm.$setUntouched();
+                        $scope.clearProfile();
                         $scope.createProfile = false;
                         $scope.created = false;
 
@@ -134,5 +122,16 @@ controller('createDoctorNurseCtrl',
                     });
                 }
             };
+
+            $scope.clearProfile = function() {
+                $scope.doctorKey = null;
+                $scope.firstName = null;
+                $scope.lastName = null;
+                $scope.telephone = null;
+                $scope.patientNumber = null;
+                $scope.healthCareProviderNumber = null;
+                $scope.profileDoctorNurseForm.$setPristine();
+                $scope.profileDoctorNurseForm.$setUntouched();
+            }
 
         }]);
