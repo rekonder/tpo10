@@ -17,4 +17,4 @@ $.notifyDefaults({
 });
 
 // NUJNO ODKOMENTIRAJ ZA PRODUKCIJO
-$.ajaxSetup({cache: true});
+// $.ajaxSetup({cache: true});
