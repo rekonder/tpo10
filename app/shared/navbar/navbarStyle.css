@@ -22,9 +22,8 @@ body {
 }
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
-    /*color: #333333;*/
-    color: #2A3F54;
-    background-color: white;
+    color: white;
+    background-color: #3E5367;
 }
 .navbar-default .navbar-nav>li.active>a,
 .navbar-default .navbar-nav>li.active>a:hover,

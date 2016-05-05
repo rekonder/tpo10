@@ -75,7 +75,7 @@ body, html {
     height: 100%;
     background: #2A3F54;
     left: 0;
-    top: 52px;
+    top: 50px;
 }
 
 .side-menu {
@@ -118,7 +118,15 @@ body, html {
     margin-left: 230px;
     width: calc(100% - 230px);
     color: black;
-    /*background: black;*/
+    padding-top: 18px;
+}
+
+.dashboard-content .row {
+    padding-bottom: 18px;
+}
+
+.dashboard-content .navbar-default {
+    background:red;  
 }
 /* END DASHBOARD */
 
