@@ -78,6 +78,14 @@ body, html {
     top: 50px;
 }
 
+/*.dashboard-menu.collapsed {
+    width: 48px;
+}
+
+.dashboard-menu.collapsed > * {
+    display: none;
+}*/
+
 .side-menu {
     padding-top: 24px;
     padding-left: 0;
@@ -98,7 +106,7 @@ body, html {
 }
 
 .profile-info {
-    margin-top: 28px;    
+    margin-top: 18px;    
 }
 
 .profile-info > .description {
@@ -107,10 +115,15 @@ body, html {
     font-weight: 300;   
 }
 
+.side-menu i {
+    padding-right: 12px;
+} 
+
 .profile-info > .picture > img {
-    padding: 8px;
+    margin-left: 12px;
+    padding-bottom: 10px;
     border-radius: 20px; 
-    max-width: 128px;
+    max-width: 120px;
 }
 
 
@@ -123,10 +136,6 @@ body, html {
 
 .dashboard-content .row {
     padding-bottom: 18px;
-}
-
-.dashboard-content .navbar-default {
-    background:red;  
 }
 /* END DASHBOARD */
 
