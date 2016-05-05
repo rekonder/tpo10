@@ -15,6 +15,15 @@ function($rootScope, $resource, accountService) {
                     q: '@_q'
                 },
                 isArray: true
+            },
+            getHealthCareProviders: {
+                method: 'GET',
+                url: appSettings.baseUrl + '/api/Helper/HealthCareProvider',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                isArray: true
             }
         });
     }

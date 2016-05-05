@@ -53,3 +53,91 @@ table th,
 table td {
     width: auto !important;
 }
+
+/* DASHBOARD  */
+
+/* potrebno nastaviti, da deluje height:100% pri container-fluid.ng-scope  */
+body, html {
+    height: 100%;
+}
+
+.container-fluid.ng-scope {
+    position: relative;
+    padding: 0;
+    top: -18px;
+    color: white;
+    height: 100%;
+}
+
+.dashboard-menu {
+    position: fixed;
+    width: 230px;
+    height: 100%;
+    background: #2A3F54;
+    left: 0;
+    top: 50px;
+}
+
+/*.dashboard-menu.collapsed {
+    width: 48px;
+}
+
+.dashboard-menu.collapsed > * {
+    display: none;
+}*/
+
+.side-menu {
+    padding-top: 24px;
+    padding-left: 0;
+}
+.side-menu > li {
+    padding-left: 20px;
+    height: 32px;
+}
+.side-menu > li:hover {
+    background: #3E5367;
+}
+
+.menu-section .side-menu a  {
+    color: #E7E7E7;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+}
+
+.profile-info {
+    margin-top: 18px;    
+}
+
+.profile-info > .description {
+    margin-left: 12px;
+    font-size: 1.2em;
+    font-weight: 300;   
+}
+
+.side-menu i {
+    padding-right: 12px;
+} 
+
+.profile-info > .picture > img {
+    margin-left: 12px;
+    padding-bottom: 10px;
+    border-radius: 20px; 
+    max-width: 120px;
+}
+
+
+.dashboard-content {
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    color: black;
+    padding-top: 18px;
+}
+
+.dashboard-content .row {
+    padding-bottom: 18px;
+}
+/* END DASHBOARD */
+
+
+

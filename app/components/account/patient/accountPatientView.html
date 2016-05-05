@@ -1,4 +1,5 @@
 <div class="container">
+<!-- UPORABIŠKI PROFILI -->
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Uporabniški profili</h3>
@@ -29,6 +30,7 @@
                     <td>{{profile.Gender}}</td>
                     <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
                     <td class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard($index)"></button> 
                         <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="open($index)" ng-hide="profile.opened"></button>
                         <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="close($index)" ng-show="profile.opened"></button>
                         <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" ng-click="delete($index)" ladda="deletingProfile[$index]" data-style="expand-right"></button>
@@ -182,26 +184,41 @@
             </div>
         </form>
     </div>
-    <!--<div class="panel-footer">
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>-->
 </div>
+<!-- /UPORABIŠKI PROFILI -->
+<!-- SPREMEMBA GESLA -->
+<form class="form-horizontal" ng-submit="changePassword()" novalidate>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <h3>Spremenite geslo</h3>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="oldPassword" class="col-sm-2 control-label">Staro geslo</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="oldPassword" ng-model="oldPassword" required password>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="newPassword" class="col-sm-2 control-label">Novo geslo</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="newPassword" ng-model="newPassword" required password>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="confirmNewPassword" class="col-sm-2 control-label">Potrdite novo geslo</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="confirmNewPassword" ng-model="confirmNewPassword" required password confirm-password="newPassword">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default btn-primary" ladda="changingPassword" data-style="expand-right">Spremeni</button>
+        </div>
+    </div>
+</form>
+<!-- /SPREMEMBA GESLA -->
 </div>

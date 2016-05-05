@@ -1,7 +1,7 @@
 angular.module('app.components.account.patient', []).
 controller('accountPatientCtrl',
-['$scope', 'accountResource', 'accountService', '$location', 'patientProfileResources',
-function($scope, accountResource, accountService, $location, patientProfileResources) {
+['$scope', 'accountResource', 'accountService', 'patientService', '$location', 'patientProfileResources',
+function($scope, accountResource, accountService, patientService, $location, patientProfileResources) {
     var account = accountService.getAccount();
     
     if(accountService.authorize('Patient', null));
@@ -67,12 +67,22 @@ function($scope, accountResource, accountService, $location, patientProfileResou
             $scope.deletingProfile[index] = false;
             $scope.refreshProfiles();
             $.notify({message: 'Profil je bil odstranjen.'}, {type: 'success'});
+            accountService.subProfileCount();
+            $scope.close();
         }, function(response) {
             console.log(response);
             $scope.deletingProfile[index] = false;
             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
         });
     };
+    
+    $scope.dashboard = function(index) {
+        console.log(index);
+        if(!isNaN(index)) {
+            patientService.setSelectedPatientProfile($scope.profiles[index]); 
+            $location.path('dashboard/patient');   
+        }
+    }
     
     $scope.submitProfile = function() {
         if($scope.createClicked) {
@@ -83,6 +93,7 @@ function($scope, accountResource, accountService, $location, patientProfileResou
                 $scope.submittingProfile = false;
                 $scope.refreshProfiles();
                 $.notify({message: 'Profil je bil dodan.'}, {type: 'success'});
+                accountService.addProfileCount();
                 $scope.close();
             }, function(response) {
                 console.log(response);
@@ -106,6 +117,29 @@ function($scope, accountResource, accountService, $location, patientProfileResou
                 $scope.close();
             });
         }
+    };
+    
+    $scope.changePassword = function() {
+        $scope.changingPassword = true;
+        accountResource().changePassword({
+            "OldPassword": $scope.oldPassword,
+            "NewPassword": $scope.newPassword,
+            "ConfirmPassword": $scope.confirmNewPassword
+        }).$promise.then(function(response) {
+            console.log(response);
+            $scope.changingPassword = false;
+            $.notify({message: 'Geslo je bilo spremenjeno.'}, {type: 'success'});
+            $scope.oldPassword = null;
+            $scope.newPassword = null;
+            $scope.confirmNewPassword = null;
+        }, function(response) {
+            console.log(response);
+            $scope.changingPassword = false;
+            $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
+            $scope.oldPassword = null;
+            $scope.newPassword = null;
+            $scope.confirmNewPassword = null;
+        });
     };
     
     $scope.$watch('sameContactInfo', function(newValue) {
