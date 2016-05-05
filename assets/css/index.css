@@ -50,6 +50,6 @@ input,
 }
 
 table th,
-table td, {
+table td {
     width: auto !important;
 }
