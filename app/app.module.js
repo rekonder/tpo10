@@ -14,6 +14,7 @@ var app = angular.module('app', [
     
     // SERVICES
     'app.services.account',
+    'app.services.patient',
     
     // RESOURCES
     'app.resources.helper',
@@ -35,6 +36,10 @@ var app = angular.module('app', [
     'app.components.account',
     'app.components.account.patient',
     'app.components.account.administrator'
+    
+    // DASHBOARD
+    'app.components.dashboard.patient'
+
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',

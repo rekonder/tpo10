@@ -1,7 +1,7 @@
 angular.module('app.components.account.patient', []).
 controller('accountPatientCtrl',
-['$scope', 'accountResource', 'accountService', '$location', 'patientProfileResources',
-function($scope, accountResource, accountService, $location, patientProfileResources) {
+['$scope', 'accountResource', 'accountService', 'patientService', '$location', 'patientProfileResources',
+function($scope, accountResource, accountService, patientService, $location, patientProfileResources) {
     var account = accountService.getAccount();
     
     if(accountService.authorize('Patient', null));
@@ -75,6 +75,14 @@ function($scope, accountResource, accountService, $location, patientProfileResou
             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
         });
     };
+    
+    $scope.dashboard = function(index) {
+        console.log(index);
+        if(!isNaN(index)) {
+            patientService.setSelectedPatientProfile($scope.profiles[index]); 
+            $location.path('dashboard/patient');   
+        }
+    }
     
     $scope.submitProfile = function() {
         if($scope.createClicked) {
