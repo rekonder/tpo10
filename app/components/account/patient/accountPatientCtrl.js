@@ -67,6 +67,8 @@ function($scope, accountResource, accountService, patientService, $location, pat
             $scope.deletingProfile[index] = false;
             $scope.refreshProfiles();
             $.notify({message: 'Profil je bil odstranjen.'}, {type: 'success'});
+            accountService.subProfileCount();
+            $scope.close();
         }, function(response) {
             console.log(response);
             $scope.deletingProfile[index] = false;
@@ -91,6 +93,7 @@ function($scope, accountResource, accountService, patientService, $location, pat
                 $scope.submittingProfile = false;
                 $scope.refreshProfiles();
                 $.notify({message: 'Profil je bil dodan.'}, {type: 'success'});
+                accountService.addProfileCount();
                 $scope.close();
             }, function(response) {
                 console.log(response);
@@ -114,6 +117,29 @@ function($scope, accountResource, accountService, patientService, $location, pat
                 $scope.close();
             });
         }
+    };
+    
+    $scope.changePassword = function() {
+        $scope.changingPassword = true;
+        accountResource().changePassword({
+            "OldPassword": $scope.oldPassword,
+            "NewPassword": $scope.newPassword,
+            "ConfirmPassword": $scope.confirmNewPassword
+        }).$promise.then(function(response) {
+            console.log(response);
+            $scope.changingPassword = false;
+            $.notify({message: 'Geslo je bilo spremenjeno.'}, {type: 'success'});
+            $scope.oldPassword = null;
+            $scope.newPassword = null;
+            $scope.confirmNewPassword = null;
+        }, function(response) {
+            console.log(response);
+            $scope.changingPassword = false;
+            $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
+            $scope.oldPassword = null;
+            $scope.newPassword = null;
+            $scope.confirmNewPassword = null;
+        });
     };
     
     $scope.$watch('sameContactInfo', function(newValue) {
