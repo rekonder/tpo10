@@ -1,0 +1,10 @@
+<footer ng-controller="footerCtrl">
+    <div class="container-fluid text-right">
+        <div ng-hide="account">
+            TPO  10
+        </div>
+        <div ng-show="account">
+            Zadnje prijavljen {{account.lastLogin | toDate | date: 'd. M. yyyy'}} z {{account.lastLoginIp}} IP naslova.
+        </div>
+    </div>
+</footer>
