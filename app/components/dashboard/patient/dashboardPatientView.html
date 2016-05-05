@@ -1,89 +1,109 @@
-<div class="container">
-    <div class="col-md-3 left_col">
-        <div class="left_col">
-
-          <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>TPO10</span></a>
-          </div>
-          <div class="clearfix"></div>
-
-          <!-- menu prile quick info -->
-          <div class="profile">
-            <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+<div class="container-fluid">
+  
+  <!-- DASHBOARD LEFT MENU  -->
+  <nav class="dashboard-menu">
+    
+    <!-- PROFILE INFO -->
+    <div clas="profile-info">
+      <div class="picture">
+        <img alt="profile picture" src="https://api.adorable.io/avatars/174/tpo10@adorable.io.png">
+      </div>
+      
+      <div class="description">
+        Dobrodošel,   
+        {{selectedPatientProfile.FirstName}} {{selectedPatientProfile.LastName}}!  
+      </div>
+    </div>
+    <!-- END PROFILE INFO -->
+      
+      <div class="menu-section">
+        
+        <ul class="side-menu">
+          <li><a href="#/dashboard/patient">Pregled profila</a></li>
+          <li><a href="#/dashboard/patient">Urejanje profila</a></li>
+          <li><a href="#/dashboard/patient">Vnos meritev</a></li>
+        </ul>
+        
+      </div>
+      
+  </nav>
+  
+  <!-- END DASHBOARD LEFT MENU  -->
+  <div class="dashboard-content" role="main">
+    
+    <div class="container-fluid" style="color:white;">
+      
+      <div class="row">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
             </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>{{selectedPatientProfile.FirstName}} {{selectedPatientProfile.LastName}}</h2>
-            </div>
-          </div>
-          <!-- /menu prile quick info -->
 
-          <br>
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-
-            <div class="menu_section">
-              <h3>Nadzorna plošča</h3>
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Pregled profila <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none;">
-                    <li><a href="#"> Osebni zdravnik </a>
-                    <li><a href="#"> Zobozdravnik </a>
-                    <li><a href="#"> Zdravila </a>
-                    <li><a href="#"> Recepti </a>
-                    <li><a href="#"> Opravljeni pregledi </a>
-                    <li><a href="#"> Naročeni pregledi </a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Urejanje <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none;">
-                    <li><a href="#">Profil pacienta</a>
-                    </li>
-                    <li><a href="#">Osebni zdravnik</a>
-                    </li>
-                    <li><a href="#">Zobozdravnik</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class=""><a><i class="fa fa-table"></i> Meritve <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none;">
-                    <li><a href="#">Lastne meritve</a>
-                    </li>
-                    <li><a href="#">Nadzorovane meritve</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Poročila <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none;">
-                    <li><a href="#">Poročilo 1</a>
-                    </li>
-                    <li><a href="#">Poročilo 2</a>
-                    </li>
-                    <li><a href="#">Poročilo 3</a>
-                    </li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
               </ul>
-            </div>
-            
-          </div>
-          <!-- /sidebar menu -->
-
-          <!-- /menu footer buttons -->
-          <div class="sidebar-footer hidden-small" style="display: block;">
-            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
-              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            
-            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Nazaj na seznam uporabnikov">
-              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
-            
-          </div>
-          <!-- /menu footer buttons -->
-        </div>
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
       </div>
+      
+      <div class="row">
+          <div class="col-md-4">
+            sadsdasd
+          </div>
+          <div class="col-md-4">
+            sadsdasd
+          </div>
+          <div class="col-md-4">
+            sadsdasd
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  
 </div>

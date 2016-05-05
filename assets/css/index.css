@@ -53,3 +53,38 @@ table th,
 table td, {
     width: auto !important;
 }
+
+/* DASHBOARD  */
+.dashboard-menu {
+    position: fixed;
+    width: 230px;
+    height: 100%;
+    background: red;
+    left: 0;
+    top: 52px;
+    /*display: table-cell;*/
+}
+
+
+/* potrebno nastaviti, da deluje height:100% pri container-fluid.ng-scope  */
+body, html {
+    height: 100%;
+}
+.container-fluid.ng-scope {
+    position: relative;
+    padding: 0;
+    top: -18px;
+    color: white;
+    height: 100%;
+}
+
+.dashboard-content {
+    margin-left: 230px;
+    color: blue;
+    width: calc(100% - 230px);
+    background: green;
+}
+/* END DASHBOARD */
+
+
+
