@@ -78,10 +78,43 @@ body, html {
     top: 50px;
 }
 
+.dashboard-menu.collapsed {
+    width: 48px;
+    text-align: center;
+}
+
+.dashboard-menu.collapsed .profile-info {
+    display: none;
+}
+
+.dashboard-menu.collapsed .side-menu .fa {
+    font-size: 2em;
+}
+
+.dashboard-menu.collapsed .side-menu .text {
+    display: none;
+}
+
+.dashboard-menu.collapsed li {
+    width: 100%;
+    text-align: center;
+}
+
+.dashboard-menu.collapsed .side-menu > li {
+    padding: 0;
+    height: 32px;
+} 
+
+
 .side-menu {
     padding-top: 24px;
     padding-left: 0;
 }
+
+.side-menu .fa {
+    font-size: 1.3em;    
+}
+
 .side-menu > li {
     padding-left: 20px;
     height: 32px;
@@ -98,7 +131,7 @@ body, html {
 }
 
 .profile-info {
-    margin-top: 28px;    
+    margin-top: 18px;    
 }
 
 .profile-info > .description {
@@ -107,10 +140,16 @@ body, html {
     font-weight: 300;   
 }
 
+.side-menu .text {
+    margin-left: 12px;
+    font-size: 1.1em;
+} 
+
 .profile-info > .picture > img {
-    padding: 8px;
-    border-radius: 20px; 
-    max-width: 128px;
+    margin-left: 12px;
+    padding-bottom: 10px;
+    border-radius: 20px;     
+    max-width: 120px;
 }
 
 
@@ -123,10 +162,6 @@ body, html {
 
 .dashboard-content .row {
     padding-bottom: 18px;
-}
-
-.dashboard-content .navbar-default {
-    background:red;  
 }
 /* END DASHBOARD */
 
