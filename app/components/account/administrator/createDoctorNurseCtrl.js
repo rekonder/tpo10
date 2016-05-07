@@ -8,6 +8,7 @@ controller('createDoctorNurseCtrl',
             else $location.path('/account');
 
             $scope.role = 'Doctor';
+            $scope.roleDoc = 0;
 
             helperResources().getHealthCareProviders().$promise.then(function(response) {
                 $scope.healthCareProvidersProfile = response;
@@ -52,6 +53,7 @@ controller('createDoctorNurseCtrl',
                     $scope.registerDoctorNurseForm.$setUntouched();
                     $scope.clearProfile();
                     $scope.role = 'Doctor';
+
                     $scope.created = true;
                     $scope.createProfile = false;
                 }, function(response) {
@@ -74,6 +76,7 @@ controller('createDoctorNurseCtrl',
                         'LastName': $scope.lastName,
                         'Telephone': $scope.telephone,
                         'PatientNumber': $scope.patientNumber,
+                        'DocOrDentist': $scope.roleDoc,
                         'HealthCareProviderNumber': $scope.healthCareProviderNumber.Key
                     };
                     console.log(profile);
@@ -130,6 +133,7 @@ controller('createDoctorNurseCtrl',
                 $scope.telephone = null;
                 $scope.patientNumber = null;
                 $scope.healthCareProviderNumber = null;
+                $scope.roleDoc = 0;
                 $scope.profileDoctorNurseForm.$setPristine();
                 $scope.profileDoctorNurseForm.$setUntouched();
             }
