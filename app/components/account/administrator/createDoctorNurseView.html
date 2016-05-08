@@ -56,7 +56,7 @@
             <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="createProfile" ng-submit="createStaffProfile()" novalidate>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <h3>Ustavarite profil {{sloRole + ' ' + oldEmail}}</h3>
+                        <h3>Ustvarite profil {{sloRole + ' ' + oldEmail}}</h3>
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,10 +101,10 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="radio">
                             <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                                <label><input type="radio" ng-model="roleDoc" value="0">Zdravnik</label>
+                                <label><input type="radio" ng-model="$parent.roleDoc" value="0">Zdravnik</label>
                             </div>
                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <label><input type="radio" ng-model="roleDoc" value="1">Zobozdravnik</label>
+                                <label><input type="radio" ng-model="$parent.roleDoc" value="1">Zobozdravnik</label>
                             </div>
                         </div>
                     </div>

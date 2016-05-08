@@ -1,0 +1,206 @@
+<div class="container">
+
+    <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="profile.length == 0" ng-submit="createStaffProfile()" novalidate>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <h3>Prosim prvo ustvarite profil:</h3>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="doctorKey" class="col-sm-2 control-label">Šifra {{sloRole}} </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="doctorKey" ng-model="doctorKey" required  doctor-key>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">E-pošta</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" ng-model="email" required email email-err-type="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="firstName" class="col-sm-2 control-label">Ime</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstName" ng-model="firstName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-2 control-label">Priimek</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" ng-model="lastName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="telephone" class="col-sm-2 control-label">Telefon</label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="telephone" ng-model="telephone" required telephone-number>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="healthCareProviderNumber" class="col-sm-2 control-label">Številka ustanove</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="healthCareProviderNumber" ng-model="healthCareProviderNumber" ng-options="x.Key + ' - '
+                         + x.Name for x in healthCareProvidersProfile | orderBy:'Key'" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="patientNumber" class="col-sm-2 control-label">Število pacientov</label>
+            <div class="col-sm-10">
+                <input type="number" min="0"class="form-control" id="patientNumber" ng-model="patientNumber" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="radio">
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <label><input type="radio" ng-model="roleDoc" value="0">Zdravnik</label>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <label><input type="radio" ng-model="roleDoc" value="1">Zobozdravnik</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">Ustvari</button>
+            </div>
+        </div>
+    </form>
+    <div class="panel panel-default" ng-show="profile.length != 0">
+        <div class="panel-heading">
+            <h3 class="panel-title">Vaš profil</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <th>Številka</th>
+                    <th>E-pošta</th>
+                    <th>Priimek</th>
+                    <th>Ime</th>
+                    <th>Telefon</th>
+                    <th>Zdravstveni dom</th>
+                    <th>Vloga</th>
+                    <th>Trenutno št. pacientov</th>
+                    <th>Maks. št. pacientov</th>
+                </thead>
+                <tbody>
+
+                    <tr id="{{formData.Id}}">
+                        <td>{{formData.DoctorKey}}</td>
+                        <td>{{formData.Email}}</td>
+                        <td>{{formData.LastName}}</td>
+                        <td>{{formData.FirstName}}</td>
+                        <td>{{formData.Telephone}}</td>
+                        <td>{{formData.HealthCareProvider.Key + '-' + formData.HealthCareProvider.Name }}</td>
+                        <td>{{roleDocName}}</td>
+                        <td>{{formData.CurrentPatientNumber}}</td>
+                        <td>{{formData.PatientNumber}}</td>
+                        <td class="text-right">
+                            <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="open()" ng-hide="clicked"></button>
+                            <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="clicked = false" ng-show="clicked"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-body" ng-show="clicked">
+            <form class="form-horizontal" name="profileDoctorNurseForm" ng-submit="changeProfile()" novalidate>
+                <div class="form-group">
+                    <label for="doctorKey" class="col-sm-2 control-label">Šifra </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="doctorKey1" ng-model="profile.DoctorKey" required  doctor-key>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">E-pošta</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email1" ng-model="profile.Email" required email email-err-type="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-2 control-label">Ime</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="firstName1" ng-model="profile.FirstName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="col-sm-2 control-label">Priimek</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastName1" ng-model="profile.LastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telephone" class="col-sm-2 control-label">Telefon</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" id="telephone1" ng-model="profile.Telephone" required telephone-number>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="healthCareProviderNumber" class="col-sm-2 control-label">Številka ustanove</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="healthCareProviderNumber1" ng-model="healthCareProviderNumber" data-ng-options="x.Key + ' - '
+                                 + x.Name for x in healthCareProvidersProfile | orderBy:'Key'"  required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="patientNumber" class="col-sm-2 control-label">Število pacientov</label>
+                    <div class="col-sm-10">
+                        <input type="number" min={{formData.CurrentPatientNumber}} class="form-control" id="patientNumber1" ng-model="profile.PatientNumber" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="formData.CurrentPatientNumber == 0">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="radio">
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                <label><input type="radio" ng-model="$parent.roleDocUpdate" value="0">Zdravnik</label>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <label><input type="radio" ng-model="$parent.roleDocUpdate" value="1">Zobozdravnik</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">Posodobi</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <form class="form-horizontal" ng-submit="changePassword()" novalidate ng-show="profile.length != 0" name="changePass">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <h3>Spremenite geslo</h3>
+            </div>
+            <div class="col-sm-offset-2 col-sm-10">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="oldPassword" class="col-sm-2 control-label">Staro geslo</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="oldPassword" ng-model="oldPassword" required password>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPassword" class="col-sm-2 control-label">Novo geslo</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="newPassword" ng-model="newPassword" required password>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmNewPassword" class="col-sm-2 control-label">Potrdite novo geslo</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="confirmNewPassword" ng-model="confirmNewPassword" required password confirm-password="newPassword">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default btn-primary" ladda="changingPassword" data-style="expand-right">Spremeni</button>
+            </div>
+        </div>
+    </form>
+</div>
