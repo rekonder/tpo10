@@ -11,9 +11,11 @@ controller('doctorChooserCtrl',
 
             // selected profile
             var selectedPatientProfile = patientService.getSelectedPatientProfile();
-            console.log(selectedPatientProfile);
+            //console.log(selectedPatientProfile);
 
             var selectedPatientProfileId = selectedPatientProfile.Id;
+
+
             doctorChooserResources().getChosenDoctors({id: selectedPatientProfileId}).$promise.then(
                 function(response) { // OK
                     console.log(response);
@@ -25,10 +27,24 @@ controller('doctorChooserCtrl',
             );
 
             // daza from form sent to backend
-            $scope.chooseDoctor = function () {
-                console.log($scope.formData.PersonalDoctor);
-                console.log($scope.formData.DentistDoctor);
-            }
+            $scope.chooseDoctors = function () {
+                console.log('test');
+                $scope.formData.Id = selectedPatientProfileId;
+
+                console.log($scope.formData);
+
+                if($scope.formData) {
+                    doctorChooserResources().putChosenDoctors({id: $scope.formData.Id}, $scope.formData).$promise.then(function(response) {
+                        console.log(response)
+                        $.notify({message: 'Izbrani zdravniki so bili shranjeni.'}, {type: 'success'});
+                    }, function(response) {
+                        console.log(response);
+                        $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
+                    });
+                }
+
+
+            };
 
         }]);
 

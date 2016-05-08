@@ -12,7 +12,7 @@
 
 
 
-    <form class="form-horizontal" ng-submit="chooseDoctor()" novalidate>
+    <form class="form-horizontal" ng-submit="chooseDoctors()" novalidate>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <h3>Izberi / zamenjaj zdravnika</h3>
@@ -26,7 +26,7 @@
             <label for="personalDoctors" class="col-sm-4 control-label">Osebni zdravnik</label>
             <div class="col-sm-8">
                 <select class="form-control" id="personalDoctors" ng-model="formData.PersonalDoctor" required>
-                    <option selected ng-repeat="doctor in doctors" ng-if="doctor.DocOrDentist == 0" ng-selected="selectedPatientProfileFromBackend.PersonalDoctor == doctor.Id">
+                    <option ng-repeat="doctor in doctors" ng-if="doctor.DocOrDentist == 0" ng-selected="selectedPatientProfileFromBackend.PersonalDoctor == doctor.Id" value="{{doctor.Id}}">
                         [ id: {{doctor.DoctorKey}} ] {{doctor.FirstName}} {{doctor.FirstName}}, PROSTA MESTA: {{ doctor.PatientNumber - doctor.CurrentPatientNumber }}
                     </option>
                 </select>
@@ -38,7 +38,7 @@
             <label for="dentistDoctors" class="col-sm-4 control-label">Zobozdravnik</label>
             <div class="col-sm-8">
                 <select class="form-control" id="dentistDoctors" ng-model="formData.DentistDoctor" required>
-                    <option selected ng-repeat="doctor in doctors" ng-if="doctor.DocOrDentist == 1" ng-selected="selectedPatientProfileFromBackend.PersonalDoctor == doctor.Id">
+                    <option ng-repeat="doctor in doctors" ng-if="doctor.DocOrDentist == 1" ng-selected="selectedPatientProfileFromBackend.PersonalDoctor == doctor.Id" value="{{doctor.Id}}">
                         [ id: {{doctor.DoctorKey}} ] {{doctor.FirstName}} {{doctor.FirstName}}, PROSTA MESTA: {{ doctor.PatientNumber - doctor.CurrentPatientNumber }}
                     </option>
                 </select>
@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default btn-primary" data-style="expand-right">Shrani izbrane zdravnike</button>
+                <button type="submit" id="submit" ng-class="submit" class="btn btn-default btn-primary" data-style="expand-right">Shrani izbrane zdravnike</button>
                 <!--ladda=""-->
             </div>
         </div>
