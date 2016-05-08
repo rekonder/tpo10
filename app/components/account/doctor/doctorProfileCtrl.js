@@ -1,7 +1,7 @@
 angular.module('app.components.account.doctor', []).
 controller('createDoctorCtrl',
-    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'helperResources',
-        function($scope, accountResource, accountService, $location, doctorProfileResources, helperResources) {
+    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'helperResources', '$route',
+        function($scope, accountResource, accountService, $location, doctorProfileResources, helperResources, $route) {
             var account = accountService.getAccount();
 
             if(accountService.authorize('Doctor', null));
@@ -121,6 +121,7 @@ controller('createDoctorCtrl',
                     $scope.formData = angular.copy($scope.profile);
                     $scope.doctorOrDentist();
                     $scope.clicked = false;
+                    accountService.setEmail($scope.profile.Email);
                 }, function(response) {
                     console.log(response);
                     $scope.submittingProfile = false;
