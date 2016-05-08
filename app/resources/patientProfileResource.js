@@ -3,9 +3,10 @@ factory('patientProfileResources', ['$rootScope', '$resource', 'accountService',
 function($rootScope, $resource, accountService) {
     var appSettings = $rootScope.appSettings;
     return function() {
-        return $resource(appSettings.baseUrl + '/api/PatientProfiles/Account/:id', { id: '@_id' }, {
+        return $resource(appSettings.baseUrl + '/api/PatientProfiles/:id', { id: '@_id' }, {
             getPatientProfiles: {
                 method: 'GET',
+                url: appSettings.baseUrl + '/api/PatientProfiles/Account/:id',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'

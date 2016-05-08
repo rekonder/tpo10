@@ -8,16 +8,18 @@ function($scope, accountResource, accountService, $location, $routeParams, patie
     console.log($routeParams.patientId);
     
     $scope.refreshProfile = function() {
-        patientProfileResources().getPatientProfile({patientId: $routeParams.patientId}).$promise.then(function(response) {
+        patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function(response) {
             console.log(response);
             response.BirthDate = moment(response.BirthDate).toDate().toLocaleDateString();
             $scope.profile = response;
+            $scope.avatar = ($scope.profile.Gender == "Moški")? "assets/images/profiles/patient-male.png":"assets/images/profiles/patient-female.png"; 
+            console.log($scope.avatar);
             
         }, function(response) {
             console.log(response);
         });
     };
     
-    $scope.refreshProfile();
-
+    $scope.refreshProfile(); 
+    
 }]);    
