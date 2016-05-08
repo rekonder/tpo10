@@ -1,0 +1,192 @@
+<div class="container-fluid">
+  
+  <!-- DASHBOARD LEFT MENU  -->
+  <nav class="dashboard-menu">
+    
+    <!-- PROFILE INFO -->
+    <div class="profile-info">
+      <div class="picture">
+        <img alt="profile picture" class="img-circle" src="https://api.adorable.io/avatars/182/tpo10.png">
+      </div>
+      
+      <div class="description">
+        Dobrodošel,   
+        {{profile.FirstName}} {{profile.LastName}}!  
+      </div>
+    </div>
+    <!-- END PROFILE INFO -->
+      
+      <div class="menu-section">
+        
+        <ul class="side-menu">
+          <li><a href="{{absUrl}}"><i class="fa fa-user"></i> <i class="text">Pregled profila</i></a></li>
+          <li><a href="{{absUrl}}/edit"><i class="fa fa-cog"></i> <i class="text">Urejanje profila</i></a></li>
+          <li><a href="{{absUrl}}/measurement"><i class="fa fa-edit"></i> <i class="text">Vnos meritev</i></a></li>
+          <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Izbor profila</i></a></li>
+        </ul>
+        
+      </div>
+      
+  </nav>
+  <!-- END DASHBOARD LEFT MENU  -->
+  
+  
+  <!-- DASHBOARD CONTENT -->
+  <div class="dashboard-content" role="main">
+    <div class="container-fluid">
+       
+       <div class="row">
+        <div class="col-md-12">
+           <form class="form-horizontal" ng-submit="submitProfile()" novalidate>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <h4>Uporabniški profil</h4>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <div style="min-height: 22px;"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthInsuranceNumber" class="col-sm-4 control-label">ZZZS številka</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="healthInsuranceNumber" ng-model="formData.HealthInsuranceNumber" required  health-insurance-number>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName" class="col-sm-4 control-label">Ime</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="firstName" ng-model="formData.FirstName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="col-sm-4 control-label">Priimek</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="lastName" ng-model="formData.LastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-4 control-label">Naslov</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="address" ng-model="formData.Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="post" class="col-sm-4 control-label">Poštna številka</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="post" ng-model="formData.PostNumber" required post-number>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone" class="col-sm-4 control-label">Telefon</label>
+                        <div class="col-sm-8">
+                            <input type="tel" class="form-control" id="telephone" ng-model="formData.Telephone" required telephone-number>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate" class="col-sm-4 control-label">Datum rojstva</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="birthDate" ng-model="formData.BirthDate" datetimepicker date required view-mode="years">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender" class="col-sm-4 control-label">Spol</label>
+                        <div class="col-sm-8">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" id="gender0" value="Ženski" ng-model="formData.Gender" ng-checked="formData.Gender == 'Ženski'" required>
+                                    Ženski
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" id="gender1" value="Moški" ng-model="formData.Gender" ng-checked="formData.Gender == 'Moški'" required>
+                                    Moški
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <h4>Kontaktne informacije</h4>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <input type="checkbox" ng-model="sameContactInfo"> Uporabi podatke uporabniškega profila
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactFirstName" class="col-sm-4 control-label">Ime</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactFirstName" ng-model="formData.ContactFirstName" ng-disabled="sameContactInfo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactLastName" class="col-sm-4 control-label">Priimek</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactLastName" ng-model="formData.ContactLastName" ng-disabled="sameContactInfo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactAddress" class="col-sm-4 control-label">Naslov</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactAddress" ng-model="formData.ContactAddress" ng-disabled="sameContactInfo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPost" class="col-sm-4 control-label">Pošta</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactPost" ng-model="formData.ContactPostNumber" ng-disabled="sameContactInfo"
+                            required post-number>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactTelephone" class="col-sm-4 control-label">Telefon</label>
+                        <div class="col-sm-8">
+                            <input type="tel" class="form-control" id="contactTelephone" ng-model="formData.ContactTelephone" ng-disabled="sameContactInfo" required telephone-number>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactFamilyRelationship" class="col-sm-4 control-label">Družinska relacija</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="contactFamilyRelationship" ng-model="formData.ContactFamilyRelationship" ng-disabled="sameContactInfo" required>
+                                <option value="" disabled selected>Jaz sem _____ zgornjega profila.</option>
+                                <option value="Jaz">Jaz</option>
+                                <option value="Starš">Starš</option>
+                                <option value="Otrok">Otrok</option>
+                                <option value="Brat ali sestra">Brat ali sestra</option>
+                                <option value="Stari starš">Stari starš</option>
+                                <option value="Vnuk">Vnuk</option>
+                                <option value="Nečak ali nečakinja">Nečak ali nečakinja</option>
+                                <option value="Bratranec ali sestrična">Bratranec ali sestrična</option>
+                                <option value="Stric ali teta">Stric ali teta</option>
+                                <option value="Ostalo">Ostalo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="submit" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">
+                                <span ng-show="createClicked">Ustvari</span><span ng-hide="createClicked">Shrani</span>
+                            </button>            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <!-- END OF DASHBOARD CONTENT -->
+  
+  
+</div>
+     

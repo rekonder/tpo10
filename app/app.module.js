@@ -14,7 +14,6 @@ var app = angular.module('app', [
     
     // SERVICES
     'app.services.account',
-    'app.services.patient',
     
     // RESOURCES
     'app.resources.helper',

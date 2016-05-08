@@ -1,7 +1,7 @@
 angular.module('app.components.account.patient', []).
 controller('accountPatientCtrl',
-['$scope', 'accountResource', 'accountService', 'patientService', '$location', 'patientProfileResources',
-function($scope, accountResource, accountService, patientService, $location, patientProfileResources) {
+['$scope', 'accountResource', 'accountService', '$location', 'patientProfileResources',
+function($scope, accountResource, accountService, $location, patientProfileResources) {
     var account = accountService.getAccount();
     
     if(accountService.authorize('Patient', null));
@@ -78,9 +78,8 @@ function($scope, accountResource, accountService, patientService, $location, pat
     
     $scope.dashboard = function(index) {
         console.log(index);
-        if(!isNaN(index)) {
-            patientService.setSelectedPatientProfile($scope.profiles[index]); 
-            $location.path('dashboard/patient');   
+        if(!isNaN(index)) { 
+            $location.path('dashboard/patient/' + $scope.profiles[index].Id);   
         }
     }
     
