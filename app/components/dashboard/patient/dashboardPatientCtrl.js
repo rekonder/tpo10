@@ -2,9 +2,10 @@ angular.module('app.components.dashboard.patient', []).
 controller('dashboardPatientCtrl', 
 ['$scope', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources',
 function($scope, accountResource, accountService, $location, $routeParams, patientProfileResources) {
-    console.log($routeParams.patientId);
+    
     $scope.absUrl = $location.absUrl();
     console.log($scope.absUrl);
+    console.log($routeParams.patientId);
     
     $scope.refreshProfile = function() {
         patientProfileResources().getPatientProfile({patientId: $routeParams.patientId}).$promise.then(function(response) {

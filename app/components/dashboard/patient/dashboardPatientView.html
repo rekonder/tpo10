@@ -19,10 +19,9 @@
       <div class="menu-section">
         
         <ul class="side-menu">
-          <li><a href="{{absUrl}}"><i class="fa fa-user"></i> <i class="text">Pregled profila</i></a></li>
-          <li><a href="{{absUrl}}/edit"><i class="fa fa-cog"></i> <i class="text">Urejanje profila</i></a></li>
-          <li><a href="{{absUrl}}/measurement"><i class="fa fa-edit"></i> <i class="text">Vnos meritev</i></a></li>
-          <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Izbor profila</i></a></li>
+          <li><a href="#/dashboard/patient/{{profile.Id}}"><i class="fa fa-user"></i> <i class="text">Pregled profila</i></a></li>
+          <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Nazaj na izbor profila</i></a></li>
+          
         </ul>
         
       </div>
@@ -106,6 +105,46 @@
               
           </div>
       </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-hover" ng-if="profile.PersonalDoctor!=null">
+            <h2>Osebni zdravnik</h2>
+            <p ng-if="profile.PersonalDoctor==null">Pacient še nima izbranega osebnega zdravnika!</p>
+            <tr>
+              <th>Ime</th>
+              <td>{{profile.PersonalDoctor.FirstName}}</td>
+            </tr>
+            <tr>
+              <th>Priimek</th>
+              <td>{{profile.PersonalDoctor.LastName}}</td>
+            </tr>
+            <tr>
+              <th>Telefon</th>
+              <td>{{profile.PersonalDoctor.Telephone}}</td>
+            </tr>
+          </table>
+          
+          <table class="table table-hover" ng-if="profile.DentistDoctor!=null">
+            <h2>Zobozdravnik</h2>
+            <p ng-if="profile.DentistDoctor==null">Pacient še nima izbranega zobozdravnika!</p>
+            <tr>
+              <tr>
+              <th>Ime</th>
+              <td>{{profile.DentistDoctor.FirstName}}</td>
+            </tr>
+            <tr>
+              <th>Priimek</th>
+              <td>{{profile.DentistDoctor.LastName}}</td>
+            </tr>
+            <tr>
+              <th>Telefon</th>
+              <td>{{profile.DentistDoctor.Telephone}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      
       
 <!--      
       <div class="row">
