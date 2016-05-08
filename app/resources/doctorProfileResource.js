@@ -20,6 +20,22 @@ factory('doctorProfileResources', ['$rootScope', '$resource', 'accountService',
                         'Accept': 'application/json',
                         'Authorization': accountService.getToken()
                     }
+                },
+                getDoctorProfile: {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
+                },
+                putDoctorProfile: {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
                 }
             });
         }

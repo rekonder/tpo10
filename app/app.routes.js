@@ -50,6 +50,10 @@ routes.config(['$routeProvider', function($routeProvider) {
            templateUrl: 'app/components/dashboard/patient/dashboardPatientViewEdit.html',
            controller: 'dashboardPatientCtrl' 
         }).
+        when('/account/doctor', {
+            templateUrl: 'app/components/account/doctor/doctorProfileView.html',
+            controller: 'createDoctorCtrl'
+        }).
         otherwise({
            redirectTo: '/'
         });

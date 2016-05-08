@@ -8,6 +8,7 @@ controller('createDoctorNurseCtrl',
             else $location.path('/account');
 
             $scope.role = 'Doctor';
+            $scope.roleDoc = 0;
 
             helperResources().getHealthCareProviders().$promise.then(function(response) {
                 $scope.healthCareProvidersProfile = response;
@@ -33,8 +34,7 @@ controller('createDoctorNurseCtrl',
                         message += 'medicinsko sestro ';
                     $.notify({message: message +  $scope.email + ' .'}, {type: 'success'});
                     $scope.oldEmail = $scope.email;
-                    $scope.oldRole = $scope.role;
-                    if($scope.oldRole == 'Doctor') {
+                    if($scope.role == 'Doctor') {
                         $scope.sloRole = 'zdravnika';
                         $scope.zdravnik = true;
                     }
@@ -52,6 +52,7 @@ controller('createDoctorNurseCtrl',
                     $scope.registerDoctorNurseForm.$setUntouched();
                     $scope.clearProfile();
                     $scope.role = 'Doctor';
+
                     $scope.created = true;
                     $scope.createProfile = false;
                 }, function(response) {
@@ -74,7 +75,9 @@ controller('createDoctorNurseCtrl',
                         'LastName': $scope.lastName,
                         'Telephone': $scope.telephone,
                         'PatientNumber': $scope.patientNumber,
-                        'HealthCareProviderNumber': $scope.healthCareProviderNumber.Key
+                        'DocOrDentist': $scope.roleDoc,
+                        'HealthCareProviderNumber': $scope.healthCareProviderNumber.Key,
+                        'Email': $scope.oldEmail
                     };
                     console.log(profile);
                     doctorProfileResources().postDoctorProfile({id: $scope.staffId}, profile).$promise.then(function (response) {
@@ -88,7 +91,7 @@ controller('createDoctorNurseCtrl',
                         $scope.submittingProfile = false;
                         if(response.statusText == "Not Found")
                             $.notify({message: 'Ta ustanova s to številko ne obstaja.'}, {type: 'danger'});
-                        else if (response.data.Message == "Doctor or nurse with that key already exsists")
+                        else if (response.data.Message == "doctor or nurse with that key already exsists")
                             $.notify({message: 'Ta številka zdravnika ali medicinske sestre že obstaja.'}, {type: 'danger'});
                         else
                             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
@@ -115,7 +118,7 @@ controller('createDoctorNurseCtrl',
 
                         if(response.statusText == "Not Found")
                             $.notify({message: 'Ta ustanova s to številko ne obstaja.'}, {type: 'danger'});
-                        else if (response.data.Message == "Doctor or nurse with that key already exsists")
+                        else if (response.data.Message == "doctor or nurse with that key already exsists")
                             $.notify({message: 'Ta številka zdravnika ali medicinske sestre že obstaja.'}, {type: 'danger'});
                         else
                             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
@@ -130,6 +133,7 @@ controller('createDoctorNurseCtrl',
                 $scope.telephone = null;
                 $scope.patientNumber = null;
                 $scope.healthCareProviderNumber = null;
+                $scope.roleDoc = 0;
                 $scope.profileDoctorNurseForm.$setPristine();
                 $scope.profileDoctorNurseForm.$setUntouched();
             }
