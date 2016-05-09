@@ -1,9 +1,7 @@
-angular.module('app.components.dashboard.administrator', []).
+angular.module('app.shared.leftMenu.administrator', []).
 controller('dashboardAdministrator', ['$scope', '$location', 'accountService',
     function($scope, $location, accountService) {
-        console.log("Hello");
         $scope.$watch(function() { return accountService.getAccount(); }, function(newValue) {
-            console.log("Hello");
             $scope.account = newValue;
         }, true);
     }]);
