@@ -37,14 +37,23 @@ controller('doctorChooserCtrl',
                             angular.forEach($scope.doctors, function (item) {
                                 if(angular.equals(item.DocOrDentist, 0)){
                                     $scope.personalDoctors.push(item);
+                                    var isReadOnly = true;
+                                    if((item.PatientNumber - item.CurrentPatientNumber) <= 0) {
+                                        isReadOnly = false;
+                                    }
+
+
                                     $scope.personalDoctorOptions.push({
                                         name: '[' + item.DoctorKey + '] ' + item.FirstName + " " + item.LastName + ', prosta mesta: ' + (item.PatientNumber - item.CurrentPatientNumber),
-                                        id: item.Id
+                                        id: item.Id,
+                                        isReadOnly: isReadOnly
                                     });
 
                                     if(personalDoc != null && angular.equals(item.Id, personalDoc.Id)){
                                         $scope.personalDoctorSelectedOption = $scope.personalDoctorOptions[$scope.personalDoctorOptions.length-1];
                                     }
+
+
                                 }
                                 else{
                                     $scope.dentistDoctors.push(item);
@@ -61,6 +70,16 @@ controller('doctorChooserCtrl',
                             });
                             // console.log($scope.personalDoctors);
                             // console.log($scope.dentistDoctors);
+
+                            $scope.add_extra_field = function(){
+                                $scope.ui_fields.push({
+                                    name: "",
+                                    type: "",
+                                    isreadonly: false
+                                });
+                            }
+
+
                         },
                         function(response) { // ERR
                             console.log(response);
@@ -92,7 +111,7 @@ controller('doctorChooserCtrl',
                         //console.log(formData);
 
                         doctorChooserResources().putChosenDoctors({id: formData.Id}, formData).$promise.then(function(response) {
-                            console.log(response)
+                            console.log(response);
                             $.notify({message: 'Izbrani zdravniki so bili shranjeni.'}, {type: 'success'});
 
                         }, function(response) {

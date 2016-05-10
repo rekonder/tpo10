@@ -3,46 +3,63 @@
     <div class="dashboard-content" role="main">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-lg-12">
-                <form class="form-horizontal" ng-submit="chooseDoctors()" novalidate>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <h3>Izberi / zamenjaj zdravnika</h3>
+                <div class="col-lg-8">
+                    <form class="form-horizontal" ng-submit="chooseDoctors()" novalidate>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <h3>Izberi / zamenjaj zdravnika</h3>
+                            </div>
                         </div>
-                        <div class="col-sm-offset-2 col-sm-10">
 
+
+                        <div class="form-group">
+                            <label for="personalDoctors" class="col-sm-4 control-label">Osebni zdravnik</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="personalDoctors"
+                                        data-ng-options="p.name for p in personalDoctorOptions"
+
+
+                                        data-ng-model="personalDoctorSelectedOption"
+                                >
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        <label for="personalDoctors" class="col-sm-4 control-label">Osebni zdravnik</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="personalDoctors" data-ng-options="p.name for p in personalDoctorOptions"
-                                    data-ng-model="personalDoctorSelectedOption"></select>
+                        <div class="form-group">
+                            <label for="dentistDoctors" class="col-sm-4 control-label">Zobozdravnik</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="dentistDoctors"
+                                        data-ng-options="d.name for d in dentistDoctorOptions"
+                                        data-ng-model="dentistDoctorSelectedOption"></select>
+                            </div>
                         </div>
-                    </div>
 
-
-                    <div class="form-group">
-                        <label for="dentistDoctors" class="col-sm-4 control-label">Zobozdravnik</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="dentistDoctors" data-ng-options="d.name for d in dentistDoctorOptions"
-                                    data-ng-model="dentistDoctorSelectedOption"></select>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" id="submit" ng-class="submit" class="btn btn-default btn-primary"
+                                        data-style="expand-right">
+                                    Shrani izbrane zdravnike
+                                </button>
+                                <!--ladda=""-->
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" id="submit" ng-class="submit" class="btn btn-default btn-primary" data-style="expand-right">
-                                Shrani izbrane zdravnike
-                            </button>
-                            <!--ladda=""-->
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
+
+
+    <div ng-repeat="field in ui_fields">
+        <label for="Language">Field Name :</label><input class="form-control" ng-readonly="field.isreadonly" type="text" ng-model="field.name">
+        <label for="Language">Field type :</label>
+        <select class="form-control"  ng-disabled="field.isreadonly" ng-model="field.type">
+            <option value="">Select field type</option>
+            <option value="timedate">Date & Time</option>
+            <option value="text">Text</option>
+        </select>
+    </div>
+
+
 </div>
