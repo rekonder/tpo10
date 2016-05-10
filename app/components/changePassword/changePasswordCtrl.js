@@ -4,6 +4,11 @@ controller('changePasswordCtrl',
         function($scope, accountResource, accountService, $location) {
             var account = accountService.getAccount();
 
+            if(accountService.authorize('Patient', null));
+            else if(accountService.authorize('Doctor', null));
+            else if(accountService.authorize('Administrator', null));
+            else $location.path('/account');
+
             $scope.changePassword = function() {
                 $scope.changingPassword = true;
                 accountResource().changePassword({

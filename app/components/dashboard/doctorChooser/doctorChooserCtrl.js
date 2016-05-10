@@ -6,6 +6,9 @@ controller('doctorChooserCtrl',
                  doctorProfileResources, patientProfileResources, helperResources, doctorChooserResources) {
 
             // all doctors
+            if(accountService.authorize('Patient', null));
+            // else if(accountService.authorize('Doctor', null)); //for later
+            else $location.path('/account');
             doctorProfileResources().getDoctorProfiles().$promise.then(
 
                 function(response) { // OK

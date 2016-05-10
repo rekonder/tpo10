@@ -2,7 +2,10 @@ angular.module('app.components.dashboard.patient', []).
 controller('dashboardPatientCtrl', 
 ['$scope', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources',
 function($scope, accountResource, accountService, $location, $routeParams, patientProfileResources) {
-    
+
+    if(accountService.authorize('Patient', null));
+   // else if(accountService.authorize('Doctor', null)); //for later
+    else $location.path('/account');
     $scope.absUrl = $location.absUrl();
     console.log($scope.absUrl);
     console.log($routeParams.patientId);
