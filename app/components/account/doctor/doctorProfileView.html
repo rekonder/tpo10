@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container-fluid">
+    <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+    <div class="dashboard-content" role="main">
+<div class="container-fluid">
 
     <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="profile.length == 0" ng-submit="createStaffProfile()" novalidate>
         <div class="form-group">
@@ -67,7 +70,7 @@
             </div>
         </div>
     </form>
-    <div class="panel panel-default" ng-show="profile.length != 0">
+    <div class="panel panel-default" ng-show="profile.length != 0 && showProfile">
         <div class="panel-heading">
             <h3 class="panel-title">Vaš profil</h3>
         </div>
@@ -170,7 +173,7 @@
         </div>
 
     </div>
-    <form class="form-horizontal" ng-submit="changePassword()" novalidate ng-show="profile.length != 0" name="changePass">
+    <form class="form-horizontal" ng-submit="changePassword()" novalidate ng-show="profile.length != 0 && showPassword" name="changePass">
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <h3>Spremenite geslo</h3>
@@ -203,4 +206,7 @@
             </div>
         </div>
     </form>
+</div>
+    </div>
+</div>
 </div>

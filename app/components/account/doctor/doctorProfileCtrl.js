@@ -8,7 +8,8 @@ controller('createDoctorCtrl',
             else $location.path('/account');
 
             $scope.roleDoc = 0;
-
+            $scope.showProfile = true;
+            $scope.showPassword = false;
             $scope.refreshProfiles = function() {
                 doctorProfileResources().getDoctorProfile({id: account.id}).$promise.then(function(response) {
                     console.log(response);
