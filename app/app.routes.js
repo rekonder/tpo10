@@ -60,6 +60,6 @@ routes.config(['$routeProvider', function($routeProvider) {
             controller: 'createDoctorCtrl'
         }).
         otherwise({
-           redirectTo: '/'
+           redirectTo: '/account'
         });
 }]);
