@@ -7,11 +7,15 @@
             <img alt="profile picture" class="img-circle" src="{{avatar}}">
         </div>
 
-        <div class="description" ng-if="patient || doctor">
+        <div class="description" ng-if="doctor">
             Dobrodošel,
             {{profile.FirstName}} {{profile.LastName}}!
         </div>
-        <div class="description" ng-if="admin">
+        <div class="description" ng-if="patient">
+            Pacient:
+            {{profile.FirstName}} {{profile.LastName}}!
+        </div>
+        <div class="description" ng-if="admin || patientLogged">
             Dobrodošel,
             {{account.email}}!
         </div>
@@ -20,17 +24,22 @@
 
     <div class="menu-section">
 
-        <ul class="side-menu" ng-if="patient">
+        <ul class="side-menu" ng-show="patient">
             <li><a href="#/dashboard/patient/{{profile.Id}}"><i class="fa fa-user"></i> <i class="text">Pregled profila</i></a></li>
             <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Nazaj na izbor profila</i></a></li>
             <li><a href="#/dashboard/patient/{{profile.Id}}/doctors"><i class="fa fa-user-md" aria-hidden="true"></i> <i class="text">Izbor/Zamenjava zdravnikov</i></a></li>
         </ul>
-        <ul class="side-menu" ng-if="doctor">
+        <ul class="side-menu" ng-show="doctor">
             <li><a href="#/account/doctor"><i class="fa fa-user"></i> <i class="text">Profil</i></a></li>
-            <li><a href="#/changePassword"><i class="fa fa-user"></i> <i class="text">Sprememba gesla</i></a></li>
+            <li><a href="#/changePassword"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <i class="text">Sprememba gesla</i></a></li>
         </ul>
 
-        <ul class="side-menu" ng-if="admin">
+        <ul class="side-menu" ng-show="patientLogged">
+            <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Profili</i></a></li>
+            <li><a href="#/changePassword"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <i class="text">Sprememba gesla</i></a></li>
+        </ul>
+
+        <ul class="side-menu" ng-show="admin">
             <li><a href="#/account/administrator"><i class="fa fa-user"></i> <i class="text">Dodaj zdravnika/medicinsko sestro</i></a></li>
         </ul>
 

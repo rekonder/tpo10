@@ -6,9 +6,11 @@ controller('leftMenuCtrl',
             $scope.absUrl = $location.absUrl();
             console.log($scope.absUrl);
             console.log($routeParams.patientId);
-            $scope.patient = accountService.authorize('Patient', null)
-            $scope.doctor = accountService.authorize('Doctor', null)
-            $scope.admin = accountService.authorize('Administrator', null)
+            $scope.patient = accountService.authorize('Patient', null);
+            $scope.doctor = accountService.authorize('Doctor', null);
+            $scope.admin = accountService.authorize('Administrator', null);
+            $scope.patientLogged = false;
+            $scope.profile = {};
             if ($scope.patient){
                 $scope.refreshProfilePatient = function () {
                     patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function (response) {
@@ -19,22 +21,25 @@ controller('leftMenuCtrl',
                         console.log($scope.avatar);
 
                     }, function (response) {
+                        $scope.patient = false;
+                        $scope.patientLogged = true;
+                        $scope.avatar = "assets/images/profiles/patient-male.png";
                         console.log(response);
                     });
                 };
                 $scope.refreshProfilePatient();
             }
             else if ($scope.doctor) {
-                $scope.refreshProfiles1 = function() {
+                $scope.refreshProfilesDoctor = function() {
                     doctorProfileResources().getDoctorProfile({id: $scope.account.id}).$promise.then(function(response) {
-                        $scope.avatar = "assets/images/profiles/patient-male.png";
+                        $scope.avatar = "assets/images/profiles/doctor.png";
                         $scope.profile = response
                     }, function(response) {
                         console.log(response);
                     });
                 };
 
-                $scope.refreshProfiles1();
+                $scope.refreshProfilesDoctor();
             }
             else if ($scope.admin) {
                 $scope.avatar = "assets/images/profiles/admin.png";
