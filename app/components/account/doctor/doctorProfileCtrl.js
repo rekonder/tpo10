@@ -8,8 +8,6 @@ controller('createDoctorCtrl',
             else $location.path('/account');
 
             $scope.roleDoc = 0;
-            $scope.showProfile = true;
-            $scope.showPassword = false;
             $scope.refreshProfiles = function() {
                 doctorProfileResources().getDoctorProfile({id: account.id}).$promise.then(function(response) {
                     console.log(response);
@@ -59,33 +57,6 @@ controller('createDoctorCtrl',
                         $.notify({message: 'Ta številka zdravnika ali medicinske sestre že obstaja.'}, {type: 'danger'});
                     else
                         $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
-                });
-            };
-
-            $scope.changePassword = function() {
-                $scope.changingPassword = true;
-                accountResource().changePassword({
-                    "OldPassword": $scope.oldPassword,
-                    "NewPassword": $scope.newPassword,
-                    "ConfirmPassword": $scope.confirmNewPassword
-                }).$promise.then(function(response) {
-                    console.log(response);
-                    $scope.changingPassword = false;
-                    $.notify({message: 'Geslo je bilo spremenjeno.'}, {type: 'success'});
-                    $scope.oldPassword = null;
-                    $scope.newPassword = null;
-                    $scope.confirmNewPassword = null;
-                    $scope.changePass.$setPristine();
-                    $scope.changePass.$setUntouched();
-                }, function(response) {
-                    console.log(response);
-                    $scope.changingPassword = false;
-                    $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
-                    $scope.oldPassword = null;
-                    $scope.newPassword = null;
-                    $scope.confirmNewPassword = null;
-                    $scope.changePass.$setPristine();
-                    $scope.changePass.$setUntouched();
                 });
             };
 

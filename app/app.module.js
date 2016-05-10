@@ -37,6 +37,7 @@ var app = angular.module('app', [
     'app.components.account.patient',
     'app.components.account.administrator',
     'app.components.account.doctor',
+    'app.components.changePassword',
     
     // DASHBOARD
     'app.components.dashboard.patient',

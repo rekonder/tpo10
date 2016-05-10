@@ -24,6 +24,11 @@ routes.config(['$routeProvider', function($routeProvider) {
            templateUrl: 'app/components/register/activate/activateView.html',
            controller: 'activateCtrl'
         }).
+        // CHANGE PASSWORD
+        when('/changePassword', {
+            templateUrl: 'app/components/changePassword/changePasswordView.html',
+            controller: 'changePasswordCtrl'
+        }).
         // ACCOUNT
         when('/account', {
            templateUrl: 'app/components/account/accountView.html',
