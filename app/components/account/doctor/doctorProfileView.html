@@ -1,12 +1,14 @@
 <div class="container-fluid">
-    <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+    <div ng-show="profile.length != 0">
+        <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+    </div>
     <div class="dashboard-content" role="main">
 <div class="container-fluid">
 
     <form class="form-horizontal" name="profileDoctorNurseForm" ng-show="profile.length == 0" ng-submit="createStaffProfile()" novalidate>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <h3>Prosim prvo ustvarite profil:</h3>
+                <h3>Prosimo najprej ustvarite profil:</h3>
             </div>
         </div>
         <div class="form-group">
