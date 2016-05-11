@@ -19,6 +19,8 @@ var app = angular.module('app', [
     'app.resources.helper',
     'app.resources.account',
     'app.resources.patientProfile',
+    'app.resources.doctorProfile',
+    'app.resources.nurseProfile',
     
     // LOGIN
     'app.components.login',
@@ -31,7 +33,8 @@ var app = angular.module('app', [
     
     // ACCOUNT
     'app.components.account',
-    'app.components.account.patient'
+    'app.components.account.patient',
+    'app.components.account.administrator'
 ]);
 
 app.run(['$rootScope', 'defaultErrorMessageResolver',
