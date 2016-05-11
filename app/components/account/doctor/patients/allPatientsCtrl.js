@@ -4,7 +4,7 @@ controller('doctorPatientCtrl',
         function($scope, accountResource, accountService, $location, patientProfileResources, doctorPatientProfileResources) {
             var account = accountService.getAccount();
 
-            if(accountService.authorize('Doctor', null));
+            if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true);
             else $location.path('/account');
 
 

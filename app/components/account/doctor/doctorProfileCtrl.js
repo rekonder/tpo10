@@ -18,8 +18,10 @@ controller('createDoctorCtrl',
                         $scope.profile= [];
                         $scope.formData = [];
                     }
+                    accountService.setCheckDoctorProfile(true);
                 }, function(response) {
                     console.log(response);
+                    accountService.setCheckDoctorProfile(false);
                     $scope.profile= [];
                     $scope.formData = [];
                 });
@@ -49,7 +51,8 @@ controller('createDoctorCtrl',
                     $scope.refreshProfiles();
                     $scope.submittingProfile = false;
                     $.notify({message: 'Uspešno ste kreirali profil zdravnika ' + $scope.email}, {type: 'success'});
-                    accountService.setEmail($scope.profile.Email);
+                    accountService.setCheckDoctorProfile(true);
+                    accountService.setEmail( $scope.email);
                 }, function (response) {
                     $scope.submittingProfile = false;
                     if(response.statusText == "Not Found")

@@ -49,4 +49,15 @@ service('accountService', ['$location', function($location) {
         account.email = email;
         localStorage.setItem('tpo10_account', JSON.stringify(account));
     }
+    this.setCheckDoctorProfile = function(value){
+        var createdDocProfile = {
+            'created': value
+        };
+        localStorage.setItem('doctor_created', JSON.stringify(createdDocProfile));
+    }
+    this.getCheckDoctorProfile = function(){
+        console.log("1 " + JSON.parse(localStorage.getItem('doctor_created')));
+        var profile = JSON.parse(localStorage.getItem('doctor_created'))
+        return profile.created;
+    }
 }]);
