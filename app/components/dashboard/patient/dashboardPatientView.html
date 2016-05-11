@@ -1,0 +1,150 @@
+<div class="container-fluid">
+
+  <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+  
+  
+  <!-- DASHBOARD CONTENT -->
+  <div class="dashboard-content" role="main">
+    <div class="container-fluid">
+      
+      <div class="row">
+          <div class="col-md-6">
+              <table class="table table-hover">
+                <h2>Osebni podatki</h2>
+                <tr>
+                  <th>ZZZS številka</td>
+                  <td>{{profile.HealthInsuranceNumber}}</td>
+                </tr>
+                <tr>
+                  <th>Ime</td>
+                  <td>{{profile.FirstName}}</td>
+                </tr>
+                <tr>
+                  <th>Priimek</td>
+                  <td>{{profile.LastName}}</td>
+                </tr>
+                <tr>
+                  <th>Naslov</td>
+                  <td>{{profile.Address}}</td>
+                </tr>
+                <tr>
+                  <th>Poštna številka</td>
+                  <td>{{profile.PostNumber}}</td>
+                </tr>
+                <tr>
+                  <th>Telefon</td>
+                  <td>{{profile.Telephone}}</td>
+                </tr>
+                <tr>
+                  <th>Datum rojstva</td>  
+                  <td>{{profile.BirthDate}}</td>
+                </tr>
+                <tr>
+                  <th>Spol</td>
+                  <td>{{profile.Gender}}</td>
+                </tr>                
+              </table>
+          </div>
+          <div class="col-md-6">
+              <table class="table table-hover">
+                <h2>Podatki kontaktne osebe</h2>
+                <tr>
+                  <th>Ime</td>
+                  <td>{{profile.ContactFirstName}}</td>
+                </tr>
+                <tr>
+                  <th>Priimek</td>
+                  <td>{{profile.ContactLastName}}</td>
+                </tr>
+                <tr>
+                  <th>Naslov</td>
+                  <td>{{profile.ContactAddress}}</td>
+                </tr>
+                <tr>
+                  <th>Pošta</td>
+                  <td>{{profile.ContactPostNumber}}</td>
+                </tr>
+                <tr>
+                  <th>Telefon</td>
+                  <td>{{profile.ContactTelephone}}</td>
+                </tr>
+                <tr>
+                  <th>Družinska relacija</td>
+                  <td>{{profile.ContactFamilyRelationship}}</td>
+                </tr>             
+              </table>
+          </div>
+          <div class="col-md-6">
+              
+          </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-hover" ng-if="profile.PersonalDoctor!=null">
+            <h2>Osebni zdravnik</h2>
+            <p ng-if="profile.PersonalDoctor==null">Pacient še nima izbranega osebnega zdravnika!</p>
+            <tr>
+              <th>Ime</th>
+              <td>{{profile.PersonalDoctor.FirstName}}</td>
+            </tr>
+            <tr>
+              <th>Priimek</th>
+              <td>{{profile.PersonalDoctor.LastName}}</td>
+            </tr>
+            <tr>
+              <th>Telefon</th>
+              <td>{{profile.PersonalDoctor.Telephone}}</td>
+            </tr>
+          </table>
+          
+          <table class="table table-hover" ng-if="profile.DentistDoctor!=null">
+            <h2>Zobozdravnik</h2>
+            <p ng-if="profile.DentistDoctor==null">Pacient še nima izbranega zobozdravnika!</p>
+            <tr>
+              <tr>
+              <th>Ime</th>
+              <td>{{profile.DentistDoctor.FirstName}}</td>
+            </tr>
+            <tr>
+              <th>Priimek</th>
+              <td>{{profile.DentistDoctor.LastName}}</td>
+            </tr>
+            <tr>
+              <th>Telefon</th>
+              <td>{{profile.DentistDoctor.Telephone}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      
+      
+<!--      
+      <div class="row">
+          <div class="col-md-6">
+            <img class="img-responsive" src="http://placehold.it/500x300">
+          </div>
+          <div class="col-md-6">
+            <img class="img-responsive" src="http://placehold.it/500x300">
+          </div>
+      </div>
+      
+      
+      <div class="row">
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+      </div>-->
+      
+    </div>
+  </div>
+  <!-- END OF DASHBOARD CONTENT -->
+  
+  
+</div>

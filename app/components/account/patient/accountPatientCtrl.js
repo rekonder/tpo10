@@ -76,6 +76,13 @@ function($scope, accountResource, accountService, $location, patientProfileResou
         });
     };
     
+    $scope.dashboard = function(index) {
+        console.log(index);
+        if(!isNaN(index)) { 
+            $location.path('dashboard/patient/' + $scope.profiles[index].Id);   
+        }
+    }
+    
     $scope.submitProfile = function() {
         if($scope.createClicked) {
             // CREATE

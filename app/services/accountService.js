@@ -44,4 +44,9 @@ service('accountService', ['$location', function($location) {
         account.profileCount--;
         localStorage.setItem('tpo10_account', JSON.stringify(account));
     };
+    this.setEmail = function (email) {
+        var account = this.getAccount();
+        account.email = email;
+        localStorage.setItem('tpo10_account', JSON.stringify(account));
+    }
 }]);

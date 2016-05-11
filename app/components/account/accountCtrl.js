@@ -5,6 +5,6 @@ function($scope, accountResource, accountService, $location) {
     else if(accountService.authorize('Doctor',        '/account/doctor'));
     else if(accountService.authorize('Nurse',         '/account/nurse'));
     else if(accountService.authorize('Administrator', '/account/administrator'));
-    else $location.path('/');
+    else $location.path('/login');
     return;
 }]);
