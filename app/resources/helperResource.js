@@ -11,9 +11,6 @@ function($rootScope, $resource, accountService) {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                params: {
-                    q: '@_q'
-                },
                 isArray: true
             },
             getHealthCareProviders: {

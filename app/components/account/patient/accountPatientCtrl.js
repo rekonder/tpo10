@@ -1,11 +1,17 @@
 angular.module('app.components.account.patient', []).
 controller('accountPatientCtrl',
-['$scope', 'accountResource', 'accountService', '$location', 'patientProfileResources',
-function($scope, accountResource, accountService, $location, patientProfileResources) {
+['$scope', 'accountResource', 'helperResources', 'accountService', '$location', 'patientProfileResources',
+function($scope, accountResource, helperResources, accountService, $location, patientProfileResources) {
     var account = accountService.getAccount();
     
     if(accountService.authorize('Patient', null));
     else $location.path('/account');
+    
+    helperResources().getPosts().$promise.then(function(response) {
+        $scope.posts = response;
+    }, function(response) {
+        console.error(response);
+    });
     
     $scope.deletingProfile = [];
     
@@ -24,6 +30,8 @@ function($scope, accountResource, accountService, $location, patientProfileResou
             $scope.profiles = [];
         });
     };
+    
+    
     
     $scope.refreshProfiles();
     
