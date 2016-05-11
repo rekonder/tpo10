@@ -14,7 +14,6 @@ var app = angular.module('app', [
     
     // SERVICES
     'app.services.account',
-    'app.services.patient',
     
     // RESOURCES
     'app.resources.helper',
@@ -37,11 +36,13 @@ var app = angular.module('app', [
     'app.components.account',
     'app.components.account.patient',
     'app.components.account.administrator',
+    'app.components.account.doctor',
     
     // DASHBOARD
     'app.components.dashboard.patient',
-
-    'app.components.dashboard.doctorChooser'
+    'app.components.dashboard.doctorChooser',
+    'app.shared.leftMenu.administrator',
+    'app.shared.leftMenu.patient'
 
 ]);
 
