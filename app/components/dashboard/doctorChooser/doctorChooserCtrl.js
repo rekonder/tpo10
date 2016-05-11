@@ -106,14 +106,14 @@ controller('doctorChooserCtrl',
                         //console.log('test');
                         $scope.Id = selectedPatientProfileId;
 
-                        var formData = {
-                            'Id': selectedPatientProfileId,
-                            'PersonalDoctor': $scope.personalDoctorSelectedOption.id,
-                            'DentistDoctor': $scope.dentistDoctorSelectedOption.id
-                        };
+                        var formData = {};
+                        if($scope.personalDoctorSelectedOption)
+                            formData.PersonalDoctor = $scope.personalDoctorSelectedOption.id;
+                        if($scope.dentistDoctorSelectedOption)
+                            formData.DentistDoctor = $scope.dentistDoctorSelectedOption.id;
                         //console.log(formData);
 
-                        doctorChooserResources().putChosenDoctors({id: formData.Id}, formData).$promise.then(function(response) {
+                        doctorChooserResources().putChosenDoctors({id: $scope.Id}, formData).$promise.then(function(response) {
                             console.log(response);
                             $.notify({message: 'Izbrani zdravniki so bili shranjeni.'}, {type: 'success'});
 
