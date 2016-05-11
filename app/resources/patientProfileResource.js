@@ -3,7 +3,7 @@ factory('patientProfileResources', ['$rootScope', '$resource', 'accountService',
 function($rootScope, $resource, accountService) {
     var appSettings = $rootScope.appSettings;
     return function() {
-        return $resource(appSettings.baseUrl + '/api/PatientProfiles/:id?_t='+new Date().getTime(), { id: '@_id' }, {
+        return $resource(appSettings.baseUrl + '/api/PatientProfiles/:id', { id: '@_id' }, {
             getPatientProfiles: {
                 method: 'GET',
                 url: appSettings.baseUrl + '/api/PatientProfiles/Account/:id',

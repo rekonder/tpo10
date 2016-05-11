@@ -1,9 +1,15 @@
 angular.module('app.components.register', []).
-controller('registerCtrl', ['$scope', 'accountResource', 'patientProfileResources', '$location',
-function($scope, accountResource, patientProfileResources, $location) {
+controller('registerCtrl', ['$scope', 'accountResource', 'helperResources', 'patientProfileResources', '$location',
+function($scope, accountResource, helperResources, patientProfileResources, $location) {
     
     $scope.gender = "Ženski"
-            
+    
+    helperResources().getPosts().$promise.then(function(response) {
+        $scope.posts = response;
+    }, function(response) {
+        console.error(response);
+    });
+     
     $scope.register = function() {
         $scope.registering = true;
         accountResource().register({
