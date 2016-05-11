@@ -13,19 +13,27 @@ controller('leftMenuCtrl',
             $scope.profile = {};
             if ($scope.patient){
                 $scope.refreshProfilePatient = function () {
-                    patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function (response) {
-                        console.log(response);
-                        response.BirthDate = moment(response.BirthDate).toDate().toLocaleDateString();
-                        $scope.profile = response;
-                        $scope.avatar = ($scope.profile.Gender == "Moški") ? "assets/images/profiles/patient-male.png" : "assets/images/profiles/patient-female.png";
-                        console.log($scope.avatar);
+                    if ($routeParams.patientId) {
 
-                    }, function (response) {
+                        patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function (response) {
+                            console.log(response);
+                            response.BirthDate = moment(response.BirthDate).toDate().toLocaleDateString();
+                            $scope.profile = response;
+                            $scope.avatar = ($scope.profile.Gender == "Moški") ? "assets/images/profiles/patient-male.png" : "assets/images/profiles/patient-female.png";
+                            console.log($scope.avatar);
+
+                        }, function (response) {
+                            $scope.patient = false;
+                            $scope.patientLogged = true;
+                            $scope.avatar = "assets/images/profiles/patient-male.png";
+                            console.log(response);
+                        });
+                    }
+                    else{
                         $scope.patient = false;
                         $scope.patientLogged = true;
                         $scope.avatar = "assets/images/profiles/patient-male.png";
-                        console.log(response);
-                    });
+                    }
                 };
                 $scope.refreshProfilePatient();
             }
