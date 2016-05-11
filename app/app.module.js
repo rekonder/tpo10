@@ -22,6 +22,7 @@ var app = angular.module('app', [
     'app.resources.doctorProfile',
     'app.resources.nurseProfile',
     'app.resources.doctorChooser',
+    'app.resources.doctorPatientProfile',
 
     // LOGIN
     'app.components.login',
@@ -37,6 +38,7 @@ var app = angular.module('app', [
     'app.components.account.patient',
     'app.components.account.administrator',
     'app.components.account.doctor',
+    'app.components.account.doctor.patient',
     'app.components.changePassword',
     
     // DASHBOARD
