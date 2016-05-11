@@ -154,7 +154,6 @@ body, html {
     max-width: 120px;
 }
 
-
 .dashboard-content {
     margin-left: 230px;
     width: calc(100% - 230px);
@@ -163,6 +162,16 @@ body, html {
 }
 
 .dashboard-content .row {
+    padding-bottom: 18px;
+}
+
+.dashboard-content-no-menu {
+    width: 100%;
+    color: black;
+    padding-top: 18px;
+}
+
+.dashboard-content-no-menu .row {
     padding-bottom: 18px;
 }
 /* END DASHBOARD */

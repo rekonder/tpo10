@@ -49,6 +49,7 @@ controller('createDoctorCtrl',
                     $scope.refreshProfiles();
                     $scope.submittingProfile = false;
                     $.notify({message: 'Uspešno ste kreirali profil zdravnika ' + $scope.email}, {type: 'success'});
+                    accountService.setEmail($scope.profile.Email);
                 }, function (response) {
                     $scope.submittingProfile = false;
                     if(response.statusText == "Not Found")
