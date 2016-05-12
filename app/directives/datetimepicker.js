@@ -13,8 +13,8 @@ validation.directive("datetimepicker", [function() {
         link: function (scope, element, attributes, ngModel) {
             element.datetimepicker({
                 useCurrent: scope.useCurrent,
-                maxDate: scope.maxDate,
-                minDate: scope.minDate,
+                maxDate: eval(scope.maxDate),
+                minDate: eval(scope.minDate),
                 viewMode: scope.viewMode,
                 locale: 'sl',
                 format: 'D. M. YYYY'

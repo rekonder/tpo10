@@ -2,7 +2,7 @@ angular.module('app.components.register', []).
 controller('registerCtrl', ['$scope', 'accountResource', 'helperResources', 'patientProfileResources', '$location',
 function($scope, accountResource, helperResources, patientProfileResources, $location) {
     
-    $scope.gender = "Ženski"
+    // $scope.gender = "Ženski"
     
     helperResources().getPosts().$promise.then(function(response) {
         $scope.posts = response;
