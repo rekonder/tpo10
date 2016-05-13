@@ -91,7 +91,7 @@ controller('createDoctorNurseCtrl',
                         $scope.submittingProfile = false;
                         if(response.statusText == "Not Found")
                             $.notify({message: 'Ta ustanova s to številko ne obstaja.'}, {type: 'danger'});
-                        else if (response.data.Message == "doctor or nurse with that key already exsists")
+                        else if (response.data.Message == "Doctor or nurse with that key already exsists")
                             $.notify({message: 'Ta številka zdravnika ali medicinske sestre že obstaja.'}, {type: 'danger'});
                         else
                             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
@@ -118,7 +118,7 @@ controller('createDoctorNurseCtrl',
 
                         if(response.statusText == "Not Found")
                             $.notify({message: 'Ta ustanova s to številko ne obstaja.'}, {type: 'danger'});
-                        else if (response.data.Message == "doctor or nurse with that key already exsists")
+                        else if (response.data.Message == "Doctor or nurse with that key already exsists")
                             $.notify({message: 'Ta številka zdravnika ali medicinske sestre že obstaja.'}, {type: 'danger'});
                         else
                             $.notify({message: 'Nekaj je šlo narobe.'}, {type: 'danger'});
