@@ -27,7 +27,7 @@
                         <tr ng-show="profiles && profiles.length == 0">
                             <td colspan="6" class="text-center">Noben pacient vas še ni izbral.</td>
                         </tr>
-                        <tr id="{{profile.Id}}" ng-repeat="profile in profiles">
+                        <tr id="{{profile.Id}}" dir-paginate="profile in profiles | itemsPerPage: 10">
                             <td>{{profile.HealthInsuranceNumber}}</td>
                             <td>{{profile.FirstName}}</td>
                             <td>{{profile.LastName}}</td>
@@ -39,6 +39,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <dir-pagination-controls></dir-pagination-controls>
                 </div>
                 </div>
             </div>
