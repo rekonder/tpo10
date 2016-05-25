@@ -34,7 +34,7 @@
                             <td>{{profile.Gender}}</td>
                             <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
                             <td class="text-right">
-                                <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard($index)"></button>
+                                <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard(profile.Id)"></button>
                             </td>
                         </tr>
                         </tbody>

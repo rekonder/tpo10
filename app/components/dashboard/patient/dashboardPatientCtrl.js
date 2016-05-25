@@ -4,7 +4,7 @@ controller('dashboardPatientCtrl',
 function($scope, accountResource, accountService, $location, $routeParams, patientProfileResources) {
 
     if(accountService.authorize('Patient', null));
-   // else if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true); //for later
+    else if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true); //for later
     else $location.path('/account');
     $scope.absUrl = $location.absUrl();
     console.log($scope.absUrl);
