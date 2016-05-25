@@ -6,8 +6,7 @@ controller('doctorPatientCtrl',
 
             if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true);
             else $location.path('/account');
-
-            $scope.currentPage = 0;
+            
             $scope.refreshProfiles = function() {
                 
                 doctorPatientProfileResources().getAllPatientProfileByDoctor({id: account.id}).$promise.then(function(response) {
@@ -56,21 +55,4 @@ controller('doctorPatientCtrl',
                 });
                 return result;
             };
-
-            $scope.prevPage = function () {
-                if ($scope.currentPage > 0) {
-                    $scope.currentPage--;
-                }
-            };
-
-            $scope.nextPage = function () {
-                if ($scope.currentPage < $scope.pagedItems.length - 1) {
-                    $scope.currentPage++;
-                }
-            };
-
-            $scope.setPage = function () {
-                $scope.currentPage = this.n;
-            };
-
         }]);
