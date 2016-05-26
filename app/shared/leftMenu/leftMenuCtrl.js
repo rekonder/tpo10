@@ -10,6 +10,7 @@ controller('leftMenuCtrl',
             $scope.doctor = accountService.authorize('Doctor', null);
             $scope.admin = accountService.authorize('Administrator', null);
             $scope.patientLogged = false;
+            $scope.doctorPacientProfile = false;
             $scope.profile = {};
             if ($scope.patient){
                 $scope.refreshProfilePatient = function () {
@@ -42,6 +43,17 @@ controller('leftMenuCtrl',
                     doctorProfileResources().getDoctorProfile({id: $scope.account.id}).$promise.then(function(response) {
                         $scope.avatar = "assets/images/profiles/doctor.png";
                         $scope.profile = response
+                        if ($routeParams.patientId) {
+                            patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function (response) {
+                                console.log(response);
+                                response.BirthDate = moment(response.BirthDate).toDate().toLocaleDateString();
+                                $scope.profile = response;
+                                $scope.doctor = false;
+                                $scope.doctorPacientProfile = true;
+
+                            }, function (response) {
+                            });
+                        }
                     }, function(response) {
                         console.log(response);
                     });

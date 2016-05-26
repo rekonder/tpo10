@@ -6,7 +6,7 @@
   <!-- DASHBOARD CONTENT -->
   <div class="dashboard-content" role="main">
     <div class="container-fluid">
-      
+
       <div class="row">
           <div class="col-md-6">
               <table class="table table-hover">
@@ -75,7 +75,7 @@
               </table>
           </div>
       </div>
-      
+
       <div class="row">
         <div class="col-md-6">
           <table class="table table-hover" ng-if="profile.PersonalDoctor!=null">
@@ -94,7 +94,8 @@
               <td>{{profile.PersonalDoctor.Telephone}}</td>
             </tr>
           </table>
-          
+        </div>
+          <div class="col-md-6">
           <table class="table table-hover" ng-if="profile.DentistDoctor!=null">
             <h2>Zobozdravnik</h2>
             <p ng-if="profile.DentistDoctor==null">Pacient še nima izbranega zobozdravnika!</p>
@@ -114,6 +115,119 @@
           </table>
         </div>
       </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="oldObservations.length != 0">
+                    <h2>Opravljeni pregledi</h2>
+                    <p ng-if="oldObservations.length == 0">Pacient še ni bil pri zdravniku!</p>
+                    <thead>
+                    <th>Datum</th>
+                    <th>Zdravnik</th>
+                    </thead>
+                    <tr id="{{oldObservations.Name}}" ng-repeat="obs in oldObservations">
+                        <td>{{obs.ObservationTime | date:'d.M.yyyy H:m' }}</td>
+                        <td>{{obs.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="false">
+                    <h2>Prihajajoči pregledi</h2>
+                    <p>Pacient nima prihajajočih pregledov!</p>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="alergy.length != 0">
+                    <h2>Alergije</h2>
+                    <p ng-if="alergy.length == 0">Pacient še nima zaznanih alergij!</p>
+                    <thead>
+                        <th>Ime</th>
+                    </thead>
+                    <tr id="{{alergy.Name}}" ng-repeat="alg in alergy">
+                        <td>{{alg.Name}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="diseases.length != 0">
+                    <h2>Bolezni</h2>
+                    <p ng-if="diseases.length == 0">Pacient še ni imel bolezni!</p>
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Vnesel</th>
+                    </thead>
+                    <tr id="{{diseases.DiseaseName}}" ng-repeat="dis in diseases">
+                        <td>{{dis.ObservationTime | date:'d.M.yyyy H:m' }}</td>
+                        <td>{{dis.DiseaseName}}</td>
+                        <td>{{dis.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="diets.length != 0">
+                    <h2>Diete</h2>
+                    <p ng-if="diets.length == 0">Pacient še nima predpisane diete!</p>
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Navodila</th>
+                    <th>Vnesel</th>
+                    </thead>
+                    <tr id="{{diets.DietName}}" ng-repeat="diet in diets">
+                        <td>{{diet.ObservationTime | date:'d.M.yyyy H:m'}}</td>
+                        <td>{{diet.DietName}}</td>
+                        <td ng-repeat="dietUrl in diet.DietUrl"><a href="{{dietUrl.Url}}">{{dietUrl.Url}} </a></td>
+                        <td>{{diet.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="medications.length != 0">
+                    <h2>Zdravila</h2>
+                    <p ng-if="medications.length == 0">Pacient še nima predpisanih zdravil!</p>
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Navodila</th>
+                    <th>Vnesel</th>
+                    </thead>
+                    <tr id="{{medications.DietName}}" ng-repeat="medication in medications">
+                        <td>{{medication.ObservationTime | date:'d.M.yyyy H:m'}}</td>
+                        <td>{{medication.MedicationName}}</td>
+                        <td><a href="{{medication.MedicationUrl}}">{{medication.MedicationUrl}} </a></td>
+                        <td>{{medication.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="measurements.length != 0">
+                    <h2>Meritve</h2>
+                    <p ng-if="measurements.length == 0">Pacient še nima meritev!</p>
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Izmerjeno</th>
+                    <th>Vnesel</th>
+                    </thead>
+                    <tr id="measurement.MeasurementTime" ng-repeat="measurement in measurements">
+                        <td>{{measurement.MeasurementTime | date:'d.M.yyyy H:m'}}</td>
+                        <td>{{measurement.MeasurementPartName}}</td>
+                        <td>{{measurement.Value + measurement.MeasurementUnit}}</td>
+                        <td>{{measurement.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
       
       
 <!--      

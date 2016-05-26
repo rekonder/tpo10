@@ -23,6 +23,7 @@ var app = angular.module('app', [
     'app.resources.nurseProfile',
     'app.resources.doctorChooser',
     'app.resources.doctorPatientProfile',
+    'app.resources.observation',
 
     // LOGIN
     'app.components.login',
@@ -44,7 +45,9 @@ var app = angular.module('app', [
     // DASHBOARD
     'app.components.dashboard.patient',
     'app.components.dashboard.doctorChooser',
-    'app.shared.leftMenu'
+    'app.shared.leftMenu',
+
+    'angularUtils.directives.dirPagination'
 
 ]);
 
