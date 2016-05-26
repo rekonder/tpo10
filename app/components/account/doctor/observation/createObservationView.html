@@ -1,0 +1,128 @@
+<div class="container-fluid">
+    <div ng-include="'app/shared/leftMenu/leftMenuView.html'" ng-if="profile.length != 0"></div>
+
+    <div ng-class="profile.length == 0?{'dashboard-content-no-menu':true}:{'dashboard-content':true}" role="main">
+        
+        <div class="container-fluid">
+             <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="submitObservation()" novalidate>
+                        <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <h4>Pregled</h4>
+                                    </div>
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <div style="min-height: 22px;"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentPatient" class="col-sm-4 control-label">Izbor pacienta</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="currentPatient" data-ng-options="p.name for p in [{'name': 'asd'}, {'name': 'hahah'}]"
+                                    data-ng-model="formData.selectedPatient"></select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="observationTime" class="col-sm-4 control-label">Datum meritve</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="observationTime" ng-model="formData.observationTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                    </div>
+                                </div>
+                                      
+                                            
+                                <div class="form-group">
+                                    <label for="notes" class="col-sm-4 control-label">Navodila ali opombe</label>
+                                    <div class="col-sm-8">
+                                        <textarea style="resize:vertical;" type="text" class="form-control" id="notes" ng-model="formData.notes" required></textarea>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                                <!-- Dodaj zaznane alergije -->
+                                <div class="form-group">
+                                    <label for="allergies" class="col-sm-4 control-label">Dodaj alergije</label>
+                                    <div class="col-sm-8">
+                                        <div id="allergies" ng-dropdown-multiselect="" options="allergyOptions" selected-model="selectedAllergies" extra-settings="multiselectSettings"></div>
+                                    </div>
+                                </div>
+                                <!-- Dodaj zaznane bolezni -->
+                                <div class="form-group">
+                                    <label for="diseases" class="col-sm-4 control-label">Dodaj bolezni</label>
+                                      <div class="col-sm-8">
+                                         <div id="diseases" ng-dropdown-multiselect="" options="diseaseOptions" selected-model="selectedDiseases" extra-settings="multiselectSettings"></div>
+                                    </div>
+                                </div>
+                                <!-- Predpiši dieto -->
+                                <div class="form-group">
+                                    <label for="diets" class="col-sm-4 control-label">Dodaj diete</label>
+                                    <div class="col-sm-8">
+                                        <div id="diets" ng-dropdown-multiselect="" options="dietOptions" selected-model="selectedDiets" extra-settings="multiselectSettings"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Predpiši zdravila -->
+                                <div class="form-group">
+                                    <label for="medications" class="col-sm-4 control-label">Dodaj zdravila</label>
+                                    <div class="col-sm-8">
+                                        <div id="medications" ng-dropdown-multiselect="" options="medicationOptions" selected-model="selectedMedications" extra-settings="multiselectSettings"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <h4>Vnos meritev</h4>
+                                    </div>
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <div style="min-height: 22px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Dodaj novo meritev -->
+                                <div class="form-group">
+                                    <label for="measurementTime" class="col-sm-4 control-label">Datum meritve</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="measurementTime" ng-model="formData.measurementTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                    </div>
+                                </div>
+                                      
+                                <!--  -->
+                                <div class="form-group">
+                                    <label for="notesMeasurement" class="col-sm-4 control-label">Navodila ali opombe</label>
+                                    <div class="col-sm-8">
+                                        <textarea style="resize:vertical;" type="text" class="form-control" id="notesMeasurement" ng-model="formData.notesMeasurement" required></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="valueMeasurement" class="col-sm-4 control-label">Vrednost</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="valueMeasurement" ng-model="formData.valueMeasurement" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <button type="submit" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">
+                                            <span ng-show="createClicked">Ustvari</span><span ng-hide="createClicked">Shrani</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
