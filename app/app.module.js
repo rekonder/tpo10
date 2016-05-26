@@ -23,6 +23,7 @@ var app = angular.module('app', [
     'app.resources.nurseProfile',
     'app.resources.doctorChooser',
     'app.resources.doctorPatientProfile',
+    'app.resources.observation',
 
     // LOGIN
     'app.components.login',
