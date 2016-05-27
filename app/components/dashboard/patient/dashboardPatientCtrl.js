@@ -1,7 +1,7 @@
 angular.module('app.components.dashboard.patient', []).
 controller('dashboardPatientCtrl', 
-['$scope', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources','observationResource',
-function($scope, accountResource, accountService, $location, $routeParams, patientProfileResources, observationResource) {
+['$scope', 'ngDialog', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources','observationResource',
+function($scope, ngDialog, accountResource, accountService, $location, $routeParams, patientProfileResources, observationResource) {
 
     if(accountService.authorize('Patient', null));
     else if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true); //for later
@@ -9,6 +9,7 @@ function($scope, accountResource, accountService, $location, $routeParams, patie
     $scope.absUrl = $location.absUrl();
     console.log($scope.absUrl);
     console.log($routeParams.patientId);
+    $scope.selectedObservation = {};
     $scope.alergy = [];
     $scope.oldObservations = [];
     $scope.diseases = [];
@@ -140,7 +141,7 @@ function($scope, accountResource, accountService, $location, $routeParams, patie
     $scope.closeOldObservations = function () {
         $scope.getOldObservations(5);
     }
-    
+        
     $scope.openAlergy = function () {
         $scope.getAlergy(-1);
     }
@@ -175,4 +176,29 @@ function($scope, accountResource, accountService, $location, $routeParams, patie
     $scope.closeMeasurements = function () {
         $scope.getMeasurements(5);
     }
+    
+    // #17 Podrobni prikaz podatkov o posameznem pregledu
+    $scope.showObservationDetails = function($index) {
+        if(typeof $scope.oldObservations[$index] === 'undefined') {
+            console.log("Element ne obstaja!");
+        } else {
+            var selectedObservationId = $scope.oldObservations[$index].ObservationId;
+            console.log(selectedObservationId);
+            
+            observationResource().getOldObservation({id: selectedObservationId}).$promise.then(function(response) {
+                $scope.selectedObservation = response;
+                console.log($scope.selectedObservation);
+                ngDialog.open({ 
+                    template: 'observationDetailsTemplate',
+                    className: 'ngdialog-theme-default',
+                    scope: $scope,
+                });
+
+            }, function(response) {
+                console.log(response);
+            });
+            
+        }
+    }
+    
 }]);    

@@ -5,6 +5,7 @@ var app = angular.module('app', [
     // LIBS
     'jcs-autoValidate',
     'angular-ladda',
+    'ngDialog',
     
     'app.routes',
     'app.directives.validation',
