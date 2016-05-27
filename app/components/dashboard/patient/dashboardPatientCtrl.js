@@ -85,5 +85,11 @@ function($scope, accountResource, accountService, $location, $routeParams, patie
     $scope.getDiets();
     $scope.getMedications();
     $scope.getMeasurements();
+    
+    
+    
+    
+    
+    
 
 }]);    
