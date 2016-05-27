@@ -177,6 +177,6 @@ body, html {
 /* END DASHBOARD */
 
 
-.dashboard-content {
+#patientDashboard {
     overflow: auto;
 }
