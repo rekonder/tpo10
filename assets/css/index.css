@@ -177,4 +177,6 @@ body, html {
 /* END DASHBOARD */
 
 
-
+.dashboard-content {
+    overflow: auto;
+}

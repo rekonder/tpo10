@@ -124,6 +124,10 @@
                     <thead>
                     <th>Datum</th>
                     <th>Zdravnik</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openOldObservations()" ng-hide="oldObservations.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeOldObservations()" ng-show="oldObservations.opened"></button>
+                    </th>
                     </thead>
                     <tr id="{{oldObservations.Name}}" ng-repeat="obs in oldObservations">
                         <td>{{obs.ObservationTime | date:'d.M.yyyy H:m' }}</td>
@@ -145,6 +149,10 @@
                     <p ng-if="alergy.length == 0">Pacient še nima zaznanih alergij!</p>
                     <thead>
                         <th>Ime</th>
+                        <th class="text-right">
+                            <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openAlergy()" ng-hide="alergy.opened"></button>
+                            <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeAlergy()" ng-show="alergy.opened"></button>
+                        </th>
                     </thead>
                     <tr id="{{alergy.Name}}" ng-repeat="alg in alergy">
                         <td>{{alg.Name}}</td>
@@ -159,6 +167,10 @@
                     <th>Datum vnosa</th>
                     <th>Ime</th>
                     <th>Vnesel</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openDiseases()" ng-hide="diseases.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeDiseases()" ng-show="diseases.opened"></button>
+                    </th>
                     </thead>
                     <tr id="{{diseases.DiseaseName}}" ng-repeat="dis in diseases">
                         <td>{{dis.ObservationTime | date:'d.M.yyyy H:m' }}</td>
@@ -179,11 +191,15 @@
                     <th>Ime</th>
                     <th>Navodila</th>
                     <th>Vnesel</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openDiets()" ng-hide="diets.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeDiets()" ng-show="diets.opened"></button>
+                    </th>
                     </thead>
                     <tr id="{{diets.DietName}}" ng-repeat="diet in diets">
                         <td>{{diet.ObservationTime | date:'d.M.yyyy H:m'}}</td>
                         <td>{{diet.DietName}}</td>
-                        <td ng-repeat="dietUrl in diet.DietUrl"><a href="{{dietUrl.Url}}">{{dietUrl.Url}} </a></td>
+                        <td ng-repeat="dietUrl in diet.DietUrl"><a href="{{dietUrl.Url}}">Povezava do navodil</a></td>
                         <td>{{diet.DoctorName}}</td>
                     </tr>
                 </table>
@@ -198,11 +214,15 @@
                     <th>Ime</th>
                     <th>Navodila</th>
                     <th>Vnesel</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openMedications()" ng-hide="medications.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeMedications()" ng-show="medications.opened"></button>
+                    </th>
                     </thead>
                     <tr id="{{medications.DietName}}" ng-repeat="medication in medications">
                         <td>{{medication.ObservationTime | date:'d.M.yyyy H:m'}}</td>
                         <td>{{medication.MedicationName}}</td>
-                        <td><a href="{{medication.MedicationUrl}}">{{medication.MedicationUrl}} </a></td>
+                        <td><a href="{{medication.MedicationUrl}}">Povezava do navodil </a></td>
                         <td>{{medication.DoctorName}}</td>
                     </tr>
                 </table>
@@ -218,6 +238,10 @@
                     <th>Ime</th>
                     <th>Izmerjeno</th>
                     <th>Vnesel</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openMeasurements()" ng-hide="measurements.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeMeasurements()" ng-show="measurements.opened"></button>
+                    </th>
                     </thead>
                     <tr id="measurement.MeasurementTime" ng-repeat="measurement in measurements">
                         <td>{{measurement.MeasurementTime | date:'d.M.yyyy H:m'}}</td>
