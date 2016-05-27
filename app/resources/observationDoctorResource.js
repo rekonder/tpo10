@@ -1,12 +1,12 @@
-angular.module('app.resources.observation', []).
-factory('observationResource', ['$rootScope', '$resource', 'accountService',
+angular.module('app.resources.observation.doctor', []).
+factory('observationDoctorResource', ['$rootScope', '$resource', 'accountService',
     function($rootScope, $resource, accountService) {
         var appSettings = $rootScope.appSettings;
         return function() {
-            return $resource(appSettings.baseUrl + '/api', { patientId: '@_patientId', number: 'number' }, {
-                getAlergy: {
+            return $resource(appSettings.baseUrl + '/api/Observation/:id', { id: '@_id' }, {
+                getPatientObservations: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/GetAlergies/:patientId/:number',
+                    url: appSettings.baseUrl + '/api/Observation/PatientProfile/:id',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -14,9 +14,9 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                     },
                     isArray: true
                 },
-                getOldObservations: {
+                 getAllergies: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/OldObservations/:patientId/:number',
+                    url: appSettings.baseUrl + '/api/Observation/Allergies',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -24,9 +24,9 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                     },
                     isArray: true
                 },
-                getDiseases: {
+                 getDiseases: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/GetDiases/:patientId/:number',
+                    url: appSettings.baseUrl + '/api/Observation/Diseases',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -34,9 +34,9 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                     },
                     isArray: true
                 },
-                getDiets: {
+                 getDiets: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/GetDiets/:patientId/:number',
+                    url: appSettings.baseUrl + '/api/Observation/Diets',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -44,9 +44,9 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                     },
                     isArray: true
                 },
-                getMedications: {
+                 getMedications: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/GetMedications/:patientId/:number',
+                    url: appSettings.baseUrl + '/api/Observation/Medications',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -54,15 +54,21 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                     },
                     isArray: true
                 },
-                getMeasurements: {
+                getObservation: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/GetMeasurements/:patientId/:number',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         'Authorization': accountService.getToken()
-                    },
-                    isArray: true
+                    }
+                },
+                postObservation: {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
                 }
             });
         }

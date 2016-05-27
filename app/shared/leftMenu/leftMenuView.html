@@ -11,7 +11,7 @@
             Dobrodošel,
             {{profile.FirstName}} {{profile.LastName}}!
         </div>
-        <div class="description" ng-if="patient">
+        <div class="description" ng-if="patient || doctorPacientProfile">
             Pacient:
             {{profile.FirstName}} {{profile.LastName}}!
         </div>
@@ -34,6 +34,9 @@
             <li><a href="#/account/doctor/patients"><i class="fa fa-users"></i> <i class="text">Pregled pacientov</i></a></li>
             <li><a href="#/account/doctor/observation"><i class="fa fa-stethoscope" aria-hidden="true"></i> <i class="text">Nov pregled</i></a></li>
             <li><a href="#/changePassword"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <i class="text">Sprememba gesla</i></a></li>
+        </ul>
+        <ul class="side-menu" ng-show="doctorPacientProfile">
+            <li><a href="#/account/doctor/patients"><i class="fa fa-users"></i> <i class="text">Nazaj na izbor pacienta</i></a></li>
         </ul>
 
         <ul class="side-menu" ng-show="patientLogged">

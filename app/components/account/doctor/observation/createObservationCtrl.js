@@ -1,7 +1,7 @@
 angular.module('app.components.account.doctor.observation', []).
 controller('createObservationCtrl',
-    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'doctorPatientProfileResources', 'observationResources', 'measurementResources', 'helperResources', '$route',
-        function($scope, accountResource, accountService, $location, doctorProfileResources, doctorPatientProfileResources,  observationResources, measurementResources, helperResources, $route) {
+    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'doctorPatientProfileResources', 'observationDoctorResource', 'measurementResources', 'helperResources', '$route',
+        function($scope, accountResource, accountService, $location, doctorProfileResources, doctorPatientProfileResources,  observationDoctorResource, measurementResources, helperResources, $route) {
             var account = accountService.getAccount();
             $scope.doctorProfile = {};
             
@@ -82,7 +82,7 @@ controller('createObservationCtrl',
               }
               
               $scope.allPatientObservations = function() {
-                observationResources().getPatientObservations({id: '8f39400f-cc1e-e611-86c0-005056f83588'}).$promise.then(function(response) {
+                observationDoctorResource().getPatientObservations({id: '8f39400f-cc1e-e611-86c0-005056f83588'}).$promise.then(function(response) {
                     // console.log(response);
                 
                 }, function(response) {
@@ -92,7 +92,7 @@ controller('createObservationCtrl',
                };
                
               $scope.allDiets = function() {
-                observationResources().getDiets().$promise.then(function(response) {
+                observationDoctorResource().getDiets().$promise.then(function(response) {
                     // console.log(response);
                     $scope.dietOptions = response;
                 
@@ -103,7 +103,7 @@ controller('createObservationCtrl',
                };
                
               $scope.allMedications = function() {
-                observationResources().getMedications().$promise.then(function(response) {
+                observationDoctorResource().getMedications().$promise.then(function(response) {
                     // console.log(response);
                     $scope.medicationOptions = response;
                 
@@ -115,7 +115,7 @@ controller('createObservationCtrl',
                
                
               $scope.allDiseases = function() {
-                observationResources().getDiseases().$promise.then(function(response) {
+                observationDoctorResource().getDiseases().$promise.then(function(response) {
                     // console.log(response);
                     $scope.diseaseOptions = response;
                 
@@ -126,7 +126,7 @@ controller('createObservationCtrl',
                };
                
                $scope.allAllergies = function() {
-                observationResources().getAllergies().$promise.then(function(response) {
+                observationDoctorResource().getAllergies().$promise.then(function(response) {
                     // console.log(response);
                     $scope.allergyOptions = response;
                 
@@ -198,7 +198,7 @@ controller('createObservationCtrl',
                     console.log(JSON.stringify(observationBodyRequest));  
                       
                     // Insert observation into db.  
-                    observationResources().postObservation(JSON.stringify(observationBodyRequest)).$promise.then(function(response) {
+                    observationDoctorResource().postObservation(JSON.stringify(observationBodyRequest)).$promise.then(function(response) {
                         console.log(response);
                         
                     }, function(response) {

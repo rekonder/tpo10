@@ -6,8 +6,7 @@ controller('doctorPatientCtrl',
 
             if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true);
             else $location.path('/account');
-
-
+            
             $scope.refreshProfiles = function() {
                 
                 doctorPatientProfileResources().getAllPatientProfileByDoctor({id: account.id}).$promise.then(function(response) {
@@ -26,5 +25,34 @@ controller('doctorPatientCtrl',
             };
 
             $scope.refreshProfiles();
+            $scope.dashboard = function(index) {
+                doctorPatientProfileResources().getAllPatientProfileByDoctor({id: account.id}).$promise.then(function(response) {
+                    console.log(response);
+                    for(var i = 0; i < response.length; i++) {
+                        response[i].BirthDate = moment(response[i].BirthDate).toDate().toLocaleDateString();
+                    }
+                    $scope.profiles = response;
+                    if(response.length == 0) {
+                        $scope.profiles = [];
+                    }
+                     if( $scope.checkForValue(index)) {
+                        $location.path('dashboard/patient/' + index);
+                     }
+                     else
+                         $.notify({message: 'Pacient vas več nima za izbranega'}, {type: 'danger'});
+                }, function(response) {
+                    console.log(response);
+                    $scope.profiles = [];
+                });
+            };
 
+            $scope.checkForValue = function(value) {
+                var result = false;
+                angular.forEach($scope.profiles, function(item){
+                    if(item.Id == value){
+                        result =  true;
+                    }
+                });
+                return result;
+            };
         }]);

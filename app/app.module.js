@@ -25,6 +25,7 @@ var app = angular.module('app', [
     'app.resources.doctorChooser',
     'app.resources.doctorPatientProfile',
     'app.resources.observation',
+    'app.resources.observation.doctor',
     'app.resources.measurement',
     
 
@@ -49,7 +50,9 @@ var app = angular.module('app', [
     // DASHBOARD
     'app.components.dashboard.patient',
     'app.components.dashboard.doctorChooser',
-    'app.shared.leftMenu'
+    'app.shared.leftMenu',
+
+    'angularUtils.directives.dirPagination'
 
 ]);
 
