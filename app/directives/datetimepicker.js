@@ -8,7 +8,8 @@ validation.directive("datetimepicker", [function() {
             useCurrent: '@',
             maxDate: '@',
             minDate: '@',
-            viewMode: '@'
+            viewMode: '@',
+            format: '@'
         },
         link: function (scope, element, attributes, ngModel) {
             element.datetimepicker({
@@ -17,7 +18,8 @@ validation.directive("datetimepicker", [function() {
                 minDate: eval(scope.minDate),
                 viewMode: scope.viewMode,
                 locale: 'sl',
-                format: 'D. M. YYYY'
+                format: scope.format ||  'D. M. YYYY',
+                disabledTimeIntervals: false
             })
 
             element.on('blur', function () {

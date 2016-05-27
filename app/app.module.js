@@ -9,6 +9,7 @@ var app = angular.module('app', [
     'app.routes',
     'app.directives.validation',
     'app.directives.datetimepicker',
+    'angularjs-dropdown-multiselect',
     'app.shared.navbar',
     'app.shared.footer',
     
@@ -24,6 +25,9 @@ var app = angular.module('app', [
     'app.resources.doctorChooser',
     'app.resources.doctorPatientProfile',
     'app.resources.observation',
+    'app.resources.observation.doctor',
+    'app.resources.measurement',
+    
 
     // LOGIN
     'app.components.login',
@@ -39,6 +43,7 @@ var app = angular.module('app', [
     'app.components.account.patient',
     'app.components.account.administrator',
     'app.components.account.doctor',
+    'app.components.account.doctor.observation',
     'app.components.account.doctor.patient',
     'app.components.changePassword',
     
