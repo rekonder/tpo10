@@ -304,7 +304,7 @@
                       </tr>
                       <tr>
                         <td>Pregled opravil</td>
-                        <td>{{selectedObservation.DoctorProfile.FirstName}}</td>
+                        <td>dr. {{selectedObservation.DoctorProfile.FirstName}} {{selectedObservation.DoctorProfile.LastName}}</td>
                       </tr>
                       <tr>
                         <td>Opombe</td>
@@ -366,7 +366,7 @@
                 </table>
                 
                 
-                 <table class="table table-hover">
+                <table class="table table-hover">
                     <h3>Diagnoza - Alergije</h3>
                     <p ng-if="selectedObservation.Allergies.length == 0">Ni diagnosticiranih alergij!</p>
                     <thead ng-if="selectedObservation.Allergies.length > 0">
@@ -378,8 +378,27 @@
                     </tr>
                 </table>    
                 
-                <!--TODO: dodaj še podatke o meritvah -->
-                                    
+                <table class="table table-hover">
+                    <h3>Podatki o meritvah</h3>
+                  
+                    <p ng-if="selectedObservation.ObservationMeasurements.length == 0">Ni podatkov o meritvah!</p>
+                    <thead ng-if="selectedObservation.ObservationMeasurements.length > 0">
+                        <th>Del meritve</th>
+                        <th>Čas</th>
+                        <th>Vrednost</th>
+                        <th>Opombe</th>
+                    </thead>
+                    
+                    <tr ng-repeat="measurement in selectedObservation.ObservationMeasurements">
+                        <td>{{measurement.MeasurementPart.MeasurementPartName}}</td>
+                        <td>{{measurement.MeasurementTime}}</td>
+                        <td>{{measurement.Value}} {{measurement.MeasurementPart.MeasurementUnit}}</td>
+                        <td ng-if="measurement.Notes != null || measurement.Notes != ''">
+                            <span ng-show="measurement.Notes == null || measurement.Notes == ''">/</span>
+                            {{measurement.Notes}}
+                        </td>
+                    </tr>
+                </table>   
           
                 </div>
               </div>
