@@ -1,7 +1,7 @@
 angular.module('app.components.dashboard.patient', []).
 controller('dashboardPatientCtrl', 
-['$scope', 'ngDialog', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources','observationResource',
-function($scope, ngDialog, accountResource, accountService, $location, $routeParams, patientProfileResources, observationResource) {
+['$scope', 'ngDialog', 'accountResource', 'accountService', '$location', '$routeParams', 'patientProfileResources', 'patientProfileMeasurementResource','observationResource',
+function($scope, ngDialog, accountResource, accountService, $location, $routeParams, patientProfileResources, patientProfileMeasurementResource, observationResource) {
 
     if(accountService.authorize('Patient', null));
     else if(accountService.authorize('Doctor', null) && accountService.getCheckDoctorProfile() === true); //for later
@@ -127,6 +127,36 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
                 $scope.measurements.opened = true;
         });
     };
+    
+    // #22 meritve, ki jih pacient opravi sam/doma
+    $scope.patientProfileMeasurements = {};
+    $scope.selectedPatientProfileMeasurement = {};
+    $scope.getPatientProfileMeasurements = function() {
+        patientProfileMeasurementResource().getMeasurements({patientId: $routeParams.patientId}).$promise.then(function(response) {
+            console.log(response);
+            $scope.patientProfileMeasurements.Data = response;
+            
+        }, function(response) {
+            console.log(response);
+            
+        });
+    };
+    $scope.patientProfileMeasurements.isExpanded = false;
+    $scope.patientProfileMeasurements.limit = 5;
+    
+    $scope.togglePatientProfileMeasurements = function() {
+        $scope.patientProfileMeasurements.isExpanded = !$scope.patientProfileMeasurements.isExpanded;
+        console.log($scope.patientProfileMeasurements.isExpanded);
+        
+        // If limit is undefined, the input will be returned unchanged.
+        // http://stackoverflow.com/questions/31071361/angularjs-set-limitto-to-unlimited-in-ng-repeat
+        $scope.patientProfileMeasurements.limit = ($scope.patientProfileMeasurements.isExpanded)? undefined : 5;  
+        
+        console.log($scope.patientProfileMeasurements.limit);          
+        
+    };
+    
+    
     $scope.refreshProfile();
     $scope.getAlergy(5);
     $scope.getOldObservations(5);
@@ -134,6 +164,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
     $scope.getDiets(5);
     $scope.getMedications(5);
     $scope.getMeasurements(5);
+    $scope.getPatientProfileMeasurements();
 
     $scope.openOldObservations = function () {
         $scope.getOldObservations(-1);
@@ -199,6 +230,61 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
             });
             
         }
+    }
+    
+    // #22 meritve, ki jih pacient opravi sam/doma
+    $scope.showPatientProfileMeasurementDetails = function(measurement) {
+        measurement.MeasurementTime = moment(measurement.MeasurementTime).toDate().toLocaleDateString();
+        $scope.selectedPatientProfileMeasurement = measurement;
+        console.log($scope.selectedPatientProfileMeasurement);
+
+        ngDialog.open({ 
+            template: 'patientProfileMeasurement',
+            className: 'ngdialog-theme-default',
+            scope: $scope,
+        });
+
+    };
+    
+    $scope.submitPatientProfileMeasurement = function() {
+        var data = {
+            PatientProfileId: $routeParams.patientId,
+            MeasurementTime: $scope.selectedPatientProfileMeasurement.MeasurementTime,
+            MeasurementPartId: $scope.selectedPatientProfileMeasurement.Id,
+            Value: $scope.selectedPatientProfileMeasurement.Value,
+            Note: $scope.selectedPatientProfileMeasurement.Notes
+        };
+        
+        // console.log(JSON.stringify(data));
+        patientProfileMeasurementResource().putMeasurement({id: $scope.selectedPatientProfileMeasurement.Id}, JSON.stringify(data)).$promise.then(function(response) {
+            // console.log(response);
+            ngDialog.close({ 
+                template: 'patientProfileMeasurement',
+            });
+            $.notify({message: 'Meritev je bila uspešno spremenjena.'}, {type: 'success'});
+            $scope.getPatientProfileMeasurements();
+
+        }, function(response) {
+            console.log(response);
+            $.notify({message: 'Meritev ni bila uspešno spremenjena.'}, {type: 'danger'});
+        });
+    }
+    
+    $scope.deletePatientProfileMeasurement = function() {
+        patientProfileMeasurementResource().deleteMeasurement({id: $scope.selectedPatientProfileMeasurement.Id}).$promise.then(function(response) {
+            // console.log(response);
+            $scope.selectedPatientProfileMeasurement = {};
+            ngDialog.close({ 
+                template: 'patientProfileMeasurement',
+            });
+            
+            $.notify({message: 'Meritev je bila uspešno izbrisana.'}, {type: 'success'});
+            $scope.getPatientProfileMeasurements();
+
+        }, function(response) {
+            console.log(response);
+            $.notify({message: 'Meritev ni bila uspešno izbrisana.'}, {type: 'danger'});
+        });
     }
     
 }]);    

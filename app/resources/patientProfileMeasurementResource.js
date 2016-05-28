@@ -30,6 +30,22 @@ factory('patientProfileMeasurementResource', ['$rootScope', '$resource', 'accoun
                         'Authorization': accountService.getToken()
                     }
                },
+               deleteMeasurement: {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
+               },
+               putMeasurement: {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
+               },
                 
             });
         }
