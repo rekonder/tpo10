@@ -180,3 +180,14 @@ body, html {
 .dashboard-content {
     overflow: auto;
 }
+
+
+.print-hide {
+    display: '';
+}
+
+@media print {
+    .print-hide {
+        display: none;
+    }
+}
