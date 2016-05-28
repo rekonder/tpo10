@@ -1,5 +1,5 @@
-angular.module('app.components.dashboard.patient.observation', []).
-controller('createPatientProfileObservationCtrl', 
+angular.module('app.components.dashboard.patient.measurements', []).
+controller('insertPatientProfileMeasurementCtrl', 
  ['$scope', 'accountResource', 'measurementResources', '$route', '$routeParams', 'patientProfileMeasurementResource', 
         function($scope, accountResource, measurementResources, $route, $routeParams, patientProfileMeasurementResource) {
                 

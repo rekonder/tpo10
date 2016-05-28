@@ -51,7 +51,7 @@ var app = angular.module('app', [
     
     // DASHBOARD
     'app.components.dashboard.patient',
-    'app.components.dashboard.patient.observation',
+    'app.components.dashboard.patient.measurements',
     'app.components.dashboard.doctorChooser',
     'app.shared.leftMenu',
 
