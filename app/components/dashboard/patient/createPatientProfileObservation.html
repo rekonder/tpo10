@@ -1,0 +1,100 @@
+<div class="container-fluid">
+
+  <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+  
+  
+  <!-- DASHBOARD CONTENT -->
+  <div class="dashboard-content" role="main">
+    <div class="container-fluid">
+        <form class="form-horizontal" ng-submit="submitMeasurements()" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                        <!-- Dodaj novo meritev -->
+                        <div class="form-group">
+                            <label for="measurementChooser" class="col-sm-4 control-label">Izbor meritve</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="measurementChooser" data-ng-options="p.MeasurementName for p in measurementOptions"
+                            data-ng-model="selectedMeasurement"></select> 
+                                <input type="button" class="btn btn-default" ng-click="addNewMeasurement()" value="Dodaj meritev"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button ng-show="selectedMeasurements.length > 0" type="submit" ng-submit="submitMeasurements()" class="btn btn-default btn-primary" ladda="submittingProfile" data-style="expand-right">
+                                    <span ng-show="createClicked">Ustvari</span><span ng-hide="createClicked">Shrani</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="panel panel-info" ng-repeat="measurement in selectedMeasurements">
+                            
+                            <div class="panel-heading">
+                                    <h2 class="panel-title">{{measurement.MeasurementName}}</h2>
+                                    <small>
+                                        <span ng-if="measurement.MeasurementNotes.length==0">Meritev nima nobenih dodatnih opomb/navodil.</span>
+                                        <span ng-if="measurement.MeasurementNotes.length>0">{{measurement.MeasurementNotes}}</span>
+                                    </small>
+                            </div>
+                            
+                            <div class="panel-body">
+                                <div ng-repeat="currentMeasurementPart in measurement.MeasurementParts">
+                                    <div class="form-group">
+                                        <h4 class="text-center">{{currentMeasurementPart.MeasurementPartName}}</h4>
+                                        <blockquote style="font-size: 12px; border-color: #bce8f1;">
+                                            <div class="container-fluid" style="padding-left:0;">
+                                                <dl class="dl-horizontal">
+                                                    <dt>Glede meritve</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementMore}}</dd>
+                                                    <dt>Meritev opraviti</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementTake}}</dd>
+                                                    <dt>Čas merjenja</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementTime}}</dd>
+                                                    <dt>Normalne vrednosti</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementNormal}}</dd>
+                                                    <dt>Nizke vrednosti</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementBelow}}</dd>
+                                                    <dt>Ekstremne vrednosti</dt>
+                                                    <dd>{{currentMeasurementPart.MeasurementExtreme}}</dd>
+                                                </dl>   
+                                            </div>
+                                                                                                
+                                        </blockquote>
+                                        <span hidden>{{measurementPartIds[$parent.$index + $index] = currentMeasurementPart.Id}}</span>    
+                                        <label for="measurementTime{{$parent.$index + $index}}" class="col-sm-4 control-label">Datum meritve</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="measurementTime{{$parent.$index + $index}}"" ng-model="measurementTimes[$parent.$index + $index]" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="form-group">
+                                        <label for="notesMeasurement[{{$parent.$index + $index}}"" class="col-sm-4 control-label">Navodila ali opombe</label>
+                                        <div class="col-sm-8">
+                                            <span></span>
+                                            <textarea style="resize:vertical;" type="text" class="form-control" id="notesMeasurement[{{$parent.$index + $index}}"" ng-model="measurementNotes[$parent.$index + $index]" required></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="valueMeasurement[{{$parent.$index + $index}}"" class="col-sm-4 control-label">Vrednost</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" placeholder="{{currentMeasurementPart.MeasurementUnit}}" class="form-control" id="valueMeasurement[{{$parent.$index + $index}}"" ng-model="measurementValues[$parent.$index + $index]" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        
+                                        
+                </div>
+            </div>
+        </form>
+     </div>
+     
+    </div>
+    
+</div>

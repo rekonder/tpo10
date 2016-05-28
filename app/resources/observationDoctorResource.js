@@ -6,7 +6,7 @@ factory('observationDoctorResource', ['$rootScope', '$resource', 'accountService
             return $resource(appSettings.baseUrl + '/api/Observation/:id', { id: '@_id' }, {
                 getPatientObservations: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/PatientProfile/:id',
+                    url: appSettings.baseUrl + '/api/Observation/PatientProfile',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',

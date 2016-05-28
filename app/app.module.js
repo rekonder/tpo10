@@ -28,6 +28,7 @@ var app = angular.module('app', [
     'app.resources.observation',
     'app.resources.observation.doctor',
     'app.resources.measurement',
+    'app.resources.patient.measurement',
     
 
     // LOGIN
@@ -50,6 +51,7 @@ var app = angular.module('app', [
     
     // DASHBOARD
     'app.components.dashboard.patient',
+    'app.components.dashboard.patient.observation',
     'app.components.dashboard.doctorChooser',
     'app.shared.leftMenu',
 

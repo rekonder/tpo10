@@ -63,6 +63,10 @@ routes.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'app/components/account/doctor/observation/createObservationView.html',
             controller: 'createObservationCtrl'
         }).
+        when('/dashboard/patient/:patientId/createObservation', {
+            templateUrl: 'app/components/dashboard/patient/createPatientProfileObservation.html',
+            controller: 'createPatientProfileObservationCtrl'
+        }).
         when('/account/doctor/patients', {
             templateUrl: 'app/components/account/doctor/patients/allPatientsView.html',
             controller: 'doctorPatientCtrl'
