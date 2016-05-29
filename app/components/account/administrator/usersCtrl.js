@@ -8,15 +8,31 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
     var query = function() {
         $scope.users = null;
         $scope.url = null;
-        $scope.users = UsersODataResource.odata().
-            skip($scope.skip).
-            take($scope.take).
-            withInlineCount().
-            orderBy($scope.orderby ? $scope.orderby : 'Email', $scope.orderdesc ? 'desc' : 'asc').
-            query();
-        // while($scope.users == null);
+        if($scope.createdOnInLastXDays != '/') {
+            var minDate = moment().subtract('day', $scope.createdOnInLastXDays).hours(0).minutes(0).seconds(0).toDate();
+            console.log('DATE', new Date(minDate).toJSON());
+            $scope.users = UsersODataResource.odata().
+                filter(
+                    'CreatedOn',
+                    '>=',
+                    new $odata.Value(minDate, 'DateTime')
+                ).
+                skip($scope.skip).
+                take($scope.take).
+                withInlineCount().
+                orderBy($scope.orderby ? $scope.orderby : 'Email', $scope.orderdesc ? 'desc' : 'asc').
+                query();
+        } else {
+            $scope.users = UsersODataResource.odata().
+                skip($scope.skip).
+                take($scope.take).
+                withInlineCount().
+                orderBy($scope.orderby ? $scope.orderby : 'Email', $scope.orderdesc ? 'desc' : 'asc').
+                query();
+        }
     };
     
+    $scope.createdOnInLastXDays = '/';
     $scope.skip = 0;
     $scope.take = 5;
     $scope.nextPage = function() {
@@ -32,6 +48,10 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
         $scope.take = Number(newValue);
         query();
     }, true);
+    $scope.$watch('createdOnInLastXDays', function(newValue) {
+        $scope.skip = 0;
+        query();
+    }, true);
     
     $scope.orderby = null;
     $scope.orderdesc = false;
@@ -45,6 +65,7 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
     
     $scope.print = function() {
         // TODO
+        window.print();
     };
     
     query();
