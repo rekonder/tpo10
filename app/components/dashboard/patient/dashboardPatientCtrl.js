@@ -234,7 +234,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
     
     // #22 meritve, ki jih pacient opravi sam/doma
     $scope.showPatientProfileMeasurementDetails = function(measurement) {
-        measurement.MeasurementTime = moment(measurement.MeasurementTime).toDate().toLocaleDateString();
+        measurement.MeasurementTime = moment(measurement.MeasurementTime).format('D. M. YYYY H:mm');
         $scope.selectedPatientProfileMeasurement = measurement;
         console.log($scope.selectedPatientProfileMeasurement);
 
