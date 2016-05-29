@@ -1,0 +1,117 @@
+<div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Podobni podatki o pregledu</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="assets/images/observation.png" class="img-circle img-responsive"> </div>
+            
+        
+            <div class=" col-md-9 col-lg-9 "> 
+                <table class="table">
+                <tbody>
+                    <tr>
+                    <td>Datum pregleda</td>
+                    <td>{{selectedObservation.ObservationTime}}</td>
+                    </tr>
+                    <tr>
+                    <td>Pregled opravil</td>
+                    <td>dr. {{selectedObservation.DoctorProfile.FirstName}} {{selectedObservation.DoctorProfile.LastName}}</td>
+                    </tr>
+                    <tr>
+                    <td>Opombe</td>
+                    <td>{{selectedObservation.Notes}}</td>
+                    </tr>
+                    
+                </tbody>
+                </table>
+                
+            <table class="table table-hover">
+                <h3>Predpisana zdravila</h3>
+                <p ng-if="selectedObservation.Medications.length == 0">Ni predpisanih zdravil!</p>
+                <colgroup>
+                    <col style="width:70%">
+                    <col style="width:30%">
+                </colgroup>
+                <thead ng-if="selectedObservation.Medications.length > 0">
+                    <th>Ime zdravila</th>
+                    <th>Povezava</th>
+                </thead>
+                
+                <tr ng-repeat="medication in selectedObservation.Medications">
+                    <td>{{medication.MedicationName}}</td>
+                    <td><a href="{{medication.MedicationInstruction.Url}}">Navodila</a></td>
+                </tr>
+            </table>
+            
+                <table class="table table-hover">
+                <h3>Predpisane diete</h3>
+                <p ng-if="selectedObservation.Diets.length == 0">Ni predpisanih diet!</p>
+                <colgroup>
+                    <col style="width:70%">
+                    <col style="width:30%">
+                </colgroup>
+                <thead ng-if="selectedObservation.Diets.length > 0">
+                    <th>Ime diete</th>
+                    <th>Povezava</th>
+                </thead>
+                
+                <tr ng-repeat="diet in selectedObservation.Diets">
+                    <td>{{diet.DietName}}</td>
+                    <td>
+                        <a ng-repeat="dietInstruction in diet.DietInstructions" href="{{dietInstruction.Url}}">[Navodila {{$index+1}}] </a>
+                    </td>
+                </tr>
+            </table>
+            
+            
+                <table class="table table-hover">
+                <h3>Diagnoza - Bolezni</h3>
+                <p ng-if="selectedObservation.Diseases.length == 0">Ni diagnosticiranih bolezni!</p>
+                <thead ng-if="selectedObservation.Diseases.length > 0">
+                    <th>Naziv bolezni</th>
+                </thead>
+                
+                <tr ng-repeat="disease in selectedObservation.Diseases">
+                    <td>{{disease.DiseaseName}}</td>
+                </tr>
+            </table>
+            
+            
+            <table class="table table-hover">
+                <h3>Diagnoza - Alergije</h3>
+                <p ng-if="selectedObservation.Allergies.length == 0">Ni diagnosticiranih alergij!</p>
+                <thead ng-if="selectedObservation.Allergies.length > 0">
+                    <th>Naziv alergije</th>
+                </thead>
+                
+                <tr ng-repeat="allergy in selectedObservation.Allergies">
+                    <td>{{allergy.AllergyName}}</td>
+                </tr>
+            </table>    
+            
+            <table class="table table-hover">
+                <h3>Podatki o meritvah</h3>
+                
+                <p ng-if="selectedObservation.ObservationMeasurements.length == 0">Ni podatkov o meritvah!</p>
+                <thead ng-if="selectedObservation.ObservationMeasurements.length > 0">
+                    <th>Del meritve</th>
+                    <th>Čas</th>
+                    <th>Vrednost</th>
+                    <th>Opombe</th>
+                </thead>
+                
+                <tr ng-repeat="measurement in selectedObservation.ObservationMeasurements">
+                    <td>{{measurement.MeasurementPart.MeasurementPartName}}</td>
+                    <td>{{measurement.MeasurementTime}}</td>
+                    <td>{{measurement.Value}} {{measurement.MeasurementPart.MeasurementUnit}}</td>
+                    <td ng-if="measurement.Notes != null || measurement.Notes != ''">
+                        <span ng-show="measurement.Notes == null || measurement.Notes == ''">/</span>
+                        {{measurement.Notes}}
+                    </td>
+                </tr>
+            </table>   
+        </div>
+        </div>
+    </div>
+</div>

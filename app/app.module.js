@@ -46,6 +46,7 @@ var app = angular.module('app', [
     'app.components.account.administrator',
     'app.components.account.doctor',
     'app.components.account.doctor.observation',
+    'app.components.account.doctor.observation.overview',
     'app.components.account.doctor.patient',
     'app.components.changePassword',
     

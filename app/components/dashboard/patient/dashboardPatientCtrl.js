@@ -220,7 +220,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
                 $scope.selectedObservation = response;
                 console.log($scope.selectedObservation);
                 ngDialog.open({ 
-                    template: 'observationDetailsTemplate',
+                    template: 'app/shared/ngDialogTemplates/observationTemplate.html',
                     className: 'ngdialog-theme-default',
                     scope: $scope,
                 });
@@ -239,7 +239,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
         console.log($scope.selectedPatientProfileMeasurement);
 
         ngDialog.open({ 
-            template: 'patientProfileMeasurement',
+            template: 'app/shared/ngDialogTemplates/measurementTemplate.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
         });
@@ -259,7 +259,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
         patientProfileMeasurementResource().putMeasurement({id: $scope.selectedPatientProfileMeasurement.Id}, JSON.stringify(data)).$promise.then(function(response) {
             // console.log(response);
             ngDialog.close({ 
-                template: 'patientProfileMeasurement',
+                template: 'app/shared/ngDialogTemplates/measurementTemplate.html',
             });
             $.notify({message: 'Meritev je bila uspešno spremenjena.'}, {type: 'success'});
             $scope.getPatientProfileMeasurements();
@@ -275,7 +275,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
             // console.log(response);
             $scope.selectedPatientProfileMeasurement = {};
             ngDialog.close({ 
-                template: 'patientProfileMeasurement',
+                template: 'app/shared/ngDialogTemplates/measurementTemplate.html',
             });
             
             $.notify({message: 'Meritev je bila uspešno izbrisana.'}, {type: 'success'});

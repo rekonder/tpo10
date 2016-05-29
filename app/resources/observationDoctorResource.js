@@ -6,7 +6,7 @@ factory('observationDoctorResource', ['$rootScope', '$resource', 'accountService
             return $resource(appSettings.baseUrl + '/api/Observation/:id', { id: '@_id' }, {
                 getPatientObservations: {
                     method: 'GET',
-                    url: appSettings.baseUrl + '/api/Observation/PatientProfile',
+                    url: appSettings.baseUrl + '/api/Observation/PatientProfile/:id',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -14,6 +14,16 @@ factory('observationDoctorResource', ['$rootScope', '$resource', 'accountService
                     },
                     isArray: true
                 },
+                getDoctorObservations: {
+                    method: 'GET',
+                    url: appSettings.baseUrl + '/api/Observation/DoctorProfile/:id',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    },
+                    isArray: true
+                },  
                  getAllergies: {
                     method: 'GET',
                     url: appSettings.baseUrl + '/api/Observation/Allergies',
