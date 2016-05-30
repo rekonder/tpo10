@@ -5,6 +5,7 @@ var app = angular.module('app', [
     // LIBS
     'jcs-autoValidate',
     'angular-ladda',
+    'ngDialog',
     
     'app.routes',
     'app.directives.validation',
@@ -27,6 +28,7 @@ var app = angular.module('app', [
     'app.resources.observation',
     'app.resources.observation.doctor',
     'app.resources.measurement',
+    'app.resources.patient.measurement',
     
 
     // LOGIN
@@ -44,11 +46,13 @@ var app = angular.module('app', [
     'app.components.account.administrator',
     'app.components.account.doctor',
     'app.components.account.doctor.observation',
+    'app.components.account.doctor.observation.overview',
     'app.components.account.doctor.patient',
     'app.components.changePassword',
     
     // DASHBOARD
     'app.components.dashboard.patient',
+    'app.components.dashboard.patient.measurements',
     'app.components.dashboard.doctorChooser',
     'app.shared.leftMenu',
 

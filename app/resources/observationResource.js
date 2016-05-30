@@ -3,7 +3,7 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
     function($rootScope, $resource, accountService) {
         var appSettings = $rootScope.appSettings;
         return function() {
-            return $resource(appSettings.baseUrl + '/api', { patientId: '@_patientId', number: 'number' }, {
+            return $resource(appSettings.baseUrl + '/api', { patientId: '@_patientId', number: 'number', id: '@_id' }, {
                 getAlergy: {
                     method: 'GET',
                     url: appSettings.baseUrl + '/api/Observation/GetAlergies/:patientId/:number',
@@ -23,6 +23,15 @@ factory('observationResource', ['$rootScope', '$resource', 'accountService',
                         'Authorization': accountService.getToken()
                     },
                     isArray: true
+                },
+                getOldObservation: {
+                    method: 'GET',
+                    url: appSettings.baseUrl + '/api/Observation/:id',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
+                    }
                 },
                 getDiseases: {
                     method: 'GET',

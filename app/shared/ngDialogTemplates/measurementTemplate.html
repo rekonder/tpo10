@@ -1,0 +1,83 @@
+<div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Podobni podatki meritve</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" ng-submit="submitPatientProfileMeasurement()" novalidate>
+            <div class="row">
+                <table class="table">
+                    <h3 class="text-center">Izbrana meritev</h3>
+                    <tbody>
+                    <h4 class="text-center">{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementPartName}}</h4>
+                        <blockquote style="font-size: 12px; border-color: #bce8f1;">
+                            <div class="container-fluid" style="padding-left:0;">
+                                <dl class="dl-horizontal">
+                                    <dt>Glede meritve</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementMore}}</dd>
+                                    <dt>Meritev opraviti</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementTake}}</dd>
+                                    <dt>Čas merjenja</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementTime}}</dd>
+                                    <dt>Normalne vrednosti</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementNormal}}</dd>
+                                    <dt>Nizke vrednosti</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementBelow}}</dd>
+                                    <dt>Ekstremne vrednosti</dt>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementExtreme}}</dd>
+                                </dl>   
+                            </div>
+                                                                                
+                        </blockquote>  
+                    <tr>
+                        <th>
+                            <label for="patientProfileMeasurementMeasurementTime" class="col-sm-4 control-label">Datum meritve</label>  
+                        </th>
+                        <td>
+                                <div class="form-group container-fluid">
+                                <input type="text" class="form-control" id="patientProfileMeasurementMeasurementTime" ng-model="selectedPatientProfileMeasurement.MeasurementTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="patientProfileMeasurementNotes" class="col-sm-4 control-label">Navodila ali opombe</label>  
+                        </th>
+                        <td>
+                                <div class="form-group container-fluid">
+                                <textarea style="resize:vertical;" type="text" class="form-control" id="patientProfileMeasurementNotes" ng-model="selectedPatientProfileMeasurement.Notes" required></textarea>
+                                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="patientProfileMeasurementValue" class="col-sm-4 control-label">Vrednost</label>  
+                        </th>
+                        <td>
+                                <div class="form-group container-fluid">
+                                <input type="number" placeholder="{{currentMeasurementPart.MeasurementUnit}}" class="form-control" id="patientProfileMeasurementValue" ng-model="selectedPatientProfileMeasurement.Value" required>
+                                </div>
+                        </td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>
+                            <button ng-submit="submitPatientProfileMeasurement()" style="width:128px;" class="btn btn-default btn-primary center-block" ladda="" data-style="expand-right">
+                                <span>Shrani</span>
+                            </button>  
+                        </td>
+                        <td>
+                            <button ng-click="deletePatientProfileMeasurement()" style="width:128px;" class="btn btn-default btn-danger center-block" ladda="" data-style="expand-right">
+                                <span>Izbriši meritev</span>
+                            </button>
+                        </td>
+                    </tr>
+                                        
+                    </tbody>
+                </table>
+            </div>
+            
+        </form>
+        
+        </div>
+    </div>
+</div>

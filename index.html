@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="app/shared/footer/footerStyle.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/libs/gentelella/fonts/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/libs/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="assets/libs/ng-dialog/css/ngDialog-theme-default.css">
 </head>
 <body>
     
@@ -35,8 +37,9 @@
     <script src="assets/libs/ladda/spin.min.js"></script>
     <script src="assets/libs/ladda/ladda.min.js"></script>
     <script src="assets/libs/ladda/angular-ladda.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script> 
     <script src="assets/libs/pagination/dirPagination.js"></script>
+    <script src="assets/libs/ng-dialog/js/ngDialog.js"></script>
     
     <!-- APP -->
     <script src="app/app.module.js"></script>
@@ -56,6 +59,8 @@
     <script src="app/resources/observationResource.js"></script>
     <script src="app/resources/observationDoctorResource.js"></script>
     <script src="app/resources/measurementResource.js"></script>
+    <script src="app/resources/patientProfileMeasurementResource.js"></script>
+    
 
     <!-- DIRECTIVES -->
     <script src="app/directives/validation.js"></script>
@@ -79,9 +84,11 @@
     <script src="app/components/account/doctor/doctorProfileCtrl.js"></script>
     <script src="app/components/account/doctor/patients/allPatientsCtrl.js"></script>
     <script src="app/components/account/doctor/observation/createObservationCtrl.js"></script>
+    <script src="app/components/account/doctor/observation/observationOverviewCtrl.js"></script>
     <script src="app/components/changePassword/changePasswordCtrl.js"></script>
 
     <script src="app/components/dashboard/patient/dashboardPatientCtrl.js"></script>
+    <script src="app/components/dashboard/patient/insertPatientProfileMeasurement.js"></script>
     <script src="app/components/dashboard/doctorChooser/doctorChooserCtrl.js"></script>
     <script src="app/shared/leftMenu/leftMenuCtrl.js"></script>
     <script src="assets/js/index.js"></script>

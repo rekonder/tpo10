@@ -7,6 +7,7 @@
     <div class="dashboard-content" id="patientDashboard" role="main">
         <div class="container-fluid">
 
+
             <div class="row">
                 <div class="col-md-6">
                     <table class="table table-hover">
@@ -88,6 +89,24 @@
                         </tr>
                     </table>
                 </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="oldObservations.length != 0">
+                    <h2>Opravljeni pregledi</h2>
+                    <p ng-if="oldObservations.length == 0">Pacient še ni bil pri zdravniku!</p>
+                    <thead>
+                    <th>Datum</th>
+                    <th>Zdravnik</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openOldObservations()" ng-hide="oldObservations.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeOldObservations()" ng-show="oldObservations.opened"></button>
+                    </th>
+                    </thead>
+                    <tr id="{{oldObservations.Name}}" style="cursor:pointer;" ng-repeat="obs in oldObservations" ng-click="showObservationDetails($index)">
+                        <td>{{obs.ObservationTime | date:'d.M.yyyy H:m' }}</td>
+                        <td>{{obs.DoctorName}}</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="row">
@@ -200,6 +219,7 @@
                     </table>
                 </div>
 
+<<<<<<< HEAD
                 <div class="row">
                     <div class="col-md-6">
                         <table class="table table-hover" ng-if="diets.length != 0">
@@ -226,6 +246,31 @@
                             </tr>
                         </table>
                     </div>
+=======
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover" ng-if="diets.length != 0">
+                    <h2>Diete</h2>
+                    <p ng-if="diets.length == 0">Pacient še nima predpisane diete!</p>
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Navodila</th>
+                    <th>Vnesel</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="openDiets()" ng-hide="diets.opened"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="closeDiets()" ng-show="diets.opened"></button>
+                    </th>
+                    </thead>
+                    <tr id="{{diets.DietName}}" ng-repeat="diet in diets">
+                        <td>{{diet.ObservationTime | date:'d.M.yyyy H:m'}}</td>
+                        <td>{{diet.DietName}}</td>
+                        <td><p ng-repeat="dietUrl in diet.DietUrl"><a href="{{dietUrl.Url}}">Povezava do navodil {{$index+1}}</a></p></td>
+                        <td>{{diet.DoctorName}}</td>
+                    </tr>
+                </table>
+            </div>
+>>>>>>> origin/sprint3_at
 
                     <div class="col-md-6">
                         <table class="table table-hover" ng-if="medications.length != 0">
@@ -304,7 +349,64 @@
 
                 </div>
             </div>
+<<<<<<< HEAD
             <!-- END OF DASHBOARD CONTENT -->
 
 
         </div>
+=======
+            
+            <!--#22 - meritve, ki jih pacient opravi sam/doma -->
+            <div class="col-md-6">
+                <h2>Moje meritve</h2>
+                <p ng-if="patientProfileMeasurements.Data.length == 0">Pacient še ni opravil lastnih meritev!</p>
+                    
+                <table ng-if="patientProfileMeasurements.Data.length > 0" class="table table-hover" ng-if="patientProfileMeasurements.length != 0">
+                    <thead>
+                    <th>Datum vnosa</th>
+                    <th>Ime</th>
+                    <th>Izmerjeno</th>
+                    <th class="text-right">
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="togglePatientProfileMeasurements()" ng-hide="patientProfileMeasurements.isExpanded"></button>
+                        <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="togglePatientProfileMeasurements()" ng-show="patientProfileMeasurements.isExpanded"></button>
+                    </th>
+                    </thead>
+                    <tr id="measurement.MeasurementTime" style="cursor:pointer;"  ng-click="showPatientProfileMeasurementDetails(measurement)" ng-repeat="measurement in patientProfileMeasurements.Data | orderBy: '-MeasurementTime' | limitTo: patientProfileMeasurements.limit">
+                        <td>{{measurement.MeasurementTime | date:'d.M.yyyy H:m'}}</td>
+                        <td>{{measurement.MeasurementPart.MeasurementPartName}}</td>
+                        <td>{{measurement.Value + measurement.MeasurementPart.MeasurementUnit}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        
+<!--      
+      <div class="row">
+          <div class="col-md-6">
+            <img class="img-responsive" src="http://placehold.it/500x300">
+          </div>
+          <div class="col-md-6">
+            <img class="img-responsive" src="http://placehold.it/500x300">
+          </div>
+      </div>
+      
+      
+      <div class="row">
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+          <div class="col-md-4">
+            <img class="img-responsive" src="http://placehold.it/320x300">
+          </div>
+      </div>-->
+      
+    </div>
+  </div>
+  <!-- END OF DASHBOARD CONTENT -->
+ 
+</div>
+>>>>>>> origin/sprint3_at
