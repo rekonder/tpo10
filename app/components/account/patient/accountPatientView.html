@@ -37,10 +37,11 @@
                             <td>{{profile.Gender}}</td>
                             <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
                             <td class="text-right">
+                                <button class="btn btn-xs btn-default glyphicon glyphicon-screenshot" ng-if="profile.IsGuardian" data-toggle="tooltip" data-placement="top" title="Skrbnik" tooltip></button>
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard($index)"></button>
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-eye-open" ng-click="open($index)" ng-hide="profile.opened"></button>
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-eye-close" ng-click="close($index)" ng-show="profile.opened"></button>
-                                <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" ng-click="delete($index)" ladda="deletingProfile[$index]" data-style="expand-right"></button>
+                                <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" ng-disabled="profile.IsGuardian" ng-click="delete($index)" ladda="deletingProfile[$index]" data-style="expand-right"></button>
                             </td>
                         </tr>
                         </tbody>
@@ -126,8 +127,7 @@
                                         <h4>Kontaktne informacije</h4>
                                     </div>
                                     <div class="col-sm-offset-4 col-sm-8">
-                                        <input type="checkbox" ng-model="sameContactInfo"> Uporabi podatke uporabniškega profila
-                                    </div>
+                                        <input type="checkbox" ng-model="sameContactInfo"> Uporabi podatke skrbnika                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="contactFirstName" class="col-sm-4 control-label">Ime</label>
@@ -164,7 +164,7 @@
                                 <div class="form-group">
                                     <label for="contactFamilyRelationship" class="col-sm-4 control-label">Družinska relacija</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="contactFamilyRelationship" ng-model="formData.ContactFamilyRelationship" ng-disabled="sameContactInfo" required>
+                                        <select class="form-control" id="contactFamilyRelationship" ng-model="formData.ContactFamilyRelationship" required>
                                             <option value="" disabled selected>Jaz sem _____ zgornjega profila.</option>
                                             <option value="Jaz">Jaz</option>
                                             <option value="Starš">Starš</option>

@@ -149,14 +149,33 @@ function($scope, accountResource, helperResources, accountService, $location, pa
         });
     };
     
+    
     $scope.$watch('sameContactInfo', function(newValue) {
         if(newValue) {
-            $scope.formData.ContactFirstName = $scope.formData.FirstName;
-            $scope.formData.ContactLastName = $scope.formData.LastName;
-            $scope.formData.ContactAddress = $scope.formData.Address;
-            $scope.formData.ContactPostNumber = $scope.formData.PostNumber;
-            $scope.formData.ContactTelephone = $scope.formData.Telephone;
-            $scope.formData.ContactFamilyRelationship = "Jaz";
+            var guardianProfile = null;
+            
+            $scope.profiles.forEach(function(profile) {
+                if(profile.IsGuardian) {
+                    guardianProfile = profile;   
+                }   
+            });
+                        
+            if(guardianProfile != null) {
+                $scope.formData.ContactFirstName = guardianProfile.FirstName;
+                $scope.formData.ContactLastName = guardianProfile.LastName;
+                $scope.formData.ContactAddress = guardianProfile.Address;
+                $scope.formData.ContactPostNumber = guardianProfile.PostNumber;
+                $scope.formData.ContactTelephone = guardianProfile.Telephone;
+                // $scope.formData.ContactFamilyRelationship = "Jaz";    
+            } else {
+                $scope.formData.ContactFirstName = $scope.formData.FirstName;
+                $scope.formData.ContactLastName = $scope.formData.LastName;
+                $scope.formData.ContactAddress = $scope.formData.Address;
+                $scope.formData.ContactPostNumber = $scope.formData.PostNumber;
+                $scope.formData.ContactTelephone = $scope.formData.Telephone;
+                $scope.formData.ContactFamilyRelationship = "Jaz";
+            }
+            
         }
     });
     $scope.$watch('formData.FirstName', function(newValue) {
