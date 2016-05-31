@@ -200,6 +200,8 @@ controller('createObservationCtrl',
                     // Insert observation into db.  
                     observationDoctorResource().postObservation(JSON.stringify(observationBodyRequest)).$promise.then(function(response) {
                         console.log(response);
+                        $.notify({message: 'Uspešno dodan pregled'}, {type: 'success'});
+                        $location.path('/account/doctor/observation/overview');
                         
                     }, function(response) {
                         console.log(response);

@@ -30,10 +30,11 @@
                         </blockquote>  
                     <tr>
                         <th>
-                            <label for="patientProfileMeasurementMeasurementTime" class="col-sm-4 control-label">Datum meritve</label>  
+                            <label for="patientProfileMeasurementMeasurementTime" class="col-sm-4 control-label">Datum meritve</label>
                         </th>
                         <td>
-                                <div class="form-group container-fluid">
+                               <!-- <input autofocus ng-hide="true">-->
+                                <div class="form-group container-fluid" >
                                 <input type="text" class="form-control" id="patientProfileMeasurementMeasurementTime" ng-model="selectedPatientProfileMeasurement.MeasurementTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
                                 </div>
                         </td>
@@ -63,7 +64,7 @@
                         <td>
                             <button ng-submit="submitPatientProfileMeasurement()" style="width:128px;" class="btn btn-default btn-primary center-block" ladda="" data-style="expand-right">
                                 <span>Shrani</span>
-                            </button>  
+                            </button>
                         </td>
                         <td>
                             <button ng-click="deletePatientProfileMeasurement()" style="width:128px;" class="btn btn-default btn-danger center-block" ladda="" data-style="expand-right">

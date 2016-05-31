@@ -51,6 +51,8 @@ controller('insertPatientProfileMeasurementCtrl',
                         // console.log(JSON.stringify(element));
                         patientProfileMeasurementResource().postMeasurement(JSON.stringify(measurement)).$promise.then(function(response) {
                             console.log(response);
+                            $.notify({message: 'Uspešno dodana meritev'}, {type: 'success'});
+                            $route.reload();
                             
                         }, function(response) {
                             console.log(response);

@@ -230,7 +230,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
             });
             
         }
-    }
+    };
     
     // #22 meritve, ki jih pacient opravi sam/doma
     $scope.showPatientProfileMeasurementDetails = function(measurement) {
@@ -241,7 +241,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
         ngDialog.open({ 
             template: 'app/shared/ngDialogTemplates/measurementTemplate.html',
             className: 'ngdialog-theme-default',
-            scope: $scope,
+            scope: $scope
         });
 
     };
@@ -268,7 +268,7 @@ function($scope, ngDialog, accountResource, accountService, $location, $routePar
             console.log(response);
             $.notify({message: 'Meritev ni bila uspešno spremenjena.'}, {type: 'danger'});
         });
-    }
+    };
     
     $scope.deletePatientProfileMeasurement = function() {
         patientProfileMeasurementResource().deleteMeasurement({id: $scope.selectedPatientProfileMeasurement.Id}).$promise.then(function(response) {
