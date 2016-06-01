@@ -30,6 +30,7 @@ var app = angular.module('app', [
     'app.resources.observation.doctor',
     'app.resources.measurement',
     'app.resources.patient.measurement',
+    'app.resources.appointment',
     
 
     // LOGIN
@@ -50,6 +51,7 @@ var app = angular.module('app', [
     'app.components.account.doctor.observation',
     'app.components.account.doctor.observation.overview',
     'app.components.account.doctor.patient',
+    'app.components.dashboard.patient.appointment',
     'app.components.changePassword',
     
     // DASHBOARD

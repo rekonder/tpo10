@@ -103,7 +103,12 @@ controller('createObservationCtrl',
                };
                
               $scope.allMedications = function() {
-                observationDoctorResource().getMedications().$promise.then(function(response) {
+                var givenCausesBody = {
+                    Diseases :  $scope.selectedDiseases,
+                    Allergies :  $scope.selectedAllergies,
+                };
+                // console.log(JSON.stringify(givenCausesBody));
+                observationDoctorResource().retrieveMedicationsForGivenCauses(JSON.stringify(givenCausesBody)).$promise.then(function(response) {
                     // console.log(response);
                     $scope.medicationOptions = response;
                 
