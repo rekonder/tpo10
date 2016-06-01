@@ -1,9 +1,11 @@
 angular.module('app.components.dashboard.patient.appointment', []).
 controller('appointmentPatientCtrl', 
-['$scope', '$compile', '$timeout', 'accountResource', 'accountService', '$location', '$routeParams','uiCalendarConfig',
-function($scope, $compile, $timeout, accountResource, accountService, $location, $routeParams, uiCalendarConfig) {
+['$scope', '$compile', '$timeout', 'accountResource', 'accountService', '$location', '$routeParams','uiCalendarConfig', 'doctorProfileResources', 'patientProfileResources',
+function($scope, $compile, $timeout, accountResource, accountService, $location, $routeParams, uiCalendarConfig, doctorProfileResources, patientProfileResources) {
     // Naroči se na pregled
-    $scope.test = "Dela";
+    $scope.profile = {}
+    $scope.selectedDoctor = {} 
+       
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -43,9 +45,6 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     };
     /* event sources array*/
     $scope.eventSources = [$scope.events];
-
-
-
 
 
     $scope.testResourceMethods = function() {
@@ -115,6 +114,45 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
 
         });
     }
-    $scope.testResourceMethods();
+    
+    $scope.refreshProfile = function() {
+        patientProfileResources().getPatientProfile({id: $routeParams.patientId}).$promise.then(function(response) {
+            console.log(response);
+            $scope.profile = response;
+            $scope.getDoctorProfiles();
+            
+        }, function(response) {
+            console.log(response);
+        });
+    }
+    
+    $scope.getDoctorProfiles = function() {
+        doctorProfileResources().getDoctorProfiles().$promise.then(function(response) {
+            console.log(response);
+            $scope.doctorOptions = response;
+            
+            var selectedIndex = getPatientPersonalDoctor($scope.doctorOptions, $scope.profile.PersonalDoctor);
+            // console.log(selectedIndex);
+            $scope.selectedDoctor = $scope.doctorOptions[selectedIndex]; 
+ 
+
+        }, function(response) {
+            console.log(response);
+
+        });
+    }
+    
+    $scope.refreshProfile();
+    // $scope.testResourceMethods();
     
 }]);    
+
+function getPatientPersonalDoctor(doctorOptions, personalDoctor) {
+    for(var i = 0; i < doctorOptions.length; i++) 
+    {
+        if(doctorOptions[i].DoctorKey == personalDoctor.DoctorKey) {
+            return i;
+        }
+    }
+    return -1;
+}
