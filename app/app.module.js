@@ -7,6 +7,7 @@ var app = angular.module('app', [
     'angular-ladda',
     'ngDialog',
     'ODataResources',
+    'ui.calendar',
     
     'app.routes',
     'app.directives.validation',

@@ -1,27 +1,25 @@
-<div class="container-fluid">
-
-  <div ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
-  
-  
-  <!-- DASHBOARD CONTENT -->
-  <div class="dashboard-content" role="main">
-    <div class="container-fluid">
-
-      <h1>{{test}}</h1>
-      <div class="row">
-          <div class="col-md-6">
-              
-          </div>
-          
-          <div class="col-md-6">
-             
-          </div>
-          
-          
-      </div>
-     
+<div role="main">
+    <div class="container">
+        <section id="directives-calendar">
+            <div class="page-header">
+                <h1>UI-Calendar</h1>
+            </div>
+            <div class="well">
+                    <div class="row-fluid">
+                    <div class="span8">
+                        <div class="btn-toolbar">
+                            <p class="pull-right lead">Calendar One View Options</p>
+                            <div class="btn-group">
+                                <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar1')">AgendaDay</button>
+                                <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar1')">AgendaWeek</button>
+                                <button class="btn btn-success" ng-click="changeView('month', 'myCalendar1')">Month</button>
+                            </div>
+                        </div>
+                        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
-  <!-- END OF DASHBOARD CONTENT -->
- 
 </div>
+
