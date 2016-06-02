@@ -28,6 +28,7 @@
             <li><a href="#/dashboard/patient/{{profile.Id}}"><i class="fa fa-user"></i> <i class="text">Pregled profila</i></a></li>
             <li><a href="#/dashboard/patient/{{profile.Id}}/doctors"><i class="fa fa-user-md" aria-hidden="true"></i> <i class="text">Izbor/Zamenjava zdravnikov</i></a></li>
             <li><a href="#/dashboard/patient/{{profile.Id}}/insertMeasurements"><i class="fa fa-list-ol" aria-hidden="true"></i> <i class="text">Vnos meritve</i></a></li>
+            <li><a href="#/dashboard/patient/{{profile.Id}}/appointment"><i class="fa fa-calendar" aria-hidden="true"></i> <i class="text">Naročilo na pregled</i></a></li>
             <li><a href="#/account/patient"><i class="fa fa-users"></i> <i class="text">Nazaj na izbor profila</i></a></li>
         </ul>
         <ul class="side-menu" ng-show="doctor">
@@ -38,6 +39,7 @@
             <li><a href="#/changePassword"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <i class="text">Sprememba gesla</i></a></li>
         </ul>
         <ul class="side-menu" ng-show="doctorPacientProfile">
+            <li><a href="#/dashboard/patient/{{profile.Id}}/appointment"><i class="fa fa-calendar" aria-hidden="true"></i> <i class="text">Naročilo na pregled</i></a></li>
             <li><a href="#/account/doctor/patients"><i class="fa fa-users"></i> <i class="text">Nazaj na izbor pacienta</i></a></li>
         </ul>
 

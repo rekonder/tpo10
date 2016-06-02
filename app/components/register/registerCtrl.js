@@ -49,7 +49,8 @@ function($scope, accountResource, helperResources, patientProfileResources, $loc
             'ContactAddress': $scope.contactAddress,
             'ContactPostNumber': $scope.contactPost,
             'ContactTelephone': $scope.contactTelephone,
-            'ContactFamilyRelationship': $scope.contactFamilyRelationship
+            'ContactFamilyRelationship': $scope.contactFamilyRelationship,
+            'IsGuardian': true
         };
         patientProfileResources().postPatientProfile({id: $scope.userId}, profile).$promise.then(function(response) {
             console.log(response);

@@ -40,7 +40,7 @@
                             <td>{{profile.FirstName}}</td>
                             <td>{{profile.LastName}}</td>
                             <td>{{profile.Gender}}</td>
-                            <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
+                            <td>{{profile.BirthDate | date: 'd.M.yyyy H:mm'}}</td>
                             <td class="text-right">
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard(profile.Id)"></button>
                             </td>

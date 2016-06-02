@@ -1,9 +1,12 @@
 angular.module('app.components.account.doctor.observation', []).
 controller('createObservationCtrl',
-    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'doctorPatientProfileResources', 'observationDoctorResource', 'measurementResources', 'helperResources', '$route',
-        function($scope, accountResource, accountService, $location, doctorProfileResources, doctorPatientProfileResources,  observationDoctorResource, measurementResources, helperResources, $route) {
+    ['$scope', 'accountResource', 'accountService', '$location', 'doctorProfileResources', 'doctorPatientProfileResources', 'observationDoctorResource', 'appointmentResources', 'measurementResources', 'helperResources', '$route',
+        function($scope, accountResource, accountService, $location, doctorProfileResources, doctorPatientProfileResources,  observationDoctorResource, appointmentResources, measurementResources, helperResources, $route) {
             var account = accountService.getAccount();
             $scope.doctorProfile = {};
+            $scope.doctorAppointments = [];
+            $scope.selectedAppointment = {}; 
+            $scope.appointmentChooser = false;   
             
              $scope.selectedAllergies = [];
              $scope.selectedDiseases = [];
@@ -22,7 +25,7 @@ controller('createObservationCtrl',
              $scope.measurementNotes = [];
              $scope.measurementValues = [];
              $scope.measurementPartIds = [];
-             
+                          
             // http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
              $scope.multiselectSettingsDiets = { 
                 scrollableHeight: '320',
@@ -61,6 +64,8 @@ controller('createObservationCtrl',
                  doctorProfileResources().getDoctorProfile({id: account.id}).$promise.then(function(response) {
                     // console.log(response);
                     $scope.doctorProfile = response
+                    $scope.getDoctorsAppointments();
+                    
                  }, function(response) {
                     console.log(response);
                  });
@@ -103,7 +108,12 @@ controller('createObservationCtrl',
                };
                
               $scope.allMedications = function() {
-                observationDoctorResource().getMedications().$promise.then(function(response) {
+                var givenCausesBody = {
+                    Diseases :  $scope.selectedDiseases,
+                    Allergies :  $scope.selectedAllergies,
+                };
+                // console.log(JSON.stringify(givenCausesBody));
+                observationDoctorResource().retrieveMedicationsForGivenCauses(JSON.stringify(givenCausesBody)).$promise.then(function(response) {
                     // console.log(response);
                     $scope.medicationOptions = response;
                 
@@ -168,6 +178,24 @@ controller('createObservationCtrl',
                     console.log($scope.selectedMeasurements);
                }
                
+                $scope.getDoctorsAppointments = function() {
+                  console.log($scope.doctorProfile.Id);
+                  appointmentResources().getAvailableAppointmentsForGivenDoctor({id: $scope.doctorProfile.Id}).$promise.then(function(response) {
+                        console.log(response);
+                        var appointmentsList = [];
+                        response.forEach(function(element) {
+                            if(element.IsFinished == false)
+                            {
+                                appointmentsList.push(element);
+                            }
+                        });
+                        $scope.doctorAppointments = appointmentsList; 
+
+                  }, function(response) {
+                        console.log(response);
+                  });
+               }
+               
                
                $scope.getDoctorProfile();
                $scope.allDiets();
@@ -195,18 +223,45 @@ controller('createObservationCtrl',
                         ObservationMeasurements: observationMeasurementData
                     };
                     
-                    console.log(JSON.stringify(observationBodyRequest));  
+                    // console.log(JSON.stringify(observationBodyRequest));  
                       
                     // Insert observation into db.  
                     observationDoctorResource().postObservation(JSON.stringify(observationBodyRequest)).$promise.then(function(response) {
                         console.log(response);
+                        $.notify({message: 'Uspešno dodan pregled'}, {type: 'success'});
                         
+                        // if appointment is selected
+                        if($scope.appointmentChooser && (typeof $scope.selectedAppointment.Id === 'undefined') == false)
+                        {
+                            var appointmentId = $scope.selectedAppointment.Id;
+                             var data = {
+                                StartDateTime:  $scope.selectedAppointment.StartDateTime,
+                                EndDateTime:  $scope.selectedAppointment.EndDateTime,
+                                IsAvailable:  false,
+                                Notes:  $scope.selectedAppointment.Notes,
+                                PatientProfileId:  response.PatientProfile.Id,
+                                DoctorProfileId: response.DoctorProfile.Id,
+                                ObservationId: response.Id
+                            };
+                            // console.log(appointmentId);
+                            appointmentResources().putAppointment({id: appointmentId}, JSON.stringify(data)).$promise.then(function(response) {
+                                // console.log(response);
+                                $location.path('/account/doctor/observation/overview');
+
+                            }, function(response) {
+                                // console.log(response);
+                            });
+                        } else {
+                             $location.path('/account/doctor/observation/overview');
+                        }
+                                                
                     }, function(response) {
                         console.log(response);
                     });
                     
                }
                
+                              
 
         }]);
         

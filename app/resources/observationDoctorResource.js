@@ -54,8 +54,8 @@ factory('observationDoctorResource', ['$rootScope', '$resource', 'accountService
                     },
                     isArray: true
                 },
-                 getMedications: {
-                    method: 'GET',
+                 retrieveMedicationsForGivenCauses: {
+                    method: 'POST',
                     url: appSettings.baseUrl + '/api/Observation/Medications',
                     headers: {
                         'Content-Type': 'application/json',

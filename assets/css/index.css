@@ -176,11 +176,6 @@ body, html {
 }
 /* END DASHBOARD */
 
-#patientDashboard {
-    overflow: auto;
-}
-
-
 .print-hide {
     display: initial;
 }
@@ -210,4 +205,6 @@ a {
     .print-show {
         display: initial;
     }
+
 }
+

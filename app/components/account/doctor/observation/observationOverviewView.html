@@ -19,7 +19,7 @@
                         </th>
                         </thead>
                         <tr id="observation{{obs.Id}}" style="cursor:pointer;" ng-repeat="obs in observations.Data | orderBy: '-ObservationTime' | limitTo: observations.limit" ng-click="showMeasurementDetails(obs)">
-                            <td>{{obs.ObservationTime | date:'d.M.yyyy H:m' }}</td>
+                            <td>{{obs.ObservationTime | date:'d.M.yyyy H:mm' }}</td>
                             <td>{{obs.PatientProfile.FirstName}} {{obs.PatientProfile.LastName}}</td>
                             <td>{{obs.Notes}}</td>
                         </tr>
