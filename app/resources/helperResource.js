@@ -21,6 +21,15 @@ function($rootScope, $resource, accountService) {
                     'Accept': 'application/json'
                 },
                 isArray: true
+            },
+            getUserRoles: {
+                method: 'GET',
+                url: appSettings.baseUrl + '/api/Helper/UserRoles',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                isArray: true
             }
         });
     }

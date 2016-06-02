@@ -10,6 +10,7 @@
                     <button type="print" class="btn btn-default print-hide" ng-click="print()"><span class="fa fa-print"></span></button>
                 </div>
             </div>
+
             <h4>Filtri</h4>
             <!--<table class="table table-condensed">
                 <thead>
@@ -47,6 +48,16 @@
                 </div>
             </div>
 
+            <div class="row ">
+                <div class="form-horizontal">
+                    <label for="search" class="col-sm-1 control-label">Iskanje: </label>
+                    <div class="col-sm-3 print-hide">
+                        <input ng-model="q" id="search" class="form-control" placeholder="Vnesite iskani niz">
+                    </div>
+                    <div class="print-show">{{ q }}</div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-xs-8">
                     <button type="prev" class="btn btn-xs btn-default print-hide" ng-click="prevPage()" ng-disabled="skip == 0"><span class="fa fa-chevron-left"></span></button>
@@ -77,16 +88,20 @@
                         <th>
                             <a ng-click="orderBy('LastLoginIp')">IP naslov  <span class="fa" ng-class="{'fa-sort-asc': orderby == 'LastLoginIp' && orderdesc == false, 'fa-sort-desc': orderby == 'LastLoginIp' && orderdesc == true}"></span></a>
                         </th>
+                        <th>
+                            Vloga
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr id="{{user.Id}}" ng-repeat="user in users">
+                <tbody> 
+                    <tr id="{{user.Id}}" ng-repeat="user in users | filter:q1">
                         <td>{{$index + 1 + skip}}</td>
                         <td>{{user.Email}}</td>
                         <td><span class="fa" ng-class="{'fa-check': user.EmailConfirmed == true, 'fa-times': user.EmailConfirmed == false}"></span></td>
-                        <td>{{user.CreatedOn | date:'dd. MM. yyyy hh:mm:ss'}}</td>
-                        <td>{{user.LastLogin | date:'dd. MM. yyyy hh:mm:ss'}}</td>
+                        <td>{{user.CreatedOn | date:'dd. MM. yyyy HH:mm:ss':'+0400'}}</td>
+                        <td>{{user.LastLogin | date:'dd. MM. yyyy HH:mm:ss':'+0400'}}</td>
                         <td>{{user.LastLoginIp}}</td>
+                        <td>{{user['odata.type'] | odataType | roleToSlo}}</td>
                     </tr>
                 </tbody>
             </table>

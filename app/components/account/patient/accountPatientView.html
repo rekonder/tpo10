@@ -19,6 +19,10 @@
                         <th>Priimek</th>
                         <th>Spol</th>
                         <th>Rojstni dan</th>
+
+                        <th>Osebni zdravnik</th>
+                        <th>Zobozdravnik</th>
+
                         <th class="text-right">
                             <button class="btn btn-xs btn-success glyphicon glyphicon-plus" ng-click="create()"></button>
                         </th>
@@ -36,6 +40,12 @@
                             <td>{{profile.LastName}}</td>
                             <td>{{profile.Gender}}</td>
                             <td>{{profile.BirthDate | date:'d. M. yyyy'}}</td>
+                            <td>
+                                <span ng-if="profile.PersonalDoctor">{{ profile.PersonalDoctor.LastName }}</span>
+                            </td>
+                            <td>
+                                <span ng-if="profile.DentistDoctor">{{ profile.DentistDoctor.LastName }}</span>
+                            </td>
                             <td class="text-right">
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-screenshot" ng-if="profile.IsGuardian" data-toggle="tooltip" data-placement="top" title="Skrbnik" tooltip></button>
                                 <button class="btn btn-xs btn-default glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Nadzorna plošča profila" tooltip ng-click="dashboard($index)"></button>

@@ -7,6 +7,7 @@ var app = angular.module('app', [
     'angular-ladda',
     'ngDialog',
     'ODataResources',
+    'ui.calendar',
     
     'app.routes',
     'app.directives.validation',
@@ -30,6 +31,7 @@ var app = angular.module('app', [
     'app.resources.observation.doctor',
     'app.resources.measurement',
     'app.resources.patient.measurement',
+    'app.resources.appointment',
     
 
     // LOGIN
@@ -50,6 +52,7 @@ var app = angular.module('app', [
     'app.components.account.doctor.observation',
     'app.components.account.doctor.observation.overview',
     'app.components.account.doctor.patient',
+    'app.components.dashboard.patient.appointment',
     'app.components.changePassword',
     
     // DASHBOARD
@@ -86,5 +89,22 @@ app.filter('ceil', function() {
 app.filter('floor', function() {
     return function (value) {
         return Math.floor(value);
+    };
+});
+
+app.filter('odataType', function() {
+    return function (value) {
+        return value.replace('tpo10_rest.Models.', '');
+    };
+});
+
+app.filter('roleToSlo', function() {
+    return function (value) {
+        switch(value) {
+            case 'Administrator': return 'administrator';
+            case 'Doctor': return 'doktor';
+            case 'Nurse': return 'sestra';
+            case 'Patient': return 'pacient';
+        }
     };
 });

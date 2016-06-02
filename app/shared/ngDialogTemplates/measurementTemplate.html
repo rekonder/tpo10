@@ -18,12 +18,16 @@
                                     <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementTake}}</dd>
                                     <dt>Čas merjenja</dt>
                                     <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementTime}}</dd>
-                                    <dt>Normalne vrednosti</dt>
+                                    <!--<dt>Normalne vrednosti</dt>
                                     <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementNormal}}</dd>
                                     <dt>Nizke vrednosti</dt>
                                     <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementBelow}}</dd>
                                     <dt>Ekstremne vrednosti</dt>
-                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementExtreme}}</dd>
+                                    <dd>{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementExtreme}}</dd>-->
+                                    <dt>Normalne vrednosti</dt>
+                                    <dd>od {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementNormalMin}} {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementUnit}} do {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementNormalMax}} {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementUnit}}</dd>
+                                    <dt>Ekstremne vrednosti</dt>
+                                    <dd>od {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementMin}} {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementUnit}} do {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementMax}} {{selectedPatientProfileMeasurement.MeasurementPart.MeasurementUnit}}</dd>
                                 </dl>   
                             </div>
                                                                                 
@@ -35,7 +39,7 @@
                         <td>
                                <!-- <input autofocus ng-hide="true">-->
                                 <div class="form-group container-fluid" >
-                                <input type="text" class="form-control" id="patientProfileMeasurementMeasurementTime" ng-model="selectedPatientProfileMeasurement.MeasurementTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                <input type="text" class="form-control" id="patientProfileMeasurementMeasurementTime" ng-model="selectedPatientProfileMeasurement.MeasurementTime" datetimepicker required date useCurrent format="D. M. YYYY H:mm" max-date="moment().format('YYYY-MM-DD HH:mm')">
                                 </div>
                         </td>
                     </tr>
@@ -55,7 +59,8 @@
                         </th>
                         <td>
                                 <div class="form-group container-fluid">
-                                <input type="number" placeholder="{{currentMeasurementPart.MeasurementUnit}}" class="form-control" id="patientProfileMeasurementValue" ng-model="selectedPatientProfileMeasurement.Value" required>
+                                <input type="number" placeholder="{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementUnit}}" class="form-control" id="patientProfileMeasurementValue" ng-model="selectedPatientProfileMeasurement.Value" required
+                                    min="{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementMin}}" max="{{selectedPatientProfileMeasurement.MeasurementPart.MeasurementMax}}">
                                 </div>
                         </td>
                     </tr>
