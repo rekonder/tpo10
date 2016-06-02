@@ -37,7 +37,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
         }, function(response) {
             console.log(response);
         });
-        callback(events);
+        callback($scope.events);
     };
     $scope.globalEvent = [];
     $scope.eventClicked = function (event, element, view) {
@@ -77,23 +77,25 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     };
     /* event sources array*/
     $scope.eventSources = [$scope.events,$scope.eventsF];
-
+    
     $scope.saveAppointment = function () {
+       var doctorId = $scope.selectedDoctor.Id;
+       // console.log("DoctorId: " + doctorId);
        // console.log($scope.globalEvent.start._i);
-        var data = {
-            StartDateTime: $scope.globalEvent.start._i,
-            EndDateTime: $scope.globalEvent.end._i,
-            IsAvailable: false,
-            Notes: "Hojla",
+     
+        var data2 = {
             PatientProfileId: $routeParams.patientId,
-            DoctorProfileId: "c3e71736-7327-e611-beb3-6817292e1d3b",
-            delete:false
-        };
-        // console.log(JSON.stringify(data));
-        appointmentResources().putAppointment({id: $scope.globalEvent.my_id}, JSON.stringify(data)).$promise.then(function(response) {
-            $scope.testResourceMethods();
+            DoctorProfileId: doctorId,
+            Subscribe: true
+        }
+        // console.log(JSON.stringify(data2));
+        appointmentResources().putAppointmentSubscription({id: $scope.globalEvent.my_id}, JSON.stringify(data2)).$promise.then(function(response) {
+            console.log(response);
+            $scope.getAppointmentsForSelectedDoctor();
+            $.notify({message: 'Uspešno ste rezervirali termin pregleda.'}, {type: 'success'});
 
         }, function(response) {
+            $.notify({message: response.data}, {type: 'danger'});
             console.log(response);
 
         });
@@ -101,27 +103,32 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     };
 
     $scope.deleteAppointment = function () {
-        console.log("Delete");
-        var data = {
-            StartDateTime: $scope.globalEvent.start._i,
-            EndDateTime: $scope.globalEvent.end._i,
-            IsAvailable: true,
-            Notes: "Hojla",
-            DoctorProfileId: "c3e71736-7327-e611-beb3-6817292e1d3b",
-            delete:true
-        };
-        // console.log(JSON.stringify(data));
-        appointmentResources().putAppointment({id: $scope.globalEvent.my_id}, JSON.stringify(data)).$promise.then(function(response) {
-            $scope.testResourceMethods();
+        var doctorId = $scope.selectedDoctor.Id;
+        // console.log("Unsubscribe");
+        var data2 = {
+            PatientProfileId: $routeParams.patientId,
+            DoctorProfileId: doctorId,
+            Subscribe: false
+        }
+        
+        // console.log(JSON.stringify(data2));
+        appointmentResources().putAppointmentSubscription({id: $scope.globalEvent.my_id}, JSON.stringify(data2)).$promise.then(function(response) {
+            $scope.getAppointmentsForSelectedDoctor();
+            $.notify({message: 'Uspešno ste preklicali rezervacijo termina.'}, {type: 'success'});
 
         }, function(response) {
+            $.notify({message: response.data}, {type: 'danger'});
             console.log(response);
 
         });
         ngDialog.close();
     };
 
-    $scope.testResourceMethods = function() {
+    $scope.getAppointmentsForSelectedDoctor = function() {
+        if(typeof $scope.selectedDoctor === 'undefined') 
+        {
+            return;
+        }
         console.log($scope.selectedDoctor);
         var doctorId = $scope.selectedDoctor.Id;
         console.log(doctorId);
@@ -149,44 +156,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
         }, function(response) {
             console.log(response);
         });
-        
-       /* // GET Appointment
-        appointmentResources().getAppointment({id: appointmentId}).$promise.then(function(response) {
-            console.log(response);
-
-        }, function(response) {
-            console.log(response);
-        });
-               
-
-        
-         // DELETE Appointment 
-        appointmentResources().deleteAppointment({id: appointmentId}).$promise.then(function(response) {
-            console.log(response);
-
-        }, function(response) {
-            console.log(response);
-        });
-        
-        
-         // POST 
-        var data = {
-            StartDateTime: "2016-06-01T18:06:01.1811759+02:00",
-            EndDateTime: "2016-06-01T18:07:02.1811759+02:00",
-            IsAvailable: false,
-            Notes: "Hojla",
-            // PatientProfileId: "50ef9318-658f-4fd0-b5a0-381b1ff668c3",
-            DoctorProfileId: "19b4da69-1028-e611-86c0-005056f83588"
-        };
-         
-        // console.log(JSON.stringify(data));
-        appointmentResources().postAppointment(JSON.stringify(data)).$promise.then(function(response) {
-            console.log(response);
-
-        }, function(response) {
-            console.log(response);
-
-        });*/
+      
     };
 
     
@@ -209,7 +179,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
             var selectedIndex = getPatientPersonalDoctor($scope.doctorOptions, $scope.profile.PersonalDoctor);
             // console.log(selectedIndex);
             $scope.selectedDoctor = $scope.doctorOptions[selectedIndex];
-            $scope.testResourceMethods();
+            $scope.getAppointmentsForSelectedDoctor();
  
 
         }, function(response) {
@@ -217,9 +187,10 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
 
         });
     };
+    
     $scope.$watch('selectedDoctor', function(newValue) {
         if(newValue) {
-            $scope.testResourceMethods();
+            $scope.getAppointmentsForSelectedDoctor();
         }
     });
     $scope.refreshProfile();
@@ -227,6 +198,11 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
 }]);    
 
 function getPatientPersonalDoctor(doctorOptions, personalDoctor) {
+    if(personalDoctor == null) 
+    {
+        return -1;  
+    }
+    
     for(var i = 0; i < doctorOptions.length; i++) 
     {
         if(doctorOptions[i].DoctorKey == personalDoctor.DoctorKey) {

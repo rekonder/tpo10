@@ -43,6 +43,14 @@ factory('appointmentResources', ['$rootScope', '$resource', 'accountService',
                         'Accept': 'application/json'
                     }
                 },
+                putAppointmentSubscription: {
+                    method: 'PUT',
+                    url: appSettings.baseUrl + '/api/Appointment/Subscription/:id',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                },
                
             });
         }
