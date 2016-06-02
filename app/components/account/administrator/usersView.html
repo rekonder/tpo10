@@ -10,6 +10,7 @@
                     <button type="print" class="btn btn-default print-hide" ng-click="print()"><span class="fa fa-print"></span></button>
                 </div>
             </div>
+
             <h4>Filtri</h4>
             <!--<table class="table table-condensed">
                 <thead>
@@ -44,6 +45,15 @@
                         <option value="21" ng-selected="createdOnInLastXDays == 21">21 dneh</option> 
                         <option value="28" ng-selected="createdOnInLastXDays == 28">28 dneh</option>   
                     </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-horizontal">
+                    <label for="search" class="col-sm-1 control-label">Iskanje: </label>
+                    <div class="col-sm-3">
+                        <input ng-model="q" id="search" class="form-control" placeholder="Vnesite iskani niz">
+                    </div>
                 </div>
             </div>
 
@@ -83,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    <tr id="{{user.Id}}" ng-repeat="user in users">
+                    <tr id="{{user.Id}}" ng-repeat="user in users | filter:q1">
                         <td>{{$index + 1 + skip}}</td>
                         <td>{{user.Email}}</td>
                         <td><span class="fa" ng-class="{'fa-check': user.EmailConfirmed == true, 'fa-times': user.EmailConfirmed == false}"></span></td>
