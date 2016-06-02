@@ -43,8 +43,19 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     $scope.eventClicked = function (event, element, view) {
         $scope.reserved = false;
         $scope.myReserved = false;
-        console.log(event)
-       if(!event.IsAvailable && event.pacient != null && event.pacient.Id == $routeParams.patientId)
+        $scope.history = false;
+        //a= moment.utc(new Date()).local();
+        a = new Date( moment.utc(new Date())._d);
+        //b = moment.utc(new Date( moment.utc(event._start._i)._d)).local();
+        b = new Date( moment.utc(event._start._i)._d);
+       //moment.utc(moment(task.time_stop.diff(moment(task.time_start))).format("mm")
+        console.log(a);
+        console.log(b);
+        if(a >  b){
+            $scope.history = true;
+            console.log("hEEHEHEHEHEHE")
+        }
+        else if(!event.IsAvailable && event.pacient != null && event.pacient.Id == $routeParams.patientId)
             $scope.myReserved = true;
         else if(!event.IsAvailable)
            $scope.reserved = true;

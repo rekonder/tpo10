@@ -3,15 +3,20 @@
         <h3 class="panel-title">Naročanje na pregled</h3>
     </div>
     <div class="panel-body">
+        <form class="form-horizontal" novalidate>
+            <div class="row" ng-show="history">
+                <h3>Termina ni več možno izbrati</h3>
+            </div>
+        </form>
         <form class="form-horizontal" ng-submit="saveAppointment()" novalidate>
-            <div class="row" ng-show="reserved">
+            <div class="row" ng-show="reserved && !history">
                 <h3>Termin že zaseden</h3>
             </div>
         </form>
             <form class="form-horizontal" ng-submit="deleteAppointment()" novalidate>
-                <div class="row" ng-show="myReserved">
+                <div class="row" ng-show="myReserved && !history">
                     <h3>Želite sprostiti termin?</h3>
-                    <div class="row" ng-show="myReserved">
+                    <div class="row" ng-show="myReserved && !history">
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8">
                                 <button type="submit" ng-submit="deleteAppointment()" class="btn btn-default btn-primary" ladda="submittingProfile">
@@ -23,10 +28,10 @@
                 </div>
             </form>
         <form class="form-horizontal" ng-submit="saveAppointment()" novalidate>
-            <div class="row" ng-show="!myReserved && !reserved">
+            <div class="row" ng-show="!myReserved && !reserved && !history">
                 <h3>Se želite naročiti na pregled?</h3>
             </div>
-            <div class="row" ng-show="!myReserved && !reserved">
+            <div class="row" ng-show="!myReserved && !reserved && !history">
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
                         <button type="submit" ng-submit="saveAppointment()" class="btn btn-default btn-primary" ladda="submittingProfile">
