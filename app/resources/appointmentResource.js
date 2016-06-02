@@ -48,8 +48,10 @@ factory('appointmentResources', ['$rootScope', '$resource', 'accountService',
                     url: appSettings.baseUrl + '/api/Appointment/Subscription/:id',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': accountService.getToken()
                     }
+                    
                 },
                
             });
