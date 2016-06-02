@@ -77,8 +77,6 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer, helpe
 
             default: $scope.q1 = $scope.q;
         }
-
-        console.log($scope.q, $scope.q1);
     }, true);
 
 
