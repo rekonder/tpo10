@@ -4,6 +4,11 @@ controller('appointmentPatientCtrl',
     'ngDialog','doctorProfileResources', 'patientProfileResources',
 function($scope, $compile, $timeout, accountResource, accountService, $location, $routeParams, uiCalendarConfig, appointmentResources,
          ngDialog , doctorProfileResources, patientProfileResources) {
+             
+    // Za zdravnika
+    var account = accountService.getAccount();
+    $scope.doctorProfile = {};
+    
     // Naroči se na pregled
     $scope.profile = {};
     $scope.selectedDoctor = {} ;
@@ -91,13 +96,19 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     
     $scope.saveAppointment = function () {
        var doctorId = $scope.selectedDoctor.Id;
+       var subsId = $routeParams.patientId;
+       if($scope.isDoctor) {
+           subsId = $scope.doctorProfile.Id;
+           console.log("Raa:", subsId);
+       }
        // console.log("DoctorId: " + doctorId);
        // console.log($scope.globalEvent.start._i);
      
         var data2 = {
             PatientProfileId: $routeParams.patientId,
             DoctorProfileId: doctorId,
-            Subscribe: true
+            Subscribe: true,
+            SubscriberId: subsId
         }
         // console.log(JSON.stringify(data2));
         appointmentResources().putAppointmentSubscription({id: $scope.globalEvent.my_id}, JSON.stringify(data2)).$promise.then(function(response) {
@@ -115,11 +126,17 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
 
     $scope.deleteAppointment = function () {
         var doctorId = $scope.selectedDoctor.Id;
+        var subsId = $routeParams.patientId;
+        if($scope.isDoctor) {
+            subsId = $scope.doctorProfile.Id;
+            console.log("Raa:", subsId);
+        }
         // console.log("Unsubscribe");
         var data2 = {
             PatientProfileId: $routeParams.patientId,
             DoctorProfileId: doctorId,
-            Subscribe: false
+            Subscribe: false,
+            SubscriberId: subsId
         }
         
         // console.log(JSON.stringify(data2));
@@ -180,6 +197,16 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
         }, function(response) {
             console.log(response);
         });
+        
+        if($scope.isDoctor) {
+            doctorProfileResources().getDoctorProfile({id: account.id}).$promise.then(function(response) {
+                console.log("daada:" ,response);
+                $scope.doctorProfile = response;
+                
+            }, function(response) {
+                console.log(response);
+            });
+        }
     };
     
     $scope.getDoctorProfiles = function() {
