@@ -3,7 +3,7 @@ factory('appointmentResources', ['$rootScope', '$resource', 'accountService',
     function($rootScope, $resource, accountService) {
         var appSettings = $rootScope.appSettings;
         return function() {
-            return $resource(appSettings.baseUrl + '/api/Appointment/:id', { id: '@_id' }, {
+            return $resource(appSettings.baseUrl + '/api/Appointment/:id', { id: '@_id', number: 'number', patientId: '@_patientId' }, {
                // TODO: add methods
                 getAvailableAppointmentsForGivenDoctor: {
                     method: 'GET',
@@ -11,6 +11,7 @@ factory('appointmentResources', ['$rootScope', '$resource', 'accountService',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
+                        // 'Authorization': accountService.getToken()
                     },
                     isArray: true
                 },
@@ -53,6 +54,15 @@ factory('appointmentResources', ['$rootScope', '$resource', 'accountService',
                     }
                     
                 },
+                getUpcomingAppointmentForPatientProfile: {
+                    method: 'GET',
+                    url: appSettings.baseUrl + '/api/Appointment/upcoming/patient/:patientId/:number',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    isArray: true
+                }
                
             });
         }
