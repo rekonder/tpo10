@@ -6,6 +6,7 @@ var app = angular.module('app', [
     'jcs-autoValidate',
     'angular-ladda',
     'ngDialog',
+    'ODataResources',
     
     'app.routes',
     'app.directives.validation',
@@ -44,6 +45,7 @@ var app = angular.module('app', [
     'app.components.account',
     'app.components.account.patient',
     'app.components.account.administrator',
+    'app.components.account.administrator.users',
     'app.components.account.doctor',
     'app.components.account.doctor.observation',
     'app.components.account.doctor.observation.overview',
@@ -72,5 +74,17 @@ function($rootScope, defaultErrorMessageResolver) {
 app.filter('toDate', function() {
     return function (date) {
         return moment(date).toDate();
+    };
+});
+
+app.filter('ceil', function() {
+    return function (value) {
+        return Math.ceil(value);
+    };
+});
+
+app.filter('floor', function() {
+    return function (value) {
+        return Math.floor(value);
     };
 });

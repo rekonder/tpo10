@@ -1,0 +1,108 @@
+<div class="container-fluid">
+    <div class="print-hide" ng-include="'app/shared/leftMenu/leftMenuView.html'"></div>
+    <div class="dashboard-content" role="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3>Seznam uporabnikov</h3>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <button type="print" class="btn btn-default print-hide" ng-click="print()"><span class="fa fa-print"></span></button>
+                </div>
+            </div>
+            <h4>Filtri</h4>
+            <!--<table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Uporabi</th>
+                        <th>Ime</th>
+                        <th colspan="2">Opcije</th> 
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="" value="">
+                    </td>
+                    <td>Datum registracije</td>
+                    <td>
+                        Od <input type="date" name="" value="">
+                    </td>
+                    <td>
+                        Do <input type="date" name="" value="">
+                    </td>
+                </tr>
+            </table>-->
+            <div class="row">
+                <div class="col-xs-12">
+                    Registrirani v zadnjih: <span class="print-show">{{createdOnInLastXDays}} dneh</span>
+                    <select class="print-hide" ng-model="createdOnInLastXDays">
+                        <option value="/" ng-selected="createdOnInLastXDays == '/'">/</option>
+                        <option value="1" ng-selected="createdOnInLastXDays == 1">1 dnem</option>
+                        <option value="2" ng-selected="createdOnInLastXDays == 2">2 dneh</option>
+                        <option value="7" ng-selected="createdOnInLastXDays == 7">7 dneh</option>
+                        <option value="14" ng-selected="createdOnInLastXDays == 14">14 dneh</option>
+                        <option value="21" ng-selected="createdOnInLastXDays == 21">21 dneh</option> 
+                        <option value="28" ng-selected="createdOnInLastXDays == 28">28 dneh</option>   
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <button type="prev" class="btn btn-xs btn-default print-hide" ng-click="prevPage()" ng-disabled="skip == 0"><span class="fa fa-chevron-left"></span></button>
+                    {{((skip / take) | floor) + 1}} / {{(users['odata.count'] / take) | ceil}}
+                    <button type="next" class="btn btn-xs btn-default print-hide" ng-click="nextPage()" ng-disabled="skip + take >= users['odata.count']"><span class="fa fa-chevron-right"></span></button>
+                </div>
+                <div class="col-xs-4 text-right">
+                    Število na stran: <span class="print-show">{{take}}</span>
+                    <input class="print-hide" type="number" name="take" value="5" ng-model="take" min="0">
+                </div>
+            </div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr >
+                        <th>#</th>
+                        <th>
+                            <a ng-click="orderBy('Email')">Email <span class="fa" ng-class="{'fa-sort-asc': orderby == 'Email' && orderdesc == false, 'fa-sort-desc': orderby == 'Email' && orderdesc == true}"></span></a>
+                        </th>
+                        <th>
+                            <a ng-click="orderBy('EmailConfirmed')">Potrjen <span class="fa" ng-class="{'fa-sort-asc': orderby == 'EmailConfirmed' && orderdesc == false, 'fa-sort-desc': orderby == 'EmailConfirmed' && orderdesc == true}"></span></a>
+                        </th>
+                        <th>
+                            <a ng-click="orderBy('CreatedOn')">Datum registracije  <span class="fa" ng-class="{'fa-sort-asc': orderby == 'CreatedOn' && orderdesc == false, 'fa-sort-desc': orderby == 'CreatedOn' && orderdesc == true}"></span></a>
+                        </th>
+                        <th>
+                            <a ng-click="orderBy('LastLogin')">Datum prijave  <span class="fa" ng-class="{'fa-sort-asc': orderby == 'LastLogin' && orderdesc == false, 'fa-sort-desc': orderby == 'LastLogin' && orderdesc == true}"></span></a>
+                        </th>
+                        <th>
+                            <a ng-click="orderBy('LastLoginIp')">IP naslov  <span class="fa" ng-class="{'fa-sort-asc': orderby == 'LastLoginIp' && orderdesc == false, 'fa-sort-desc': orderby == 'LastLoginIp' && orderdesc == true}"></span></a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="{{user.Id}}" ng-repeat="user in users">
+                        <td>{{$index + 1 + skip}}</td>
+                        <td>{{user.Email}}</td>
+                        <td><span class="fa" ng-class="{'fa-check': user.EmailConfirmed == true, 'fa-times': user.EmailConfirmed == false}"></span></td>
+                        <td>{{user.CreatedOn | date:'dd. MM. yyyy hh:mm:ss'}}</td>
+                        <td>{{user.LastLogin | date:'dd. MM. yyyy hh:mm:ss'}}</td>
+                        <td>{{user.LastLoginIp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-8">
+                    <button type="prev" class="btn btn-xs btn-default print-hide" ng-click="prevPage()" ng-disabled="skip == 0"><span class="fa fa-chevron-left"></span></button>
+                    {{((skip / take) | floor) + 1}} / {{(users['odata.count'] / take) | ceil}}
+                    <button type="next" class="btn btn-xs btn-default print-hide" ng-click="nextPage()" ng-disabled="skip + take >= users['odata.count']"><span class="fa fa-chevron-right"></span></button>
+                </div>
+                <div class="col-xs-4 text-right">
+                    Število na stran: <span class="print-show">{{take}}</span>
+                    <input class="print-hide" type="number" name="take" value="5" ng-model="take" min="0">
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>

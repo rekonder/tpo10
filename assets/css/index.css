@@ -179,3 +179,35 @@ body, html {
 #patientDashboard {
     overflow: auto;
 }
+
+
+.print-hide {
+    display: initial;
+}
+.print-show {
+    display: none;
+}
+
+a {
+    cursor: pointer;
+}
+
+@media print {
+    body {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        height: auto;
+    }
+    .dashboard-content {
+        margin: 0px;
+        width: 100%;
+        height: auto;
+    }
+    .print-hide {
+        display: none;
+    }
+    .print-show {
+        display: initial;
+    }
+}
