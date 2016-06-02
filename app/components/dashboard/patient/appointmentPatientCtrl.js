@@ -58,7 +58,6 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
         console.log(b);
         if(a >  b){
             $scope.history = true;
-            console.log("hEEHEHEHEHEHE")
         }
         else if(!event.IsAvailable && event.pacient != null && event.pacient.Id == $routeParams.patientId)
             $scope.myReserved = true;
@@ -109,7 +108,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
             DoctorProfileId: doctorId,
             Subscribe: true,
             SubscriberId: subsId
-        }
+        };
         // console.log(JSON.stringify(data2));
         appointmentResources().putAppointmentSubscription({id: $scope.globalEvent.my_id}, JSON.stringify(data2)).$promise.then(function(response) {
             console.log(response);
