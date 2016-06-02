@@ -98,8 +98,8 @@
                         <td>{{$index + 1 + skip}}</td>
                         <td>{{user.Email}}</td>
                         <td><span class="fa" ng-class="{'fa-check': user.EmailConfirmed == true, 'fa-times': user.EmailConfirmed == false}"></span></td>
-                        <td>{{user.CreatedOn | date:'dd. MM. yyyy HH:mm:ss':'+0200'}}</td>
-                        <td>{{user.LastLogin | date:'dd. MM. yyyy HH:mm:ss':'CEST'}}</td>
+                        <td>{{user.CreatedOn | date:'dd. MM. yyyy HH:mm:ss':'+0400'}}</td>
+                        <td>{{user.LastLogin | date:'dd. MM. yyyy HH:mm:ss':'+0400'}}</td>
                         <td>{{user.LastLoginIp}}</td>
                         <td>{{user['odata.type'] | odataType | roleToSlo}}</td>
                     </tr>
