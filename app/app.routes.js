@@ -59,6 +59,10 @@ routes.config(['$routeProvider', function($routeProvider) {
            templateUrl: 'app/components/dashboard/patient/dashboardPatientViewEdit.html',
            controller: 'dashboardPatientCtrl' 
         }).
+        when('/dashboard/patient/:patientId/appointment', {
+           templateUrl: 'app/components/dashboard/patient/appointmentPatientView.html',
+           controller: 'appointmentPatientCtrl' 
+        }).
         when('/account/doctor', {
             templateUrl: 'app/components/account/doctor/doctorProfileView.html',
             controller: 'createDoctorCtrl'

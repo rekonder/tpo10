@@ -175,6 +175,7 @@ body, html {
     padding-bottom: 18px;
 }
 /* END DASHBOARD */
+
 .print-hide {
     display: initial;
 }
@@ -204,4 +205,6 @@ a {
     .print-show {
         display: initial;
     }
+
 }
+

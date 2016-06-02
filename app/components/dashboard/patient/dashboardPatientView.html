@@ -135,12 +135,34 @@
                     </tr>
                 </table>
             </div>
+
+
             <div class="col-md-6">
-                <table class="table table-hover" ng-if="false">
+                <table class="table table-hover" ng-if="upcomingAppointments.length != 0">
                     <h2>Prihajajoči pregledi</h2>
-                    <p>Pacient nima prihajajočih pregledov!</p>
+                    <p ng-if="upcomingAppointments.length == 0">Pacient nima prihajajočih pregledov!</p>
+                    <thead>
+                        <th>Datum</th>
+                        <th>Zdravnik</th>
+                    </thead>
+
+                    <tbody>
+                        <tr id="{{upcomingAppointments.Id}}" style="cursor:pointer;" ng-repeat="upAppo in upcomingAppointments" ng-click="toAppo()">
+                            <td>{{upAppo.StartDateTime | date:'d.M.yyyy H:mm'}}</td>
+                            <td>{{upAppo.DoctorProfile.FirstName}} {{upAppo.DoctorProfile.LastName}},
+                            {{ upAppo.DoctorProfile.DocOrDentist == 0? 'zdravnik': 'zobozdravnik' }}
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+
+
+
                 </table>
             </div>
+
+
         </div>
         <div class="row">
             <div class="col-md-6">
