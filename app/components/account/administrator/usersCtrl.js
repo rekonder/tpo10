@@ -1,10 +1,10 @@
 angular.module('app.components.account.administrator.users', []).
 controller('usersCtrl',
-['$scope', '$rootScope', '$odataresource', '$odata', '$httpParamSerializer',
-function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
+['$scope', '$rootScope', '$odataresource', '$odata', '$httpParamSerializer', 'helperResources',
+function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer, helperResources) {
     var appSettings = $rootScope.appSettings;
     var UsersODataResource = $odataresource(appSettings.baseUrl + '/odata/ApplicationUsers/:userId', {userId:'@id'});
-    
+           
     var query = function() {
         $scope.users = null;
         $scope.url = null;
@@ -12,6 +12,7 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
             var minDate = moment().subtract('day', $scope.createdOnInLastXDays).hours(0).minutes(0).seconds(0).toDate();
             console.log('DATE', new Date(minDate).toJSON());
             $scope.users = UsersODataResource.odata().
+                expand('Roles').
                 filter(
                     'CreatedOn',
                     '>=',
@@ -24,6 +25,7 @@ function($scope, $rootScope, $odataresource, $odata, $httpParamSerializer) {
                 query();
         } else {
             $scope.users = UsersODataResource.odata().
+                expand('Roles').
                 skip($scope.skip).
                 take($scope.take).
                 withInlineCount().

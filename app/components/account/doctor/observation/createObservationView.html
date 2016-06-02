@@ -119,12 +119,16 @@
                                                             <dd>{{currentMeasurementPart.MeasurementTake}}</dd>
                                                             <dt>Čas merjenja</dt>
                                                             <dd>{{currentMeasurementPart.MeasurementTime}}</dd>
-                                                            <dt>Normalne vrednosti</dt>
+                                                            <!--<dt>Normalne vrednosti</dt>
                                                             <dd>{{currentMeasurementPart.MeasurementNormal}}</dd>
                                                             <dt>Nizke vrednosti</dt>
                                                             <dd>{{currentMeasurementPart.MeasurementBelow}}</dd>
                                                             <dt>Ekstremne vrednosti</dt>
-                                                            <dd>{{currentMeasurementPart.MeasurementExtreme}}</dd>
+                                                            <dd>{{currentMeasurementPart.MeasurementExtreme}}</dd>-->
+                                                            <dt>Normalne vrednosti</dt>
+                                                            <dd>od {{currentMeasurementPart.MeasurementNormalMin}} {{currentMeasurementPart.MeasurementUnit}} do {{currentMeasurementPart.MeasurementNormalMax}} {{currentMeasurementPart.MeasurementUnit}}</dd>
+                                                            <dt>Ekstremne vrednosti</dt>
+                                                            <dd>od {{currentMeasurementPart.MeasurementMin}} {{currentMeasurementPart.MeasurementUnit}} do {{currentMeasurementPart.MeasurementMax}} {{currentMeasurementPart.MeasurementUnit}}</dd>
                                                         </dl>   
                                                     </div>
                                                                                                      
@@ -132,7 +136,7 @@
                                                 <span hidden>{{measurementPartIds[$parent.$index + $index] = currentMeasurementPart.Id}}</span>    
                                                 <label for="measurementTime{{$parent.$index + $index}}" class="col-sm-4 control-label">Datum meritve</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="measurementTime{{$parent.$index + $index}}"" ng-model="measurementTimes[$parent.$index + $index]" datetimepicker required date useCurrent format="D. M. YYYY H:mm" view-mode="years" max-date="moment().format('YYYY-MM-DD HH:mm')">
+                                                    <input type="text" class="form-control" id="measurementTime{{$parent.$index + $index}}"" ng-model="measurementTimes[$parent.$index + $index]" datetimepicker required date useCurrent format="D. M. YYYY H:mm" max-date="moment().format('YYYY-MM-DD HH:mm')">
                                                 </div>
                                             </div>
                                                 
@@ -147,7 +151,8 @@
                                             <div class="form-group">
                                                 <label for="valueMeasurement[{{$parent.$index + $index}}"" class="col-sm-4 control-label">Vrednost</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" placeholder="{{currentMeasurementPart.MeasurementUnit}}" class="form-control" id="valueMeasurement[{{$parent.$index + $index}}"" ng-model="measurementValues[$parent.$index + $index]" required>
+                                                    <input type="number" placeholder="{{currentMeasurementPart.MeasurementUnit}}" class="form-control" id="valueMeasurement[{{$parent.$index + $index}}"" ng-model="measurementValues[$parent.$index + $index]" required
+                                                        min="{{currentMeasurementPart.MeasurementMin}}" max="{{currentMeasurementPart.MeasurementMax}}">
                                                 </div>
                                             </div>
                                         </div>

@@ -88,3 +88,20 @@ app.filter('floor', function() {
         return Math.floor(value);
     };
 });
+
+app.filter('odataType', function() {
+    return function (value) {
+        return value.replace('tpo10_rest.Models.', '');
+    };
+});
+
+app.filter('roleToSlo', function() {
+    return function (value) {
+        switch(value) {
+            case 'Administrator': return 'administrator';
+            case 'Doctor': return 'doktor';
+            case 'Nurse': return 'sestra';
+            case 'Patient': return 'pacient';
+        }
+    };
+});
