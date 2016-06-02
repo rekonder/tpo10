@@ -162,10 +162,12 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
                 else {
                     var color = 'gray';
                     if(item.PatientProfile.Id == $routeParams.patientId){
-                        var title = "Jaz";
+                        var title = ($scope.isDoctor)? item.PatientProfile.FirstName + " " + item.PatientProfile.LastName : "Jaz";
                     }
-                    else
-                        var title = "Zasedeno";
+                    else {
+                        var title = ($scope.isDoctor)? item.PatientProfile.FirstName + " " + item.PatientProfile.LastName : "Zasedeno";
+                    }
+                        
                 }
                 $scope.events.push({ color: color, title: title, start:item.StartDateTime, end:item.EndDateTime,allDay: false, my_id:item.Id, IsAvailable:item.IsAvailable,
                                     pacient: item.PatientProfile})
