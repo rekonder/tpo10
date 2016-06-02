@@ -26,22 +26,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
     };
 
     $scope.eventsF = function (start, end, timezone, callback) {
-        var doctorId = $scope.selectedDoctor.Id;
-        appointmentResources().getAvailableAppointmentsForGivenDoctor({id: doctorId}).$promise.then(function(response) {
-            $scope.events.length = 0;
-            console.log(response);
-            angular.forEach(response, function(item){
-                if(item.IsAvailable){
-                    var color = 'blue';
-                }
-                else
-                    var color = 'gray';
-                $scope.events.push({ color: color, title: item.Notes, start:item.StartDateTime, end:item.EndDateTime,allDay: false, my_id:item.Id, isFinished:item.IsAvailable,
-                    pacient: item.PatientProfile})
-            });
-        }, function(response) {
-            console.log(response);
-        });
+        $scope.getAppointmentsForSelectedDoctor();
         callback($scope.events);
     };
     $scope.globalEvent = [];
@@ -136,7 +121,7 @@ function($scope, $compile, $timeout, accountResource, accountService, $location,
             DoctorProfileId: doctorId,
             Subscribe: false,
             SubscriberId: subsId
-        }
+        };
         
         // console.log(JSON.stringify(data2));
         appointmentResources().putAppointmentSubscription({id: $scope.globalEvent.my_id}, JSON.stringify(data2)).$promise.then(function(response) {
